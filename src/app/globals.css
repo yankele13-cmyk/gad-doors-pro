@@ -6,7 +6,6 @@
 
 /* WhatsApp Widget Animation */
 @keyframes whatsapp-pulse {
-
   0%,
   100% {
     transform: scale(1);
@@ -18,7 +17,6 @@
     opacity: 0;
   }
 }
-
 
 /* Gad-Doors Modern Design System 2.0 */
 :root {
@@ -237,7 +235,9 @@ nav a.active {
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/images/IMG-20251112-WA0048.jpg');
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url('/images/IMG-20251112-WA0048.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -413,7 +413,7 @@ footer {
   right: 30px;
   width: 60px;
   height: 60px;
-  background: #25D366;
+  background: #25d366;
   color: white;
   border-radius: 50%;
   display: flex;
@@ -477,7 +477,7 @@ textarea:focus {
   box-shadow: var(--shadow-sm);
 }
 
-.admin-checkbox:checked+label::after {
+.admin-checkbox:checked + label::after {
   opacity: 1;
 }
 
@@ -556,7 +556,7 @@ textarea:focus {
 }
 
 /* RTL Support */
-[dir="rtl"] .language-switcher {
+[dir='rtl'] .language-switcher {
   flex-direction: row-reverse;
 }
 
@@ -670,22 +670,22 @@ nav ul.active .language-switcher {
 }
 
 /* RTL Support */
-[dir="rtl"] {
+[dir='rtl'] {
   direction: rtl;
   text-align: right;
 }
 
-[dir="rtl"] .whatsapp-widget {
+[dir='rtl'] .whatsapp-widget {
   left: 30px;
   right: auto;
 }
 
-[dir="rtl"] .admin-table th,
-[dir="rtl"] .admin-table td {
+[dir='rtl'] .admin-table th,
+[dir='rtl'] .admin-table td {
   text-align: right;
 }
 
-[dir="rtl"] .btn-small {
+[dir='rtl'] .btn-small {
   margin-right: 0;
   margin-left: 5px;
 }

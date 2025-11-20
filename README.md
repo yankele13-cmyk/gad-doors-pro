@@ -85,6 +85,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 ### Informations de Contact
 
 Modifier `src/config/siteConfig.js` pour mettre à jour :
+
 - Numéro de téléphone
 - Email
 - Adresse
@@ -107,6 +108,7 @@ npm run lint         # Vérifie les erreurs ESLint
 ## 🌐 Localisation
 
 Le site supporte le **français** et l'**hébreu** avec :
+
 - Traductions complètes dans `src/context/LanguageContext.js`
 - Support RTL automatique pour l'hébreu
 - Changement de langue via bouton dans le header
@@ -119,11 +121,11 @@ Le site supporte le **français** et l'**hébreu** avec :
 ```javascript
 const translations = {
   fr: {
-    nouvelle_cle: "Texte en français"
+    nouvelle_cle: 'Texte en français',
   },
   he: {
-    nouvelle_cle: "טקסט בעברית"
-  }
+    nouvelle_cle: 'טקסט בעברית',
+  },
 };
 ```
 
@@ -137,6 +139,7 @@ const translations = {
 ## 🎨 Personnalisation du Design
 
 Le design est contrôlé par `src/app/globals.css` :
+
 - Variables CSS dans `:root`
 - Couleur accent : `--accent-color: #d4af37`
 - Police : Outfit (Google Fonts)
@@ -144,12 +147,14 @@ Le design est contrôlé par `src/app/globals.css` :
 ## 🚧 Roadmap
 
 ### Phase Actuelle : Migration Complète ✅
+
 - [x] Structure Next.js
 - [x] Pages principales
 - [x] Localisation FR/HE
 - [x] Design fidèle à l'original
 
 ### Prochaines Étapes
+
 - [ ] Interface Admin (CRUD produits)
 - [ ] Intégration Supabase
 - [ ] Authentification admin
@@ -166,6 +171,7 @@ Le design est contrôlé par `src/app/globals.css` :
 ## 🤝 Contribution
 
 Pour contribuer au projet :
+
 1. Créer une branche feature
 2. Commiter les changements
 3. Pousser vers la branche

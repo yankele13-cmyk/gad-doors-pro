@@ -1,7 +1,12 @@
-"use client";
+'use client';
 
 import { useState, useEffect } from 'react';
-import { getProducts, deleteProduct, toggleProductVisibility, initializeStore } from '@/lib/productStore';
+import {
+  getProducts,
+  deleteProduct,
+  toggleProductVisibility,
+  initializeStore,
+} from '@/lib/productStore';
 import { products as defaultProducts } from '@/data/products';
 import { useLanguage } from '@/context/LanguageContext';
 import Badge from '@/components/Badge';
@@ -15,7 +20,7 @@ export default function ProductTable({ onEdit }) {
   useEffect(() => {
     initializeStore(defaultProducts);
     loadProducts();
-    
+
     // Écouter les mises à jour
     const handleUpdate = () => loadProducts();
     window.addEventListener('productsUpdated', handleUpdate);
@@ -48,7 +53,14 @@ export default function ProductTable({ onEdit }) {
   };
 
   return (
-    <div style={{ background: 'var(--bg-surface)', borderRadius: '12px', overflow: 'hidden', boxShadow: 'var(--shadow-sm)' }}>
+    <div
+      style={{
+        background: 'var(--bg-surface)',
+        borderRadius: '12px',
+        overflow: 'hidden',
+        boxShadow: 'var(--shadow-sm)',
+      }}
+    >
       <table className="admin-table">
         <thead>
           <tr>
@@ -63,7 +75,14 @@ export default function ProductTable({ onEdit }) {
         <tbody>
           {products.length === 0 ? (
             <tr>
-              <td colSpan="6" style={{ textAlign: 'center', padding: '40px', color: 'var(--text-muted)' }}>
+              <td
+                colSpan="6"
+                style={{
+                  textAlign: 'center',
+                  padding: '40px',
+                  color: 'var(--text-muted)',
+                }}
+              >
                 Aucun produit. Cliquez sur "Ajouter Produit" pour commencer.
               </td>
             </tr>
@@ -71,25 +90,44 @@ export default function ProductTable({ onEdit }) {
             products.map((product) => (
               <tr key={product.id}>
                 <td>
-                  <div style={{ width: '60px', height: '60px', borderRadius: '8px', overflow: 'hidden' }}>
+                  <div
+                    style={{
+                      width: '60px',
+                      height: '60px',
+                      borderRadius: '8px',
+                      overflow: 'hidden',
+                    }}
+                  >
                     <Image
                       src={`/images/${product.image}`}
                       alt={product.name}
                       width={60}
                       height={60}
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                      }}
                     />
                   </div>
                 </td>
                 <td>{product.name}</td>
                 <td dir="rtl">{product.name_he}</td>
                 <td>
-                  <Badge type={product.category === 'doors' ? 'categoryDoors' : 'categoryAccessories'}>
+                  <Badge
+                    type={
+                      product.category === 'doors'
+                        ? 'categoryDoors'
+                        : 'categoryAccessories'
+                    }
+                  >
                     {product.category === 'doors' ? 'Portes' : 'Accessoires'}
                   </Badge>
                 </td>
                 <td>
-                  <Badge type={product.isHidden ? 'statusHidden' : 'statusVisible'}>
+                  <Badge
+                    type={product.isHidden ? 'statusHidden' : 'statusVisible'}
+                  >
                     {product.isHidden ? 'Masqué' : 'Visible'}
                   </Badge>
                 </td>
@@ -98,10 +136,15 @@ export default function ProductTable({ onEdit }) {
                     <button
                       onClick={() => handleToggleVisibility(product.id)}
                       className="btn-small"
-                      style={{ background: product.isHidden ? '#4caf50' : '#ff9800', color: 'white' }}
+                      style={{
+                        background: product.isHidden ? '#4caf50' : '#ff9800',
+                        color: 'white',
+                      }}
                       title={product.isHidden ? 'Afficher' : 'Masquer'}
                     >
-                      <i className={`fas ${product.isHidden ? 'fa-eye' : 'fa-eye-slash'}`}></i>
+                      <i
+                        className={`fas ${product.isHidden ? 'fa-eye' : 'fa-eye-slash'}`}
+                      ></i>
                     </button>
                     <button
                       onClick={() => onEdit(product)}

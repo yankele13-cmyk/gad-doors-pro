@@ -4,20 +4,21 @@ import PropTypes from 'prop-types';
  * Reusable Form Field Component
  * Handles input fields with consistent styling
  */
-export default function FormField({ 
-  label, 
-  type = "text", 
-  name, 
-  value, 
-  onChange, 
+export default function FormField({
+  label,
+  type = 'text',
+  name,
+  value,
+  onChange,
   required = false,
   disabled = false,
   dir,
   placeholder,
-  as = "input"
+  as = 'input',
 }) {
-  const InputComponent = as === "textarea" ? "textarea" : as === "select" ? "select" : "input";
-  
+  const InputComponent =
+    as === 'textarea' ? 'textarea' : as === 'select' ? 'select' : 'input';
+
   return (
     <div className="form-field">
       <label htmlFor={name}>
@@ -25,7 +26,7 @@ export default function FormField({
       </label>
       <InputComponent
         id={name}
-        type={as === "input" ? type : undefined}
+        type={as === 'input' ? type : undefined}
         name={name}
         value={value}
         onChange={onChange}
@@ -48,5 +49,5 @@ FormField.propTypes = {
   disabled: PropTypes.bool,
   dir: PropTypes.oneOf(['ltr', 'rtl', 'auto']),
   placeholder: PropTypes.string,
-  as: PropTypes.oneOf(['input', 'textarea', 'select'])
+  as: PropTypes.oneOf(['input', 'textarea', 'select']),
 };

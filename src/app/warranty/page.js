@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useLanguage } from '@/context/LanguageContext';
 import PageSection from '@/components/PageSection';
@@ -10,8 +10,10 @@ export default function WarrantyPage() {
     <main>
       <PageSection paddingTop>
         <h1 className="text-center">{t('warranty_title')}</h1>
-        <p className="text-center" style={{ marginBottom: '50px' }}>{t('warranty_subtitle')}</p>
-        
+        <p className="text-center" style={{ marginBottom: '50px' }}>
+          {t('warranty_subtitle')}
+        </p>
+
         <div className="max-width-800">
           <div className="warranty-section">
             <i className="fas fa-certificate warranty-icon"></i>

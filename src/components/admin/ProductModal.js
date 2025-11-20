@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useState, useEffect } from 'react';
 import { addProduct, updateProduct } from '@/lib/productStore';
@@ -40,7 +40,7 @@ export default function ProductModal({ product, onClose, onSave }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleImageChange = (e) => {
@@ -56,7 +56,7 @@ export default function ProductModal({ product, onClose, onSave }) {
     const reader = new FileReader();
     reader.onload = (event) => {
       const base64 = event.target?.result;
-      setFormData(prev => ({ ...prev, image: base64 }));
+      setFormData((prev) => ({ ...prev, image: base64 }));
       setImagePreview(base64);
       setError('');
     };
@@ -87,7 +87,7 @@ export default function ProductModal({ product, onClose, onSave }) {
       } else {
         addProduct(formData);
       }
-      
+
       onSave?.();
       onClose();
     } catch (err) {
@@ -97,8 +97,8 @@ export default function ProductModal({ product, onClose, onSave }) {
   };
 
   return (
-    <div 
-      className="modal" 
+    <div
+      className="modal"
       style={{ display: 'flex' }}
       onClick={(e) => e.target.className.includes('modal') && onClose()}
     >
@@ -110,7 +110,9 @@ export default function ProductModal({ product, onClose, onSave }) {
         <form onSubmit={handleSubmit}>
           {/* Nom Français */}
           <div style={{ marginBottom: '20px' }}>
-            <label style={{ display: 'block', marginBottom: '5px', fontWeight: 600 }}>
+            <label
+              style={{ display: 'block', marginBottom: '5px', fontWeight: 600 }}
+            >
               Nom (Français) *
             </label>
             <input
@@ -125,7 +127,9 @@ export default function ProductModal({ product, onClose, onSave }) {
 
           {/* Nom Hébreu */}
           <div style={{ marginBottom: '20px' }}>
-            <label style={{ display: 'block', marginBottom: '5px', fontWeight: 600 }}>
+            <label
+              style={{ display: 'block', marginBottom: '5px', fontWeight: 600 }}
+            >
               Nom (Hébreu) *
             </label>
             <input
@@ -141,7 +145,9 @@ export default function ProductModal({ product, onClose, onSave }) {
 
           {/* Description Français */}
           <div style={{ marginBottom: '20px' }}>
-            <label style={{ display: 'block', marginBottom: '5px', fontWeight: 600 }}>
+            <label
+              style={{ display: 'block', marginBottom: '5px', fontWeight: 600 }}
+            >
               Description (Français) *
             </label>
             <input
@@ -156,7 +162,9 @@ export default function ProductModal({ product, onClose, onSave }) {
 
           {/* Description Hébreu */}
           <div style={{ marginBottom: '20px' }}>
-            <label style={{ display: 'block', marginBottom: '5px', fontWeight: 600 }}>
+            <label
+              style={{ display: 'block', marginBottom: '5px', fontWeight: 600 }}
+            >
               Description (Hébreu) *
             </label>
             <input
@@ -172,7 +180,9 @@ export default function ProductModal({ product, onClose, onSave }) {
 
           {/* Catégorie */}
           <div style={{ marginBottom: '20px' }}>
-            <label style={{ display: 'block', marginBottom: '5px', fontWeight: 600 }}>
+            <label
+              style={{ display: 'block', marginBottom: '5px', fontWeight: 600 }}
+            >
               Catégorie *
             </label>
             <select
@@ -188,7 +198,9 @@ export default function ProductModal({ product, onClose, onSave }) {
 
           {/* Image */}
           <div style={{ marginBottom: '20px' }}>
-            <label style={{ display: 'block', marginBottom: '5px', fontWeight: 600 }}>
+            <label
+              style={{ display: 'block', marginBottom: '5px', fontWeight: 600 }}
+            >
               Image *
             </label>
             <input
@@ -199,32 +211,38 @@ export default function ProductModal({ product, onClose, onSave }) {
             />
             {imagePreview && (
               <div style={{ marginTop: '10px' }}>
-                <img 
-                  src={imagePreview} 
-                  alt="Preview" 
-                  style={{ 
-                    maxWidth: '200px', 
-                    maxHeight: '150px', 
+                <img
+                  src={imagePreview}
+                  alt="Preview"
+                  style={{
+                    maxWidth: '200px',
+                    maxHeight: '150px',
                     borderRadius: '8px',
-                    objectFit: 'cover'
-                  }} 
+                    objectFit: 'cover',
+                  }}
                 />
               </div>
             )}
-            <small style={{ color: '#666', display: 'block', marginTop: '5px' }}>
+            <small
+              style={{ color: '#666', display: 'block', marginTop: '5px' }}
+            >
               Max 4.5MB - JPG, PNG, WebP
             </small>
           </div>
 
           {/* Error */}
           {error && (
-            <p style={{ color: 'red', marginBottom: '15px', fontSize: '0.9rem' }}>
+            <p
+              style={{ color: 'red', marginBottom: '15px', fontSize: '0.9rem' }}
+            >
               {error}
             </p>
           )}
 
           {/* Actions */}
-          <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
+          <div
+            style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end' }}
+          >
             <button
               type="button"
               onClick={onClose}

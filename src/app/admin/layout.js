@@ -1,18 +1,16 @@
-"use client";
+'use client';
 
 import { AdminProvider } from '@/context/AdminContext';
-import { Outfit } from "next/font/google";
-import "@/app/globals.css";
+import { Outfit } from 'next/font/google';
+import '@/app/globals.css';
 
-const outfit = Outfit({ subsets: ["latin"] });
+const outfit = Outfit({ subsets: ['latin'] });
 
 export default function AdminRootLayout({ children }) {
   return (
     <html lang="fr">
       <body className={outfit.className}>
-        <AdminProvider>
-          {children}
-        </AdminProvider>
+        <AdminProvider>{children}</AdminProvider>
       </body>
     </html>
   );

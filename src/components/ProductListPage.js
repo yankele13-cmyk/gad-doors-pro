@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
@@ -21,10 +21,10 @@ export default function ProductListPage({ category, titleKey }) {
   useEffect(() => {
     // Simulate initial load
     setLoading(true);
-    
+
     // Initialize store with default data
     initializeStore(defaultProducts);
-    
+
     // Small delay for smoother UX
     setTimeout(() => {
       loadProducts();
@@ -40,7 +40,7 @@ export default function ProductListPage({ category, titleKey }) {
   const loadProducts = () => {
     const allProducts = getProducts();
     const filteredProducts = allProducts.filter(
-      p => p.category === category && !p.isHidden
+      (p) => p.category === category && !p.isHidden
     );
     setProducts(filteredProducts);
   };
@@ -49,7 +49,7 @@ export default function ProductListPage({ category, titleKey }) {
     <main>
       <PageSection paddingTop>
         <h1 className="text-center">{t(titleKey)}</h1>
-        
+
         <div className="product-grid">
           {loading ? (
             <LoadingSkeleton count={6} />
@@ -57,7 +57,10 @@ export default function ProductListPage({ category, titleKey }) {
             <div className="empty-state" style={{ gridColumn: '1 / -1' }}>
               <i className="fas fa-box-open"></i>
               <h3>{t('no_products_title') || 'Aucun produit disponible'}</h3>
-              <p>{t('no_products_desc') || 'Revenez bientôt pour découvrir nos nouveautés !'}</p>
+              <p>
+                {t('no_products_desc') ||
+                  'Revenez bientôt pour découvrir nos nouveautés !'}
+              </p>
             </div>
           ) : (
             products.map((product) => (
@@ -72,5 +75,5 @@ export default function ProductListPage({ category, titleKey }) {
 
 ProductListPage.propTypes = {
   category: PropTypes.oneOf(['doors', 'accessories']).isRequired,
-  titleKey: PropTypes.string.isRequired
+  titleKey: PropTypes.string.isRequired,
 };

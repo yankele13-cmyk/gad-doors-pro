@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { createContext, useContext, useState, useEffect } from 'react';
 
@@ -33,7 +33,9 @@ export function AdminProvider({ children }) {
   };
 
   return (
-    <AdminContext.Provider value={{ isAuthenticated, isLoading, login, logout }}>
+    <AdminContext.Provider
+      value={{ isAuthenticated, isLoading, login, logout }}
+    >
       {children}
     </AdminContext.Provider>
   );

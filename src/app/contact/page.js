@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
@@ -7,22 +7,22 @@ import { showToast } from '@/components/Toast';
 
 export default function ContactPage() {
   const { t, language } = useLanguage();
-  
+
   // Form state
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: '',
-    honeypot: '' // Anti-spam field
+    honeypot: '', // Anti-spam field
   });
-  
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null); // 'success' | 'error' | null
   const [statusMessage, setStatusMessage] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
@@ -66,40 +66,81 @@ export default function ContactPage() {
       <section className="section-padding" style={{ paddingTop: '120px' }}>
         <div className="container">
           <h1 className="text-center">{t('contact_title')}</h1>
-          <p className="text-center" style={{ marginBottom: '50px' }}>{t('contact_subtitle')}</p>
-          
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '50px', maxWidth: '1000px', margin: '0 auto' }}>
+          <p className="text-center" style={{ marginBottom: '50px' }}>
+            {t('contact_subtitle')}
+          </p>
+
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: '50px',
+              maxWidth: '1000px',
+              margin: '0 auto',
+            }}
+          >
             {/* Contact Info */}
             <div>
               <div style={{ marginBottom: '30px' }}>
-                <h3><i className="fas fa-map-marker-alt" style={{ color: 'var(--accent-color)', marginRight: '10px' }}></i> {t('contact_address')}</h3>
+                <h3>
+                  <i
+                    className="fas fa-map-marker-alt"
+                    style={{
+                      color: 'var(--accent-color)',
+                      marginRight: '10px',
+                    }}
+                  ></i>{' '}
+                  {t('contact_address')}
+                </h3>
                 <p dir={language === 'he' ? 'rtl' : 'ltr'}>
-                  {language === 'he' ? siteConfig.contact.addressHe : siteConfig.contact.address}
+                  {language === 'he'
+                    ? siteConfig.contact.addressHe
+                    : siteConfig.contact.address}
                 </p>
               </div>
               <div style={{ marginBottom: '30px' }}>
-                <h3><i className="fas fa-phone" style={{ color: 'var(--accent-color)', marginRight: '10px' }}></i> {t('contact_phone')}</h3>
-                <p><span dir="ltr">{siteConfig.contact.phoneDisplay}</span></p>
+                <h3>
+                  <i
+                    className="fas fa-phone"
+                    style={{
+                      color: 'var(--accent-color)',
+                      marginRight: '10px',
+                    }}
+                  ></i>{' '}
+                  {t('contact_phone')}
+                </h3>
+                <p>
+                  <span dir="ltr">{siteConfig.contact.phoneDisplay}</span>
+                </p>
               </div>
               <div style={{ marginBottom: '30px' }}>
-                <h3><i className="fas fa-envelope" style={{ color: 'var(--accent-color)', marginRight: '10px' }}></i> {t('contact_email')}</h3>
+                <h3>
+                  <i
+                    className="fas fa-envelope"
+                    style={{
+                      color: 'var(--accent-color)',
+                      marginRight: '10px',
+                    }}
+                  ></i>{' '}
+                  {t('contact_email')}
+                </h3>
                 <p>{siteConfig.contact.email}</p>
               </div>
               {/* Google Maps - Cliquable */}
-              <a 
+              <a
                 href="https://www.google.com/maps/dir/?api=1&destination=115+Aharon+Eshkoli+Street,+Jerusalem,+Israel"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ 
+                style={{
                   display: 'block',
-                  width: '100%', 
-                  height: '300px', 
-                  borderRadius: '10px', 
-                  overflow: 'hidden', 
+                  width: '100%',
+                  height: '300px',
+                  borderRadius: '10px',
+                  overflow: 'hidden',
                   marginTop: '20px',
                   position: 'relative',
                   textDecoration: 'none',
-                  cursor: 'pointer'
+                  cursor: 'pointer',
                 }}
               >
                 <iframe
@@ -110,30 +151,42 @@ export default function ContactPage() {
                   loading="lazy"
                   title="Google Maps - Gad-Doors Location"
                 ></iframe>
-                <div style={{
-                  position: 'absolute',
-                  bottom: '10px',
-                  left: '50%',
-                  transform: 'translateX(-50%)',
-                  background: 'var(--accent-color)',
-                  color: 'white',
-                  padding: '12px 24px',
-                  borderRadius: '25px',
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
-                  fontWeight: 600,
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  transition: 'all 0.3s ease'
-                }}>
+                <div
+                  style={{
+                    position: 'absolute',
+                    bottom: '10px',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    background: 'var(--accent-color)',
+                    color: 'white',
+                    padding: '12px 24px',
+                    borderRadius: '25px',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+                    fontWeight: 600,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    transition: 'all 0.3s ease',
+                  }}
+                >
                   <i className="fas fa-directions"></i>
-                  {language === 'he' ? 'פתח בגוגל מפות' : 'Ouvrir dans Google Maps'}
+                  {language === 'he'
+                    ? 'פתח בגוגל מפות'
+                    : 'Ouvrir dans Google Maps'}
                 </div>
               </a>
             </div>
-            
+
             {/* Contact Form */}
-            <form onSubmit={handleSubmit} style={{ background: 'var(--bg-surface)', padding: '40px', borderRadius: '10px', boxShadow: 'var(--shadow-md)' }}>
+            <form
+              onSubmit={handleSubmit}
+              style={{
+                background: 'var(--bg-surface)',
+                padding: '40px',
+                borderRadius: '10px',
+                boxShadow: 'var(--shadow-md)',
+              }}
+            >
               {/* Honeypot - Hidden field for spam protection */}
               <input
                 type="text"
@@ -146,77 +199,118 @@ export default function ContactPage() {
               />
 
               <div style={{ marginBottom: '20px' }}>
-                <label style={{ display: 'block', marginBottom: '5px', fontWeight: 600 }}>
+                <label
+                  style={{
+                    display: 'block',
+                    marginBottom: '5px',
+                    fontWeight: 600,
+                  }}
+                >
                   {t('form_name')} *
                 </label>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
                   required
                   disabled={isSubmitting}
-                  style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '5px' }} 
+                  style={{
+                    width: '100%',
+                    padding: '10px',
+                    border: '1px solid #ddd',
+                    borderRadius: '5px',
+                  }}
                 />
               </div>
 
               <div style={{ marginBottom: '20px' }}>
-                <label style={{ display: 'block', marginBottom: '5px', fontWeight: 600 }}>
+                <label
+                  style={{
+                    display: 'block',
+                    marginBottom: '5px',
+                    fontWeight: 600,
+                  }}
+                >
                   {t('form_email')} *
                 </label>
-                <input 
-                  type="email" 
+                <input
+                  type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
                   required
                   disabled={isSubmitting}
-                  style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '5px' }} 
+                  style={{
+                    width: '100%',
+                    padding: '10px',
+                    border: '1px solid #ddd',
+                    borderRadius: '5px',
+                  }}
                 />
               </div>
 
               <div style={{ marginBottom: '20px' }}>
-                <label style={{ display: 'block', marginBottom: '5px', fontWeight: 600 }}>
+                <label
+                  style={{
+                    display: 'block',
+                    marginBottom: '5px',
+                    fontWeight: 600,
+                  }}
+                >
                   {t('form_msg')} *
                 </label>
-                <textarea 
+                <textarea
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
                   required
                   disabled={isSubmitting}
-                  style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '5px', height: '120px', resize: 'vertical' }}
+                  style={{
+                    width: '100%',
+                    padding: '10px',
+                    border: '1px solid #ddd',
+                    borderRadius: '5px',
+                    height: '120px',
+                    resize: 'vertical',
+                  }}
                 ></textarea>
               </div>
 
               {/* Status Messages */}
               {submitStatus && (
-                <div style={{ 
-                  marginBottom: '20px', 
-                  padding: '12px', 
-                  borderRadius: '5px',
-                  backgroundColor: submitStatus === 'success' ? '#d4edda' : '#f8d7da',
-                  color: submitStatus === 'success' ? '#155724' : '#721c24',
-                  border: `1px solid ${submitStatus === 'success' ? '#c3e6cb' : '#f5c6cb'}`
-                }}>
-                  <i className={`fas ${submitStatus === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}`} style={{ marginRight: '8px' }}></i>
+                <div
+                  style={{
+                    marginBottom: '20px',
+                    padding: '12px',
+                    borderRadius: '5px',
+                    backgroundColor:
+                      submitStatus === 'success' ? '#d4edda' : '#f8d7da',
+                    color: submitStatus === 'success' ? '#155724' : '#721c24',
+                    border: `1px solid ${submitStatus === 'success' ? '#c3e6cb' : '#f5c6cb'}`,
+                  }}
+                >
+                  <i
+                    className={`fas ${submitStatus === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}`}
+                    style={{ marginRight: '8px' }}
+                  ></i>
                   {statusMessage}
                 </div>
               )}
 
-              <button 
-                type="submit" 
-                className="btn" 
+              <button
+                type="submit"
+                className="btn"
                 disabled={isSubmitting}
-                style={{ 
-                  width: '100%', 
+                style={{
+                  width: '100%',
                   border: 'none',
                   opacity: isSubmitting ? 0.7 : 1,
                   cursor: isSubmitting ? 'not-allowed' : 'pointer',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  gap: '8px'
+                  gap: '8px',
                 }}
               >
                 {isSubmitting ? (

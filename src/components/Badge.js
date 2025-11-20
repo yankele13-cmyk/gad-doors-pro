@@ -12,11 +12,7 @@ export default function Badge({ type, children }) {
     statusHidden: 'badge badge-status-hidden',
   };
 
-  return (
-    <span className={badgeClasses[type] || 'badge'}>
-      {children}
-    </span>
-  );
+  return <span className={badgeClasses[type] || 'badge'}>{children}</span>;
 }
 
 Badge.propTypes = {
@@ -24,7 +20,7 @@ Badge.propTypes = {
     'categoryDoors',
     'categoryAccessories',
     'statusVisible',
-    'statusHidden'
+    'statusHidden',
   ]).isRequired,
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };

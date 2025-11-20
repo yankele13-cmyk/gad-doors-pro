@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
@@ -17,7 +17,9 @@ export function Toast({ message, type = 'success', onClose }) {
 
   return (
     <div className={`toast toast-${type}`}>
-      <i className={`fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}`}></i>
+      <i
+        className={`fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}`}
+      ></i>
       <span>{message}</span>
       <button onClick={onClose} className="toast-close" aria-label="Close">
         <i className="fas fa-times"></i>
@@ -29,7 +31,7 @@ export function Toast({ message, type = 'success', onClose }) {
 Toast.propTypes = {
   message: PropTypes.string.isRequired,
   type: PropTypes.oneOf(['success', 'error']),
-  onClose: PropTypes.func.isRequired
+  onClose: PropTypes.func.isRequired,
 };
 
 /**
@@ -43,7 +45,7 @@ export function ToastContainer() {
     const handleToast = (event) => {
       const { message, type } = event.detail;
       const id = toastId++;
-      setToasts(prev => [...prev, { id, message, type }]);
+      setToasts((prev) => [...prev, { id, message, type }]);
     };
 
     window.addEventListener('showToast', handleToast);
@@ -51,12 +53,12 @@ export function ToastContainer() {
   }, []);
 
   const removeToast = (id) => {
-    setToasts(prev => prev.filter(t => t.id !== id));
+    setToasts((prev) => prev.filter((t) => t.id !== id));
   };
 
   return (
     <div style={{ position: 'fixed', top: 20, right: 20, zIndex: 9999 }}>
-      {toasts.map(toast => (
+      {toasts.map((toast) => (
         <Toast
           key={toast.id}
           message={toast.message}
@@ -73,8 +75,10 @@ export function ToastContainer() {
  */
 export function showToast(message, type = 'success') {
   if (typeof window !== 'undefined') {
-    window.dispatchEvent(new CustomEvent('showToast', {
-      detail: { message, type }
-    }));
+    window.dispatchEvent(
+      new CustomEvent('showToast', {
+        detail: { message, type },
+      })
+    );
   }
 }

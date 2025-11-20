@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import Link from 'next/link';
 import { useState } from 'react';
@@ -21,7 +21,7 @@ export default function Header() {
       <Link href="/" className="logo">
         Gad<span>Doors</span>
       </Link>
-      
+
       <div className="mobile-toggle" onClick={toggleMenu}>
         <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
       </div>
@@ -39,23 +39,32 @@ export default function Header() {
             </Link>
           </li>
           <li>
-            <Link href="/accessories" className={isActive('/accessories') ? 'active' : ''}>
+            <Link
+              href="/accessories"
+              className={isActive('/accessories') ? 'active' : ''}
+            >
               {t('nav_accessories')}
             </Link>
           </li>
           <li>
-            <Link href="/warranty" className={isActive('/warranty') ? 'active' : ''}>
+            <Link
+              href="/warranty"
+              className={isActive('/warranty') ? 'active' : ''}
+            >
               {t('nav_warranty')}
             </Link>
           </li>
           <li>
-            <Link href="/contact" className={isActive('/contact') ? 'active' : ''}>
+            <Link
+              href="/contact"
+              className={isActive('/contact') ? 'active' : ''}
+            >
               {t('nav_contact')}
             </Link>
           </li>
           <li>
-            <button 
-              className="language-switcher" 
+            <button
+              className="language-switcher"
               onClick={toggleLanguage}
               aria-label="Changer de langue"
             >

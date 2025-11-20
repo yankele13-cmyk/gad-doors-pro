@@ -13,5 +13,5 @@ export default function Spinner({ size = 'md' }) {
 }
 
 Spinner.propTypes = {
-  size: PropTypes.oneOf(['sm', 'md', 'lg'])
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 };

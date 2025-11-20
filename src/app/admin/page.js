@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -11,7 +11,7 @@ export default function AdminLoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const router = useRouter();
   const { login } = useAdmin();
   const { t } = useLanguage();
@@ -22,7 +22,7 @@ export default function AdminLoginPage() {
     setIsLoading(true);
 
     const result = login(email, password);
-    
+
     if (result.success) {
       router.push('/admin/dashboard');
     } else {
@@ -35,7 +35,7 @@ export default function AdminLoginPage() {
     <div className="login-container" style={{ paddingTop: '100px' }}>
       <div className="login-box">
         <h2 style={{ marginBottom: '30px' }}>{t('admin_title')}</h2>
-        
+
         <form onSubmit={handleSubmit}>
           <input
             type="email"
@@ -45,7 +45,7 @@ export default function AdminLoginPage() {
             required
             autoComplete="email"
           />
-          
+
           <input
             type="password"
             placeholder="Mot de passe"
@@ -54,23 +54,25 @@ export default function AdminLoginPage() {
             required
             autoComplete="current-password"
           />
-          
+
           {error && (
-            <p style={{ color: 'red', marginBottom: '15px', fontSize: '0.9rem' }}>
+            <p
+              style={{ color: 'red', marginBottom: '15px', fontSize: '0.9rem' }}
+            >
               {error}
             </p>
           )}
-          
-          <button 
-            type="submit" 
-            className="btn" 
+
+          <button
+            type="submit"
+            className="btn"
             style={{ width: '100%', border: 'none' }}
             disabled={isLoading}
           >
             {isLoading ? 'Connexion...' : t('admin_login')}
           </button>
         </form>
-        
+
         <p style={{ marginTop: '20px', fontSize: '0.9rem' }}>
           <Link href="/" style={{ color: '#999' }}>
             Retour au site
@@ -78,9 +80,21 @@ export default function AdminLoginPage() {
         </p>
 
         {/* Info de debug (à retirer en production) */}
-        <div style={{ marginTop: '30px', padding: '15px', background: '#f0f0f0', borderRadius: '8px', fontSize: '0.85rem' }}>
-          <p style={{ margin: '0 0 5px', color: '#666' }}><strong>Credentials de test:</strong></p>
-          <p style={{ margin: '0', color: '#666' }}>Email: admin@gaddoors.com</p>
+        <div
+          style={{
+            marginTop: '30px',
+            padding: '15px',
+            background: '#f0f0f0',
+            borderRadius: '8px',
+            fontSize: '0.85rem',
+          }}
+        >
+          <p style={{ margin: '0 0 5px', color: '#666' }}>
+            <strong>Credentials de test:</strong>
+          </p>
+          <p style={{ margin: '0', color: '#666' }}>
+            Email: admin@gaddoors.com
+          </p>
           <p style={{ margin: '0', color: '#666' }}>Password: admin123</p>
         </div>
       </div>

@@ -19,5 +19,5 @@ export default function LoadingSkeleton({ count = 6 }) {
 }
 
 LoadingSkeleton.propTypes = {
-  count: PropTypes.number
+  count: PropTypes.number,
 };

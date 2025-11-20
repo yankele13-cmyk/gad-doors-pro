@@ -7,10 +7,7 @@ export async function POST(request) {
 
     // Anti-spam: Honeypot field (invisible to users)
     if (honeypot) {
-      return NextResponse.json(
-        { error: 'Spam detected' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Spam detected' }, { status: 400 });
     }
 
     // Validation
@@ -24,10 +21,7 @@ export async function POST(request) {
     // Email validation simple
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      return NextResponse.json(
-        { error: 'Email invalide' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Email invalide' }, { status: 400 });
     }
 
     // Pour l'instant, on simule l'envoi
@@ -36,12 +30,12 @@ export async function POST(request) {
       console.log('📧 Nouveau message de contact:', {
         from: `${name} <${email}>`,
         message: message,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       });
     }
 
     // Simuler un délai réseau
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     // En production, vous utiliseriez un service comme Resend:
     /*
@@ -63,13 +57,13 @@ export async function POST(request) {
     */
 
     return NextResponse.json(
-      { 
-        success: true, 
-        message: 'Message envoyé avec succès ! Nous vous répondrons rapidement.' 
+      {
+        success: true,
+        message:
+          'Message envoyé avec succès ! Nous vous répondrons rapidement.',
       },
       { status: 200 }
     );
-
   } catch (error) {
     console.error('Erreur API contact:', error);
     return NextResponse.json(

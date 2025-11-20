@@ -49,6 +49,7 @@ Nécessite configuration SMTP de votre hébergeur email.
 ## 🚀 Actuellement
 
 Le formulaire:
+
 - ✅ Valide les champs
 - ✅ Protège contre le spam (honeypot)
 - ✅ Affiche messages succès/erreur
