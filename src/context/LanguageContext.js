@@ -18,6 +18,31 @@ const translations = {
     cat_doors: 'Nos Portes',
     cat_acc: 'Accessoires',
     btn_discover: 'Découvrir',
+    
+    // New Home Content
+    expertise_banner: "18 ans d'expérience dans l'importation directe de portes d'intérieur",
+    
+    // Why Choose Us
+    why_title: "Pourquoi Choisir GadDoors ?",
+    why_subtitle: "L'excellence de l'importation directe au service de votre intérieur",
+    why_1_title: "Importation Directe",
+    why_1_desc: "Italie (Design) & Chine (Technologie) sans intermédiaires.",
+    why_2_title: "Service Clés en Main",
+    why_2_desc: "Conseil, métré, démontage et installation inclus.",
+    why_3_title: "Garantie 7 Ans",
+    why_3_desc: "Sur nos portes WPC contre l'eau et les termites.",
+    why_4_title: "Prix Transparent",
+    why_4_desc: "Tout est inclus, pas de surprises.",
+    
+    // Ranges
+    ranges_title: "Nos Gammes de Portes",
+    range_wpc_title: "WPC - La Star",
+    range_wpc_desc: "100% Hydrofuge & Anti-termites. Le choix n°1 en Israël.",
+    range_formica_title: "Formica - La Robuste",
+    range_formica_desc: "Haute résistance aux rayures pour zones à fort passage.",
+    range_pvc_title: "PVC - L'Économique",
+    range_pvc_desc: "Idéal pour locatif et petits budgets.",
+    btn_view_ranges: "Voir toutes nos gammes",
     why_title: 'Pourquoi Choisir GadDoors ?',
     why_subtitle:
       'Nous allions design moderne, matériaux de qualité supérieure et service client exceptionnel pour transformer votre intérieur.',
@@ -77,6 +102,31 @@ const translations = {
     cat_doors: 'הדלתות שלנו',
     cat_acc: 'אביזרים',
     btn_discover: 'גלה עוד',
+
+    // New Home Content
+    expertise_banner: "18 שנות ניסיון ביבוא ישיר של דלתות פנים",
+
+    // Why Choose Us
+    why_title: "למה לבחור בגד דורס?",
+    why_subtitle: "מצוינות ביבוא ישיר לשירות הבית שלך",
+    why_1_title: "יבוא ישיר",
+    why_1_desc: "איטליה (עיצוב) וסין (טכנולוגיה) ללא מתווכים.",
+    why_2_title: "שירות עד המפתח",
+    why_2_desc: "ייעוץ, מדידה, פירוק והתקנה כלולים.",
+    why_3_title: "7 שנות אחריות",
+    why_3_desc: "על דלתות הפולימר שלנו נגד מים וטרמיטים.",
+    why_4_title: "מחיר שקוף",
+    why_4_desc: "הכל כלול, ללא הפתעות.",
+
+    // Ranges
+    ranges_title: "קולקציות הדלתות שלנו",
+    range_wpc_title: "פולימר - הכוכב",
+    range_wpc_desc: "100% עמיד למים וטרמיטים. הבחירה מס' 1 בישראל.",
+    range_formica_title: "פורמייקה - החזקה",
+    range_formica_desc: "עמידות גבוהה לשריטות לאזורים עמוסים.",
+    range_pvc_title: "PVC - המשתלמת",
+    range_pvc_desc: "אידיאלי לדירות שכורות ותקציב נמוך.",
+    btn_view_ranges: "צפו בכל הקולקציות",
     why_title: 'למה לבחור ב-GadDoors?',
     why_subtitle:
       'אנו משלבים עיצוב מודרני, חומרים איכותיים ושירות לקוחות יוצא דופן כדי לשדרג את הבית שלך.',
