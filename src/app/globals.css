@@ -24,24 +24,28 @@
   /* Palette - Minimalist & Premium */
   --bg-body: #f8f9fa;
   --bg-surface: #ffffff;
+  --bg-body: #ffffff;
+  --bg-surface: #f8f9fa;
   --text-main: #111111;
   --text-muted: #666666;
   --accent-color: #d4af37;
+  /* Gold Identity */
   --accent-hover: #b4942b;
+  --gold-accent: #d4af37;
 
   /* Spacing & Layout */
   --container-width: 1400px;
-  /* Wider for modern feel */
+  /* Wider for showroom feel */
   --header-height: 80px;
-  --radius-sm: 8px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
 
   /* Effects */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 12px 24px -10px rgba(0, 0, 0, 0.08);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.05);
   --shadow-lg: 0 20px 40px -15px rgba(0, 0, 0, 0.12);
-  --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition: all 0.3s ease;
   /* Smooth Apple-like ease */
 
   /* Typography */
@@ -169,48 +173,48 @@ p {
 }
 
 /* Header & Nav */
+/* Header Showroom Style */
 header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: var(--header-height);
+  background: white;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+  padding: 0 2rem;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 4%;
+  position: sticky;
+  top: 0;
   z-index: 1000;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-top: 5px solid var(--gold-accent);
+  /* The Gold Strip */
 }
 
 .logo {
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: var(--text-color);
-  text-decoration: none;
-  transition: opacity 0.3s;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #000;
+  text-transform: uppercase;
+  letter-spacing: -1px;
 }
 
 .logo span {
-  color: var(--accent-color);
+  color: var(--gold-accent);
 }
 
 nav ul {
   display: flex;
-  gap: 40px;
+  gap: 2.5rem;
+  list-style: none;
   align-items: center;
 }
 
 nav a {
+  color: #000;
   font-weight: 500;
   font-size: 0.95rem;
-  color: var(--text-muted);
-  /* Gris par défaut */
-  transition: all 0.3s ease;
-  display: inline-block;
-  /* Nécessaire pour le transform */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: color 0.3s;
 }
 
 nav a:hover,

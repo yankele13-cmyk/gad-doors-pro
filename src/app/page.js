@@ -9,145 +9,124 @@ export default function Home() {
 
   return (
     <main>
-      {/* Hero Section */}
+      {/* Hero Section - Immersive Showroom Style */}
       <section className="hero">
-        <div className="hero-content container">
-          <h1>{t('hero_title')}</h1>
-          <p>{t('hero_subtitle')}</p>
-          <Link href="/doors" className="btn">
+        <div className="hero-content text-center">
+          <h1 style={{ fontSize: '3.5rem', fontWeight: 800, letterSpacing: '-2px', marginBottom: '1rem', textShadow: '0 4px 20px rgba(0,0,0,0.3)' }}>
+            {t('hero_title')}
+          </h1>
+          <p style={{ fontSize: '1.5rem', fontWeight: 300, maxWidth: '600px', margin: '0 auto 2rem', textShadow: '0 2px 10px rgba(0,0,0,0.3)' }}>
+            {t('hero_subtitle')}
+          </p>
+          <Link href="/doors" className="btn" style={{ padding: '15px 40px', fontSize: '1.1rem', letterSpacing: '1px' }}>
             {t('hero_cta')}
           </Link>
         </div>
       </section>
 
-      {/* Premium Expertise Banner - Overlapping Hero */}
-      <div className="container" style={{ position: 'relative', padding: '0 20px' }}>
-        <div className="expertise-banner text-center">
-          <p className="expertise-text">
-            <i className="fas fa-certificate" style={{ color: 'var(--accent-color)', marginRight: '12px' }}></i>
-            {t('expertise_banner')}
-          </p>
-        </div>
-      </div>
-
-      {/* Categories Preview - Clean & Modern */}
-      <section className="section-padding" style={{ paddingTop: '80px' }}>
-        <div className="container">
-          <div className="categories-preview" style={{ marginTop: 0, padding: 0 }}>
-            <Link href="/doors" className="category-card">
-              <Image
-                src="/images/IMG-20251112-WA0048.jpg"
-                alt="Portes"
-                width={600}
-                height={400}
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-              />
-              <div className="category-overlay">
-                <h3>{t('cat_doors')}</h3>
-                <span className="btn btn-outline" style={{ borderColor: 'white', color: 'white' }}>
-                  {t('btn_discover')}
-                </span>
-              </div>
-            </Link>
-            <Link href="/accessories" className="category-card">
-              <Image
-                src="/images/IMG-20251112-WA0050.jpg"
-                alt="Accessoires"
-                width={600}
-                height={400}
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-              />
-              <div className="category-overlay">
-                <h3>{t('cat_acc')}</h3>
-                <span className="btn btn-outline" style={{ borderColor: 'white', color: 'white' }}>
-                  {t('btn_discover')}
-                </span>
-              </div>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Product Ranges - Premium Cards */}
+      {/* Showroom Grid - The Main Attraction */}
       <section className="section-padding" style={{ background: 'var(--bg-body)' }}>
         <div className="container">
-          <div className="text-center">
-            <h2 className="section-title-modern">{t('ranges_title')}</h2>
-            <p className="section-subtitle-modern">Découvrez nos collections adaptées à tous les besoins</p>
+          <div className="text-center" style={{ marginBottom: '60px' }}>
+            <h2 className="section-title-modern" style={{ fontSize: '2.5rem' }}>{t('ranges_title')}</h2>
+            <p className="section-subtitle-modern">L'excellence du design italien, la robustesse de la technologie</p>
           </div>
-          
-          <div className="product-grid" style={{ marginTop: '40px', gap: '30px' }}>
-            {/* WPC */}
-            <div className="premium-card">
-              <div className="feature-icon-circle">
-                <i className="fas fa-water"></i>
+
+          <div className="showroom-grid">
+            {/* WPC Collection */}
+            <div className="showroom-card">
+              <div className="showroom-image-container">
+                <Image
+                  src="/images/IMG-20251112-WA0048.jpg"
+                  alt="Portes WPC"
+                  fill
+                  style={{ objectFit: 'cover' }}
+                />
               </div>
-              <h3>{t('range_wpc_title')}</h3>
-              <p>{t('range_wpc_desc')}</p>
+              <h3 className="showroom-title">{t('range_wpc_title')}</h3>
+              <p className="showroom-price">Premium Collection</p>
+              <p style={{ color: '#666', fontSize: '0.9rem', marginBottom: '1.5rem' }}>{t('range_wpc_desc')}</p>
+              <Link href="/doors" className="btn-showroom">
+                {t('btn_discover')}
+              </Link>
             </div>
 
-            {/* Formica */}
-            <div className="premium-card">
-              <div className="feature-icon-circle">
-                <i className="fas fa-layer-group"></i>
+            {/* Formica Collection */}
+            <div className="showroom-card">
+              <div className="showroom-image-container">
+                <Image
+                  src="/images/hero-gaddoors.jpg"
+                  alt="Portes Formica"
+                  fill
+                  style={{ objectFit: 'cover' }}
+                />
               </div>
-              <h3>{t('range_formica_title')}</h3>
-              <p>{t('range_formica_desc')}</p>
+              <h3 className="showroom-title">{t('range_formica_title')}</h3>
+              <p className="showroom-price">High Resistance</p>
+              <p style={{ color: '#666', fontSize: '0.9rem', marginBottom: '1.5rem' }}>{t('range_formica_desc')}</p>
+              <Link href="/doors" className="btn-showroom">
+                {t('btn_discover')}
+              </Link>
             </div>
 
-            {/* PVC */}
-            <div className="premium-card">
-              <div className="feature-icon-circle">
-                <i className="fas fa-wallet"></i>
+            {/* PVC Collection */}
+            <div className="showroom-card">
+              <div className="showroom-image-container">
+                <Image
+                  src="/images/IMG-20251112-WA0050.jpg"
+                  alt="Portes PVC"
+                  fill
+                  style={{ objectFit: 'cover' }}
+                />
               </div>
-              <h3>{t('range_pvc_title')}</h3>
-              <p>{t('range_pvc_desc')}</p>
+              <h3 className="showroom-title">{t('range_pvc_title')}</h3>
+              <p className="showroom-price">Smart Choice</p>
+              <p style={{ color: '#666', fontSize: '0.9rem', marginBottom: '1.5rem' }}>{t('range_pvc_desc')}</p>
+              <Link href="/doors" className="btn-showroom">
+                {t('btn_discover')}
+              </Link>
             </div>
-          </div>
-          
-          <div className="text-center" style={{ marginTop: '60px' }}>
-            <Link href="/doors" className="btn">
-              {t('btn_view_ranges')}
-            </Link>
+
+            {/* Accessories */}
+            <div className="showroom-card">
+              <div className="showroom-image-container">
+                <Image
+                  src="/images/IMG-20251112-WA0050.jpg"
+                  alt="Accessoires"
+                  fill
+                  style={{ objectFit: 'cover' }}
+                />
+              </div>
+              <h3 className="showroom-title">{t('cat_acc')}</h3>
+              <p className="showroom-price">Finishing Touch</p>
+              <p style={{ color: '#666', fontSize: '0.9rem', marginBottom: '1.5rem' }}>Poignées, serrures et butoirs design</p>
+              <Link href="/accessories" className="btn-showroom">
+                {t('btn_discover')}
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Why Choose Us - Clean Grid */}
-      <section className="section-padding">
+      {/* Minimalist Trust Section */}
+      <section style={{ padding: '80px 0', background: 'white', borderTop: '1px solid #f0f0f0' }}>
         <div className="container">
-          <div className="text-center">
-            <h2 className="section-title-modern">{t('why_title')}</h2>
-            <p className="section-subtitle-modern">{t('why_subtitle')}</p>
-          </div>
-          
-          <div className="product-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '30px' }}>
-            {/* Point 1 */}
-            <div className="premium-card" style={{ padding: '2rem' }}>
-              <i className="fas fa-globe" style={{ fontSize: '2rem', color: 'var(--accent-color)', marginBottom: '1rem' }}></i>
-              <h3>{t('why_1_title')}</h3>
-              <p>{t('why_1_desc')}</p>
+          <div className="product-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '40px' }}>
+            <div className="text-center">
+              <i className="fas fa-certificate" style={{ fontSize: '2rem', color: 'var(--gold-accent)', marginBottom: '1rem' }}></i>
+              <h3 style={{ fontSize: '1rem', textTransform: 'uppercase', letterSpacing: '1px' }}>{t('why_1_title')}</h3>
             </div>
-
-            {/* Point 2 */}
-            <div className="premium-card" style={{ padding: '2rem' }}>
-              <i className="fas fa-key" style={{ fontSize: '2rem', color: 'var(--accent-color)', marginBottom: '1rem' }}></i>
-              <h3>{t('why_2_title')}</h3>
-              <p>{t('why_2_desc')}</p>
+            <div className="text-center">
+              <i className="fas fa-tools" style={{ fontSize: '2rem', color: 'var(--gold-accent)', marginBottom: '1rem' }}></i>
+              <h3 style={{ fontSize: '1rem', textTransform: 'uppercase', letterSpacing: '1px' }}>{t('why_2_title')}</h3>
             </div>
-
-            {/* Point 3 */}
-            <div className="premium-card" style={{ padding: '2rem' }}>
-              <i className="fas fa-shield-alt" style={{ fontSize: '2rem', color: 'var(--accent-color)', marginBottom: '1rem' }}></i>
-              <h3>{t('why_3_title')}</h3>
-              <p>{t('why_3_desc')}</p>
+            <div className="text-center">
+              <i className="fas fa-shield-alt" style={{ fontSize: '2rem', color: 'var(--gold-accent)', marginBottom: '1rem' }}></i>
+              <h3 style={{ fontSize: '1rem', textTransform: 'uppercase', letterSpacing: '1px' }}>{t('why_3_title')}</h3>
             </div>
-
-            {/* Point 4 */}
-            <div className="premium-card" style={{ padding: '2rem' }}>
-              <i className="fas fa-tag" style={{ fontSize: '2rem', color: 'var(--accent-color)', marginBottom: '1rem' }}></i>
-              <h3>{t('why_4_title')}</h3>
-              <p>{t('why_4_desc')}</p>
+            <div className="text-center">
+              <i className="fas fa-tag" style={{ fontSize: '2rem', color: 'var(--gold-accent)', marginBottom: '1rem' }}></i>
+              <h3 style={{ fontSize: '1rem', textTransform: 'uppercase', letterSpacing: '1px' }}>{t('why_4_title')}</h3>
             </div>
           </div>
         </div>
