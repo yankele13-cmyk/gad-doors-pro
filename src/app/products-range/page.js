@@ -17,8 +17,8 @@ export default function ProductsRangePage() {
         {/* Detailed Ranges */}
         <div className="container" style={{ marginBottom: '80px' }}>
           {/* WPC */}
-          <div className="premium-card mb-5" style={{ flexDirection: 'row', textAlign: 'left', flexWrap: 'wrap', alignItems: 'flex-start' }}>
-            <div style={{ flex: '1 1 300px', paddingRight: '20px' }}>
+          <div className="premium-card mb-5" style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'flex-start' }}>
+            <div style={{ flex: '1 1 300px', paddingInlineEnd: '20px' }}>
               <h2 style={{ color: 'var(--accent-color)', marginBottom: '10px' }}>{t('wpc_title')}</h2>
               <h4 className="mb-3">{t('wpc_subtitle')}</h4>
               <ul style={{ listStyle: 'none', padding: 0 }}>
@@ -34,8 +34,8 @@ export default function ProductsRangePage() {
           </div>
 
           {/* Formica */}
-          <div className="premium-card mb-5" style={{ flexDirection: 'row', textAlign: 'left', flexWrap: 'wrap', alignItems: 'flex-start' }}>
-            <div style={{ flex: '1 1 300px', paddingRight: '20px' }}>
+          <div className="premium-card mb-5" style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'flex-start' }}>
+            <div style={{ flex: '1 1 300px', paddingInlineEnd: '20px' }}>
               <h2 style={{ color: '#333', marginBottom: '10px' }}>{t('formica_title')}</h2>
               <h4 className="mb-3">{t('formica_subtitle')}</h4>
               <ul style={{ listStyle: 'none', padding: 0 }}>
@@ -44,14 +44,14 @@ export default function ProductsRangePage() {
                 <li className="mb-2"><i className="fas fa-check text-success me-2"></i> {t('formica_design')}</li>
               </ul>
             </div>
-             <div style={{ flex: '0 0 100px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <div style={{ flex: '0 0 100px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                <i className="fas fa-layer-group" style={{ fontSize: '4rem', color: '#e0e0e0' }}></i>
             </div>
           </div>
 
           {/* PVC */}
-          <div className="premium-card" style={{ flexDirection: 'row', textAlign: 'left', flexWrap: 'wrap', alignItems: 'flex-start' }}>
-            <div style={{ flex: '1 1 300px', paddingRight: '20px' }}>
+          <div className="premium-card" style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'flex-start' }}>
+            <div style={{ flex: '1 1 300px', paddingInlineEnd: '20px' }}>
               <h2 style={{ color: '#666', marginBottom: '10px' }}>{t('pvc_title')}</h2>
               <h4 className="mb-3">{t('pvc_subtitle')}</h4>
               <ul style={{ listStyle: 'none', padding: 0 }}>
@@ -59,7 +59,7 @@ export default function ProductsRangePage() {
                 <li className="mb-2"><i className="fas fa-check text-success me-2"></i> {t('pvc_maint')}</li>
               </ul>
             </div>
-             <div style={{ flex: '0 0 100px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <div style={{ flex: '0 0 100px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                <i className="fas fa-wallet" style={{ fontSize: '4rem', color: '#e0e0e0' }}></i>
             </div>
           </div>
@@ -71,7 +71,7 @@ export default function ProductsRangePage() {
             <div className="product-grid">
                 <div className="premium-card">
                     <h3>{t('tech_locks_title')}</h3>
-                    <ul style={{ textAlign: 'left', listStyle: 'circle', paddingLeft: '20px' }}>
+                    <ul style={{ listStyle: 'circle', paddingInlineStart: '20px' }}>
                         <li>{t('lock_mag')}</li>
                         <li>{t('lock_butterfly')}</li>
                         <li>{t('lock_key')}</li>
@@ -94,7 +94,7 @@ export default function ProductsRangePage() {
             <table style={{ width: '100%', borderCollapse: 'collapse', background: 'white', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }}>
               <thead>
                 <tr style={{ background: '#f8f9fa', borderBottom: '2px solid #eee' }}>
-                  <th style={{ padding: '15px', textAlign: 'left' }}></th>
+                  <th style={{ padding: '15px', textAlign: 'start' }}></th>
                   <th style={{ padding: '15px', textAlign: 'center', color: 'var(--accent-color)' }}>WPC</th>
                   <th style={{ padding: '15px', textAlign: 'center' }}>Formica</th>
                   <th style={{ padding: '15px', textAlign: 'center' }}>PVC</th>
