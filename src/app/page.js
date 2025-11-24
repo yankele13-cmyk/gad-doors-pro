@@ -22,12 +22,12 @@ export default function Home() {
 
       {/* Premium Expertise Banner - Overlapping Hero */}
       <div className="container" style={{ position: 'relative', padding: '0 20px' }}>
-        <div className="expertise-banner text-center">
+        <Link href="/about" className="expertise-banner text-center" style={{ display: 'block', textDecoration: 'none' }}>
           <p className="expertise-text">
             <i className="fas fa-certificate" style={{ color: 'var(--accent-color)', marginRight: '12px' }}></i>
             {t('expertise_banner')}
           </p>
-        </div>
+        </Link>
       </div>
 
       {/* Categories Preview - Clean & Modern */}
@@ -78,35 +78,35 @@ export default function Home() {
           
           <div className="product-grid" style={{ marginTop: '40px', gap: '30px' }}>
             {/* WPC */}
-            <div className="premium-card">
+            <Link href="/products-range" className="premium-card" style={{ textDecoration: 'none', color: 'inherit' }}>
               <div className="feature-icon-circle">
                 <i className="fas fa-water"></i>
               </div>
               <h3>{t('range_wpc_title')}</h3>
               <p>{t('range_wpc_desc')}</p>
-            </div>
+            </Link>
 
             {/* Formica */}
-            <div className="premium-card">
+            <Link href="/products-range" className="premium-card" style={{ textDecoration: 'none', color: 'inherit' }}>
               <div className="feature-icon-circle">
                 <i className="fas fa-layer-group"></i>
               </div>
               <h3>{t('range_formica_title')}</h3>
               <p>{t('range_formica_desc')}</p>
-            </div>
+            </Link>
 
             {/* PVC */}
-            <div className="premium-card">
+            <Link href="/products-range" className="premium-card" style={{ textDecoration: 'none', color: 'inherit' }}>
               <div className="feature-icon-circle">
                 <i className="fas fa-wallet"></i>
               </div>
               <h3>{t('range_pvc_title')}</h3>
               <p>{t('range_pvc_desc')}</p>
-            </div>
+            </Link>
           </div>
           
           <div className="text-center" style={{ marginTop: '60px' }}>
-            <Link href="/doors" className="btn">
+            <Link href="/products-range" className="btn">
               {t('btn_view_ranges')}
             </Link>
           </div>
@@ -149,6 +149,12 @@ export default function Home() {
               <h3>{t('why_4_title')}</h3>
               <p>{t('why_4_desc')}</p>
             </div>
+          </div>
+          
+          <div className="text-center" style={{ marginTop: '40px' }}>
+            <Link href="/services" className="btn btn-outline" style={{ borderColor: 'var(--accent-color)', color: 'var(--accent-color)' }}>
+              Découvrir notre Service Tout Inclus
+            </Link>
           </div>
         </div>
       </section>

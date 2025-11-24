@@ -6,11 +6,76 @@ const LanguageContext = createContext();
 
 const translations = {
   fr: {
+    // Navigation
     nav_home: 'Accueil',
     nav_doors: 'Portes',
     nav_accessories: 'Accessoires',
     nav_warranty: 'Garantie',
     nav_contact: 'Contact',
+    nav_about: 'À Propos',
+    nav_services: 'Services',
+    nav_ranges: 'Nos Gammes',
+
+    // About Page
+    about_title: "Gad Dlatot – Importateur Direct & Expert",
+    about_subtitle: "18 ans d'excellence dans la porte d'intérieur",
+    about_exp_title: "18 Ans d'Expérience",
+    about_exp_desc: "Une expertise reconnue dans l'importation et la distribution de portes en Israël.",
+    about_origin_title: "Importation Directe",
+    about_origin_desc: "Italie pour le design, Chine pour la technologie. Sans aucun intermédiaire.",
+    about_force_title: "Maîtrise Totale",
+    about_force_desc: "De l'usine jusqu'à l'installation chez vous. Nous contrôlons toute la chaîne.",
+    
+    // Services Page
+    services_title: "Service Tout Inclus",
+    services_subtitle: "Transparence totale, zéro surprise",
+    service_consult_title: "Visite Conseil",
+    service_consult_desc: "Expert à domicile pour choisir le modèle adapté.",
+    service_measure_title: "Métré Laser",
+    service_measure_desc: "Prise de mesure professionnelle pour une précision parfaite.",
+    service_removal_title: "Démontage Inclus",
+    service_removal_desc: "Retrait de vos anciennes portes compris dans le prix !",
+    service_install_title: "Installation Pro",
+    service_install_desc: "Montage complet de la porte et des chambranles.",
+    
+    // Product Details
+    wpc_title: "WPC - La Star",
+    wpc_subtitle: "Le choix n°1 pour les foyers israéliens",
+    wpc_comp: "Composition : WPC (Wood Plastic Composite) – Alliage haute densité.",
+    wpc_resist: "Résistance : 100% Hydrofuge et Anti-termites. Idéal pour le nettoyage à grande eau.",
+    wpc_iso: "Isolation : Joint périphérique acoustique supérieur.",
+    wpc_warranty: "Garantie : 7 ans (Eau/Termites) + 1 an (Mécanisme).",
+    
+    formica_title: "Formica - La Robuste",
+    formica_subtitle: "Pour les zones à fort passage",
+    formica_comp: "Surface : Revêtement stratifié haute pression.",
+    formica_resist: "Point Fort : Résistance exceptionnelle aux rayures et aux chocs.",
+    formica_design: "Design : Textures variées (bois, béton).",
+    
+    pvc_title: "PVC - L'Économique",
+    pvc_subtitle: "Le budget maîtrisé",
+    pvc_usage: "Usage : Idéal pour locatif et rénovation.",
+    pvc_maint: "Entretien : Facile à nettoyer.",
+    
+    // Technical Options
+    tech_title: "Personnalisation & Options",
+    tech_locks_title: "Serrures & Mécanismes",
+    lock_mag: "Magnétique : Silencieuse et esthétique.",
+    lock_butterfly: "Papillon (Parpar) : Pour SDB/WC.",
+    lock_key: "Clé Standard : Pour chambres.",
+    lock_cyl: "Cylindre : Sécurité renforcée (bureaux).",
+    lock_lang: "Languette : Mécanisme classique éprouvé.",
+    
+    tech_design_title: "Design & Esthétique",
+    colors_avail: "Couleurs : Blanc Pur, Crème, Gris Moderne, Noyer, Chêne Blanchi.",
+    frames_desc: "Cadres (Mashkofim) : 100% Polymère (ne gonflent pas).",
+    
+    // Comparator
+    comp_title: "Comparateur de Gammes",
+    comp_water: "Résistance Eau",
+    comp_scratch: "Résistance Rayures",
+    comp_price: "Budget",
+    comp_warranty: "Garantie",
     hero_title: "L'Élégance à Chaque Ouverture",
     hero_subtitle:
       "Découvrez notre collection exclusive de portes d'intérieur haut de gamme.",
@@ -91,11 +156,76 @@ const translations = {
     admin_show: 'Afficher',
   },
   he: {
+    // Navigation
     nav_home: 'בית',
     nav_doors: 'דלתות',
     nav_accessories: 'אביזרים',
     nav_warranty: 'אחריות',
     nav_contact: 'צור קשר',
+    nav_about: 'אודות',
+    nav_services: 'שירותים',
+    nav_ranges: 'הקולקציות שלנו',
+
+    // About Page
+    about_title: "גד דלתות – יבואן ישיר ומומחה",
+    about_subtitle: "18 שנות מצוינות בדלתות פנים",
+    about_exp_title: "18 שנות ניסיון",
+    about_exp_desc: "מומחיות מוכחת ביבוא ושיווק דלתות בישראל.",
+    about_origin_title: "יבוא ישיר",
+    about_origin_desc: "איטליה לעיצוב, סין לטכנולוגיה. ללא מתווכים.",
+    about_force_title: "שליטה מלאה",
+    about_force_desc: "מהמפעל ועד ההתקנה אצלכם. אנו שולטים בכל השרשרת.",
+
+    // Services Page
+    services_title: "שירות הכל כלול",
+    services_subtitle: "שקיפות מלאה, ללא הפתעות",
+    service_consult_title: "ביקור ייעוץ",
+    service_consult_desc: "מומחה עד הבית לבחירת הדגם המתאים.",
+    service_measure_title: "מדידת לייזר",
+    service_measure_desc: "מדידה מקצועית לדיוק מושלם.",
+    service_removal_title: "פירוק כלול",
+    service_removal_desc: "פינוי הדלתות הישנות כלול במחיר!",
+    service_install_title: "התקנה מקצועית",
+    service_install_desc: "הרכבה מלאה של הדלת והמשקופים.",
+
+    // Product Details
+    wpc_title: "פולימר - הכוכב",
+    wpc_subtitle: "הבחירה מס' 1 לבית הישראלי",
+    wpc_comp: "הרכב: WPC (Wood Plastic Composite) – סגסוגת צפופה.",
+    wpc_resist: "עמידות: 100% עמיד למים וטרמיטים. אידיאלי לשטיפה.",
+    wpc_iso: "בידוד: אטם היקפי לבידוד אקוסטי משופר.",
+    wpc_warranty: "אחריות: 7 שנים (מים/טרמיטים) + שנה (מנגנון).",
+
+    formica_title: "פורמייקה - החזקה",
+    formica_subtitle: "לאזורים עם תנועה רבה",
+    formica_comp: "משטח: ציפוי פורמייקה בלחץ גבוה.",
+    formica_resist: "יתרון: עמידות יוצאת דופן לשריטות ומכות.",
+    formica_design: "עיצוב: מגוון טקסטורות (עץ, בטון).",
+
+    pvc_title: "PVC - המשתלמת",
+    pvc_subtitle: "תקציב מבוקר",
+    pvc_usage: "שימוש: אידיאלי לדירות שכורות ושיפוץ.",
+    pvc_maint: "תחזוקה: קל לניקוי.",
+
+    // Technical Options
+    tech_title: "התאמה אישית ואפשרויות",
+    tech_locks_title: "מנעולים ומנגנונים",
+    lock_mag: "מגנטי: שקט ואסתטי.",
+    lock_butterfly: "פרפר (תפוס/פנוי): לשירותים/מקלחת.",
+    lock_key: "מפתח רגיל: לחדרי שינה.",
+    lock_cyl: "צילינדר: ביטחון מוגבר (משרדים).",
+    lock_lang: "לשונית: מנגנון מכאני קלאסי.",
+
+    tech_design_title: "עיצוב ואסתטיקה",
+    colors_avail: "צבעים: לבן, שמנת, אפור מודרני, אגוז, אלון מולבן.",
+    frames_desc: "משקופים: 100% פולימר (לא מתנפחים).",
+
+    // Comparator
+    comp_title: "השוואת דגמים",
+    comp_water: "עמידות למים",
+    comp_scratch: "עמידות לשריטות",
+    comp_price: "תקציב",
+    comp_warranty: "אחריות",
     hero_title: 'אלגנטיות בכל פתיחה',
     hero_subtitle: 'גלה את הקולקציה הבלעדית שלנו של דלתות פנים יוקרתיות.',
     hero_cta: 'צפה בקולקציה',

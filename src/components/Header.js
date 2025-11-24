@@ -34,6 +34,21 @@ export default function Header() {
             </Link>
           </li>
           <li>
+            <Link href="/about" className={isActive('/about') ? 'active' : ''}>
+              {t('nav_about')}
+            </Link>
+          </li>
+          <li>
+            <Link href="/products-range" className={isActive('/products-range') ? 'active' : ''}>
+              {t('nav_ranges')}
+            </Link>
+          </li>
+          <li>
+            <Link href="/services" className={isActive('/services') ? 'active' : ''}>
+              {t('nav_services')}
+            </Link>
+          </li>
+          <li>
             <Link href="/doors" className={isActive('/doors') ? 'active' : ''}>
               {t('nav_doors')}
             </Link>
@@ -44,14 +59,6 @@ export default function Header() {
               className={isActive('/accessories') ? 'active' : ''}
             >
               {t('nav_accessories')}
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/warranty"
-              className={isActive('/warranty') ? 'active' : ''}
-            >
-              {t('nav_warranty')}
             </Link>
           </li>
           <li>
