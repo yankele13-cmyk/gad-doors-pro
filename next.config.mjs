@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-// Force redeploy for env vars update
+// Force redeploy - production env vars configured
 const nextConfig = {
   experimental: {
     turbopackUseSystemTlsCerts: true,
