@@ -83,9 +83,9 @@ export default function ProductModal({ product, onClose, onSave }) {
 
     try {
       if (isEditMode) {
-        updateProduct(product.id, formData);
+        await updateProduct(product.id, formData);
       } else {
-        addProduct(formData);
+        await addProduct(formData);
       }
 
       onSave?.();

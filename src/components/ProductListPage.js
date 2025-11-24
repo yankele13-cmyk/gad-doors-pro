@@ -19,17 +19,18 @@ export default function ProductListPage({ category, titleKey }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate initial load
-    setLoading(true);
+    async function initialize() {
+      setLoading(true);
 
-    // Initialize store with default data
-    initializeStore(defaultProducts);
+      // Initialize store with default data
+      await initializeStore(defaultProducts);
 
-    // Small delay for smoother UX
-    setTimeout(() => {
-      loadProducts();
+      // Load products
+      await loadProducts();
       setLoading(false);
-    }, 300);
+    }
+
+    initialize();
 
     // Listen for updates from admin
     const handleUpdate = () => loadProducts();
@@ -37,10 +38,10 @@ export default function ProductListPage({ category, titleKey }) {
     return () => window.removeEventListener('productsUpdated', handleUpdate);
   }, [category]); // Re-load if category changes
 
-  const loadProducts = () => {
-    const allProducts = getProducts();
+  const loadProducts = async () => {
+    const allProducts = await getProducts();
     const filteredProducts = allProducts.filter(
-      (p) => p.category === category && !p.isHidden
+      (p) => p.category === category && !p.is_hidden
     );
     setProducts(filteredProducts);
   };

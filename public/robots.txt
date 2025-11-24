@@ -1,0 +1,10 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Bloquer l'admin
+Disallow: /admin
+Disallow: /api
+
+# Sitemap
+Sitemap: https://gaddoors.com/sitemap.xml

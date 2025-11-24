@@ -18,8 +18,12 @@ export default function ProductTable({ onEdit }) {
 
   // Charger les produits
   useEffect(() => {
-    initializeStore(defaultProducts);
-    loadProducts();
+    async function initialize() {
+      await initializeStore(defaultProducts);
+      await loadProducts();
+    }
+
+    initialize();
 
     // Écouter les mises à jour
     const handleUpdate = () => loadProducts();
@@ -27,26 +31,26 @@ export default function ProductTable({ onEdit }) {
     return () => window.removeEventListener('productsUpdated', handleUpdate);
   }, []);
 
-  const loadProducts = () => {
-    const allProducts = getProducts();
+  const loadProducts = async () => {
+    const allProducts = await getProducts();
     setProducts(allProducts);
   };
 
-  const handleDelete = (id, name) => {
+  const handleDelete = async (id, name) => {
     if (window.confirm(`Êtes-vous sûr de vouloir supprimer "${name}" ?`)) {
       try {
-        deleteProduct(id);
-        loadProducts();
+        await deleteProduct(id);
+        await loadProducts();
       } catch (error) {
         alert('Erreur lors de la suppression : ' + error.message);
       }
     }
   };
 
-  const handleToggleVisibility = (id) => {
+  const handleToggleVisibility = async (id) => {
     try {
-      toggleProductVisibility(id);
-      loadProducts();
+      await toggleProductVisibility(id);
+      await loadProducts();
     } catch (error) {
       alert('Erreur : ' + error.message);
     }
@@ -126,9 +130,9 @@ export default function ProductTable({ onEdit }) {
                 </td>
                 <td>
                   <Badge
-                    type={product.isHidden ? 'statusHidden' : 'statusVisible'}
+                    type={product.is_hidden ? 'statusHidden' : 'statusVisible'}
                   >
-                    {product.isHidden ? 'Masqué' : 'Visible'}
+                    {product.is_hidden ? 'Masqué' : 'Visible'}
                   </Badge>
                 </td>
                 <td>
@@ -137,13 +141,13 @@ export default function ProductTable({ onEdit }) {
                       onClick={() => handleToggleVisibility(product.id)}
                       className="btn-small"
                       style={{
-                        background: product.isHidden ? '#4caf50' : '#ff9800',
+                        background: product.is_hidden ? '#4caf50' : '#ff9800',
                         color: 'white',
                       }}
-                      title={product.isHidden ? 'Afficher' : 'Masquer'}
+                      title={product.is_hidden ? 'Afficher' : 'Masquer'}
                     >
                       <i
-                        className={`fas ${product.isHidden ? 'fa-eye' : 'fa-eye-slash'}`}
+                        className={`fas ${product.is_hidden ? 'fa-eye' : 'fa-eye-slash'}`}
                       ></i>
                     </button>
                     <button

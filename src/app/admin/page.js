@@ -80,23 +80,7 @@ export default function AdminLoginPage() {
         </p>
 
         {/* Info de debug (à retirer en production) */}
-        <div
-          style={{
-            marginTop: '30px',
-            padding: '15px',
-            background: '#f0f0f0',
-            borderRadius: '8px',
-            fontSize: '0.85rem',
-          }}
-        >
-          <p style={{ margin: '0 0 5px', color: '#666' }}>
-            <strong>Credentials de test:</strong>
-          </p>
-          <p style={{ margin: '0', color: '#666' }}>
-            Email: admin@gaddoors.com
-          </p>
-          <p style={{ margin: '0', color: '#666' }}>Password: admin123</p>
-        </div>
+
       </div>
     </div>
   );

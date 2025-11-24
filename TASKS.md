@@ -8,25 +8,25 @@ Ce document détaille les prochaines étapes pour finaliser le développement du
 
 ### 1. Intégration de Supabase pour les Données Produits
 
-- **Statut :** ⏳ À faire
-- **Priorité :** 🔥 CRITIQUE
-- **Constat :** Les produits sont actuellement codés en dur dans `src/data/products.js`, ce qui rend le site statique et difficile à mettre à jour.
+- **Statut :** ⏸️ En pause (Priorité changée par l'utilisateur)
+- **Priorité :** 🟡 MOYENNE
+- **Constat :** Les produits sont actuellement codés en dur. L'utilisateur préfère d'abord gérer les contacts.
 - **Actions Clés :**
   - [ ] Configurer le client Supabase dans `src/lib/supabase.js`.
-  - [ ] Créer la table `products` dans Supabase avec les colonnes nécessaires (id, name, description, price, images, category, etc.).
-  - [ ] Remplacer les appels aux données locales par des appels à l'API Supabase dans les pages `doors` et `accessories`.
-  - [ ] Mettre en place des fonctions de récupération de données (`getProducts`, `getProductById`) dans `src/lib/productStore.js`.
+  - [ ] Créer la table `products`.
+  - [ ] Migrer les données.
 
-### 2. Finalisation du Formulaire de Contact
+### 2. Finalisation du Formulaire de Contact (Google Sheets)
 
-- **Statut :** ⏳ À faire
+- **Statut :** 🧪 En test
 - **Priorité :** 🔥 CRITIQUE
-- **Constat :** L'interface du formulaire est prête, mais la logique d'envoi d'email côté serveur est manquante (`src/app/api/contact/route.js`).
+- **Constat :** L'intégration est codée. En attente de validation par l'utilisateur.
 - **Actions Clés :**
-  - [ ] Choisir et configurer un service d'envoi d'email (ex: Resend, SendGrid).
-  - [ ] Implémenter la logique d'envoi dans la route API.
-  - [ ] Ajouter une validation robuste des données côté serveur (Zod est une bonne option).
-  - [ ] Améliorer les retours à l'utilisateur (toasts/messages) pour les cas de succès et d'erreur.
+  - [x] Configurer un projet Google Cloud et activer l'API Google Sheets.
+  - [x] Créer un compte de service et récupérer les identifiants (JSON).
+  - [x] Installer `googleapis`.
+  - [x] Connecter la route API `/api/contact` à Google Sheets.
+  - [ ] Tester l'envoi de données.
 
 ### 3. Mise en Place de l'Authentification Admin
 

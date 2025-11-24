@@ -1,18 +1,7 @@
 /**
  * Supabase Client Configuration
- *
- * STATUT ACTUEL: Non utilisé - le site fonctionne avec localStorage
- *
- * Ce fichier sera utilisé lors de la migration vers Supabase pour:
- * - Stockage des produits en base de données PostgreSQL
- * - Authentification admin robuste avec JWT
- * - Upload d'images vers Supabase Storage
- *
- * Pour activer Supabase:
- * 1. Créer un compte sur https://supabase.com
- * 2. Créer un projet
- * 3. Copier les clés dans .env.local (voir docs/ENV_TEMPLATE.md)
- * 4. Décommenter le code ci-dessous
+ * 
+ * Connexion active à la base de données Supabase
  */
 
 import { createClient } from '@supabase/supabase-js';

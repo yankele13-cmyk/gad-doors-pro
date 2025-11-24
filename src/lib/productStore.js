@@ -1,105 +1,203 @@
-// Product Store - CRUD operations avec localStorage
-// Gestion centralisée des produits
+// Product Store - CRUD operations avec Supabase
+// Gestion centralisée des produits via base de données
 
-const STORAGE_KEY = 'gadDoorsProducts';
+import { supabase } from './supabase';
 
-// Charger les produits depuis localStorage ou retourner les données par défaut
-export function getProducts() {
-  if (typeof window === 'undefined') return [];
-
-  const stored = localStorage.getItem(STORAGE_KEY);
-  if (stored) {
-    try {
-      return JSON.parse(stored);
-    } catch (e) {
-      console.error('Error parsing products from localStorage:', e);
-      return [];
-    }
+// Charger les produits depuis Supabase
+export async function getProducts() {
+  if (!supabase) {
+    console.error('Supabase client not initialized');
+    return [];
   }
 
-  // Si pas de données, charger depuis data/products.js
-  return [];
-}
+  try {
+    const { data, error } = await supabase
+      .from('products')
+      .select('*')
+      .order('id', { ascending: true });
 
-// Sauvegarder les produits dans localStorage
-function saveProducts(products) {
-  if (typeof window === 'undefined') return;
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
-
-  // Dispatcher un événement custom pour notifier les autres composants
-  window.dispatchEvent(new Event('productsUpdated'));
+    if (error) throw error;
+    return data || [];
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    return [];
+  }
 }
 
 // Ajouter un nouveau produit
-export function addProduct(productData) {
-  const products = getProducts();
+export async function addProduct(productData) {
+  if (!supabase) {
+    throw new Error('Supabase client not initialized');
+  }
 
-  // Générer un nouvel ID
-  const newId =
-    products.length > 0 ? Math.max(...products.map((p) => p.id)) + 1 : 1;
+  try {
+    const { data, error } = await supabase
+      .from('products')
+      .insert([
+        {
+          name: productData.name,
+          name_he: productData.name_he,
+          category: productData.category,
+          image: productData.image,
+          description: productData.description || '',
+          description_he: productData.description_he || '',
+          is_hidden: false,
+        },
+      ])
+      .select()
+      .single();
 
-  const newProduct = {
-    id: newId,
-    ...productData,
-    isHidden: false, // Par défaut visible
-  };
+    if (error) throw error;
 
-  const updatedProducts = [...products, newProduct];
-  saveProducts(updatedProducts);
+    // Dispatcher un événement pour notifier les composants
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new Event('productsUpdated'));
+    }
 
-  return newProduct;
+    return data;
+  } catch (error) {
+    console.error('Error adding product:', error);
+    throw error;
+  }
 }
 
 // Mettre à jour un produit existant
-export function updateProduct(id, productData) {
-  const products = getProducts();
-  const index = products.findIndex((p) => p.id === id);
-
-  if (index === -1) {
-    throw new Error(`Product with id ${id} not found`);
+export async function updateProduct(id, productData) {
+  if (!supabase) {
+    throw new Error('Supabase client not initialized');
   }
 
-  products[index] = {
-    ...products[index],
-    ...productData,
-  };
+  try {
+    const updateData = {
+      ...(productData.name && { name: productData.name }),
+      ...(productData.name_he && { name_he: productData.name_he }),
+      ...(productData.category && { category: productData.category }),
+      ...(productData.image && { image: productData.image }),
+      ...(productData.description !== undefined && {
+        description: productData.description,
+      }),
+      ...(productData.description_he !== undefined && {
+        description_he: productData.description_he,
+      }),
+      ...(productData.isHidden !== undefined && {
+        is_hidden: productData.isHidden,
+      }),
+      updated_at: new Date().toISOString(),
+    };
 
-  saveProducts(products);
-  return products[index];
+    const { data, error } = await supabase
+      .from('products')
+      .update(updateData)
+      .eq('id', id)
+      .select()
+      .single();
+
+    if (error) throw error;
+
+    // Dispatcher un événement pour notifier les composants
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new Event('productsUpdated'));
+    }
+
+    return data;
+  } catch (error) {
+    console.error('Error updating product:', error);
+    throw error;
+  }
 }
 
 // Supprimer un produit
-export function deleteProduct(id) {
-  const products = getProducts();
-  const filteredProducts = products.filter((p) => p.id !== id);
-
-  if (filteredProducts.length === products.length) {
-    throw new Error(`Product with id ${id} not found`);
+export async function deleteProduct(id) {
+  if (!supabase) {
+    throw new Error('Supabase client not initialized');
   }
 
-  saveProducts(filteredProducts);
-  return true;
+  try {
+    const { error } = await supabase.from('products').delete().eq('id', id);
+
+    if (error) throw error;
+
+    // Dispatcher un événement pour notifier les composants
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new Event('productsUpdated'));
+    }
+
+    return true;
+  } catch (error) {
+    console.error('Error deleting product:', error);
+    throw error;
+  }
 }
 
 // Toggle visibilité d'un produit
-export function toggleProductVisibility(id) {
-  const products = getProducts();
-  const product = products.find((p) => p.id === id);
-
-  if (!product) {
-    throw new Error(`Product with id ${id} not found`);
+export async function toggleProductVisibility(id) {
+  if (!supabase) {
+    throw new Error('Supabase client not initialized');
   }
 
-  product.isHidden = !product.isHidden;
-  saveProducts(products);
+  try {
+    // Récupérer le produit actuel
+    const { data: product, error: fetchError } = await supabase
+      .from('products')
+      .select('is_hidden')
+      .eq('id', id)
+      .single();
 
-  return product;
+    if (fetchError) throw fetchError;
+
+    // Inverser la visibilité
+    const { data, error } = await supabase
+      .from('products')
+      .update({ is_hidden: !product.is_hidden })
+      .eq('id', id)
+      .select()
+      .single();
+
+    if (error) throw error;
+
+    // Dispatcher un événement pour notifier les composants
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new Event('productsUpdated'));
+    }
+
+    return data;
+  } catch (error) {
+    console.error('Error toggling product visibility:', error);
+    throw error;
+  }
 }
 
-// Initialiser le store avec les données par défaut si localStorage est vide
-export function initializeStore(defaultProducts) {
-  const existing = getProducts();
-  if (existing.length === 0 && defaultProducts && defaultProducts.length > 0) {
-    saveProducts(defaultProducts);
+// Initialiser le store avec les données par défaut si la base est vide
+export async function initializeStore(defaultProducts) {
+  if (!supabase) {
+    console.warn('Supabase not initialized, skipping store initialization');
+    return;
+  }
+
+  try {
+    const existing = await getProducts();
+
+    if (existing.length === 0 && defaultProducts && defaultProducts.length > 0) {
+      // Insérer les produits par défaut
+      const productsToInsert = defaultProducts.map((p) => ({
+        name: p.name,
+        name_he: p.name_he,
+        category: p.category,
+        image: p.image,
+        description: p.description || '',
+        description_he: p.description_he || '',
+        is_hidden: p.isHidden || false,
+      }));
+
+      const { error } = await supabase
+        .from('products')
+        .insert(productsToInsert);
+
+      if (error) throw error;
+
+      console.log('✅ Store initialized with default products');
+    }
+  } catch (error) {
+    console.error('Error initializing store:', error);
   }
 }
