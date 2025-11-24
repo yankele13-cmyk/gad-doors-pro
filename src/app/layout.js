@@ -54,10 +54,11 @@ export const metadata = {
       'max-snippet': -1,
     },
   },
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-  },
+};
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
 };
 
 // Le RootLayout est maintenant beaucoup plus simple.
