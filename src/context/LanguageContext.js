@@ -104,6 +104,7 @@ const translations = {
     
     // Ranges
     ranges_title: "Nos Gammes de Portes",
+    ranges_subtitle: "Découvrez nos collections adaptées à tous les besoins",
     range_wpc_title: "WPC - La Star",
     range_wpc_desc: "100% Hydrofuge & Anti-termites. Le choix n°1 en Israël.",
     range_formica_title: "Formica - La Robuste",
@@ -111,6 +112,7 @@ const translations = {
     range_pvc_title: "PVC - L'Économique",
     range_pvc_desc: "Idéal pour locatif et petits budgets.",
     btn_view_ranges: "Voir toutes nos gammes",
+    btn_service_all_inclusive: "Découvrir notre Service Tout Inclus",
     why_title: 'Pourquoi Choisir GadDoors ?',
     why_subtitle:
       'Nous allions design moderne, matériaux de qualité supérieure et service client exceptionnel pour transformer votre intérieur.',
@@ -255,14 +257,16 @@ const translations = {
     why_4_desc: "הכל כלול, ללא הפתעות.",
 
     // Ranges
-    ranges_title: "קולקציות הדלתות שלנו",
+    ranges_title: "הקולקציות שלנו",
+    ranges_subtitle: "גלו את הקולקציות שלנו המותאמות לכל צורך",
     range_wpc_title: "פולימר - הכוכב",
-    range_wpc_desc: "100% עמיד למים וטרמיטים. הבחירה מס' 1 בישראל.",
-    range_formica_title: "פורמייקה - החזקה",
-    range_formica_desc: "עמידות גבוהה לשריטות לאזורים עמוסים.",
-    range_pvc_title: "PVC - המשתלמת",
-    range_pvc_desc: "אידיאלי לדירות שכורות ותקציב נמוך.",
+    range_wpc_desc: "100% חסין מים ונגד טרמיטים. הבחירה מס' 1 בישראל.",
+    range_formica_title: "פורמייקה - החזק",
+    range_formica_desc: "עמידות גבוהה לשריטות לאזורי מעבר אינטנסיבי.",
+    range_pvc_title: "PVC - הכלכלי",
+    range_pvc_desc: "אידיאלי להשכרה ולתקציבים קטנים.",
     btn_view_ranges: "צפו בכל הקולקציות",
+    btn_service_all_inclusive: "גלו את השירות הכל-כלול שלנו",
     why_title: 'למה לבחור ב-GadDoors?',
     why_subtitle:
       'אנו משלבים עיצוב מודרני, חומרים איכותיים ושירות לקוחות יוצא דופן כדי לשדרג את הבית שלך.',

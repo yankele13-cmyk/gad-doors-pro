@@ -73,7 +73,7 @@ export default function Home() {
         <div className="container">
           <div className="text-center">
             <h2 className="section-title-modern">{t('ranges_title')}</h2>
-            <p className="section-subtitle-modern">Découvrez nos collections adaptées à tous les besoins</p>
+            <p className="section-subtitle-modern">{t('ranges_subtitle')}</p>
           </div>
           
           <div className="product-grid" style={{ marginTop: '40px', gap: '30px' }}>
@@ -153,7 +153,7 @@ export default function Home() {
           
           <div className="text-center" style={{ marginTop: '40px' }}>
             <Link href="/services" className="btn btn-outline" style={{ borderColor: 'var(--accent-color)', color: 'var(--accent-color)' }}>
-              Découvrir notre Service Tout Inclus
+              {t('btn_service_all_inclusive')}
             </Link>
           </div>
         </div>
