@@ -25,6 +25,9 @@ const translations = {
     about_origin_desc: "Italie pour le design, Chine pour la technologie. Sans aucun intermédiaire.",
     about_force_title: "Maîtrise Totale",
     about_force_desc: "De l'usine jusqu'à l'installation chez vous. Nous contrôlons toute la chaîne.",
+    about_exp_hover: "Depuis 2007, nous avons installé plus de 50 000 portes à travers Israël. Notre longévité est votre meilleure garantie de fiabilité et de suivi.",
+    about_origin_hover: "Nous sélectionnons personnellement chaque modèle en Italie pour son style unique, et en Chine pour les meilleures innovations WPC. Aucun intermédiaire = Meilleur prix.",
+    about_force_hover: "Pas de sous-traitants douteux. Nos propres équipes gèrent la logistique, le stockage et la pose. Un seul interlocuteur pour une tranquillité d'esprit totale.",
     
     // Services Page
     services_title: "Service Tout Inclus",
@@ -175,6 +178,9 @@ const translations = {
     about_origin_desc: "איטליה לעיצוב, סין לטכנולוגיה. ללא מתווכים.",
     about_force_title: "שליטה מלאה",
     about_force_desc: "מהמפעל ועד ההתקנה אצלכם. אנו שולטים בכל השרשרת.",
+    about_exp_hover: "מאז 2007, התקנו מעל 50,000 דלתות ברחבי ישראל. הוותק שלנו הוא האחריות הטובה ביותר לאמינות ושירות.",
+    about_origin_hover: "אנו בוחרים אישית כל דגם באיטליה עבור העיצוב, ובסין עבור החדשנות. ללא מתווכים = המחיר הטוב ביותר.",
+    about_force_hover: "ללא קבלני משנה. הצוותים שלנו מנהלים את הלוגיסטיקה, האחסון וההתקנה. כתובת אחת לשקט נפשי מלא.",
 
     // Services Page
     services_title: "שירות הכל כלול",

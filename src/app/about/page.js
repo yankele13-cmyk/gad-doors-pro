@@ -23,6 +23,9 @@ export default function AboutPage() {
               </div>
               <h3>{t('about_exp_title')}</h3>
               <p>{t('about_exp_desc')}</p>
+              <div className="card-hover-overlay">
+                <p className="card-hover-text">{t('about_exp_hover')}</p>
+              </div>
             </div>
 
             {/* Direct Import */}
@@ -32,6 +35,9 @@ export default function AboutPage() {
               </div>
               <h3>{t('about_origin_title')}</h3>
               <p>{t('about_origin_desc')}</p>
+              <div className="card-hover-overlay">
+                <p className="card-hover-text">{t('about_origin_hover')}</p>
+              </div>
             </div>
 
             {/* Total Control */}
@@ -41,6 +47,9 @@ export default function AboutPage() {
               </div>
               <h3>{t('about_force_title')}</h3>
               <p>{t('about_force_desc')}</p>
+              <div className="card-hover-overlay">
+                <p className="card-hover-text">{t('about_force_hover')}</p>
+              </div>
             </div>
           </div>
         </div>
