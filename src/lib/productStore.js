@@ -212,10 +212,17 @@ export async function deduplicateProducts() {
   }
 }
 
+// Variable pour éviter l'initialisation concurrente (Race Condition)
+let isInitializing = false;
+
 // Initialiser le store avec les données par défaut si la base est vide
 export async function initializeStore(defaultProducts) {
+  if (isInitializing) return;
+  isInitializing = true;
+
   if (!supabase) {
     console.warn('Supabase not initialized, skipping store initialization');
+    isInitializing = false;
     return;
   }
 
@@ -249,5 +256,7 @@ export async function initializeStore(defaultProducts) {
     }
   } catch (error) {
     console.error('Error initializing store:', error);
+  } finally {
+    isInitializing = false;
   }
 }
