@@ -79,6 +79,8 @@ const translations = {
     comp_scratch: "Résistance Rayures",
     comp_price: "Budget",
     comp_warranty: "Garantie",
+    comp_warranty_7: "7 Ans",
+    comp_warranty_1: "1 An",
     hero_title: "L'Élégance à Chaque Ouverture",
     hero_subtitle:
       "Découvrez notre collection exclusive de portes d'intérieur haut de gamme.",
@@ -234,6 +236,8 @@ const translations = {
     comp_scratch: "עמידות לשריטות",
     comp_price: "תקציב",
     comp_warranty: "אחריות",
+    comp_warranty_7: "7 שנים",
+    comp_warranty_1: "שנה",
     hero_title: 'אלגנטיות בכל פתיחה',
     hero_subtitle: 'גלה את הקולקציה הבלעדית שלנו של דלתות פנים יוקרתיות.',
     hero_cta: 'צפה בקולקציה',

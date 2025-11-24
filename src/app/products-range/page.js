@@ -121,9 +121,9 @@ export default function ProductsRangePage() {
                 </tr>
                  <tr>
                   <td style={{ padding: '15px', fontWeight: 'bold' }}>{t('comp_warranty')}</td>
-                  <td style={{ padding: '15px', textAlign: 'center' }}>7 Ans</td>
-                  <td style={{ padding: '15px', textAlign: 'center' }}>1 An</td>
-                  <td style={{ padding: '15px', textAlign: 'center' }}>1 An</td>
+                  <td style={{ padding: '15px', textAlign: 'center' }}>{t('comp_warranty_7')}</td>
+                  <td style={{ padding: '15px', textAlign: 'center' }}>{t('comp_warranty_1')}</td>
+                  <td style={{ padding: '15px', textAlign: 'center' }}>{t('comp_warranty_1')}</td>
                 </tr>
               </tbody>
             </table>
