@@ -229,20 +229,18 @@ nav a.active {
 
 /* Hero Section */
 .hero {
-  height: 100vh;
-  min-height: 700px;
+  min-height: 600px;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)),
+    url('/images/hero-gaddoors.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-image:
-    linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-    url('/images/IMG-20251112-WA0048.jpg');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  color: var(--bg-surface);
-  padding-top: var(--header-height);
+  color: white;
+  position: relative;
 }
 
 .hero-content {
