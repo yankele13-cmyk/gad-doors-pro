@@ -167,6 +167,51 @@ export async function toggleProductVisibility(id) {
   }
 }
 
+// Nettoyer les doublons
+export async function deduplicateProducts() {
+  if (!supabase) return;
+
+  try {
+    const { data: products, error } = await supabase
+      .from('products')
+      .select('*')
+      .order('id', { ascending: true });
+
+    if (error) throw error;
+
+    const seen = new Set();
+    const duplicates = [];
+
+    for (const product of products) {
+      // On utilise le nom comme clé unique
+      const key = product.name.trim().toLowerCase();
+      if (seen.has(key)) {
+        duplicates.push(product.id);
+      } else {
+        seen.add(key);
+      }
+    }
+
+    if (duplicates.length > 0) {
+      console.log(`Found ${duplicates.length} duplicates. Removing...`);
+      const { error: deleteError } = await supabase
+        .from('products')
+        .delete()
+        .in('id', duplicates);
+
+      if (deleteError) throw deleteError;
+      console.log('Duplicates removed successfully.');
+      
+      // Dispatch update
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new Event('productsUpdated'));
+      }
+    }
+  } catch (error) {
+    console.error('Error deduplicating products:', error);
+  }
+}
+
 // Initialiser le store avec les données par défaut si la base est vide
 export async function initializeStore(defaultProducts) {
   if (!supabase) {
@@ -196,6 +241,11 @@ export async function initializeStore(defaultProducts) {
       if (error) throw error;
 
       console.log('✅ Store initialized with default products');
+    } else if (existing.length > defaultProducts.length * 1.5) {
+      // S'il y a beaucoup plus de produits que par défaut, on tente un nettoyage
+      // C'est une heuristique simple pour détecter les doublons massifs
+      console.log('⚠️ Potential duplicates detected, running cleanup...');
+      await deduplicateProducts();
     }
   } catch (error) {
     console.error('Error initializing store:', error);
