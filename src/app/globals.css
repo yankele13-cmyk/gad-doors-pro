@@ -23,18 +23,6 @@
 :root {
   /* Palette - Minimalist & Premium */
   --bg-body: #f8f9fa;
-  --bg-surface: #ffffff;
-  --text-main: #111111;
-  --text-muted: #666666;
-  --accent-color: #d4af37;
-  --accent-hover: #b4942b;
-
-  /* Spacing & Layout */
-  --container-width: 1400px;
-  /* Wider for modern feel */
-  --header-height: 80px;
-  --radius-sm: 8px;
-  --radius-md: 16px;
   --radius-lg: 24px;
 
   /* Effects */
