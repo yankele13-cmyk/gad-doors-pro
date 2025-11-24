@@ -15,42 +15,63 @@ export default function ServicesPage() {
         </div>
 
         <div className="container">
-          <div className="product-grid" style={{ gap: '30px' }}>
-            {/* Consultation */}
-            <div className="premium-card">
-              <div className="feature-icon-circle">
-                <i className="fas fa-comments"></i>
+          <div className="timeline-section">
+            <div className="timeline-line"></div>
+
+            {/* Step 1: Consultation */}
+            <div className="timeline-item">
+              <div className="timeline-number">1</div>
+              <div className="timeline-content">
+                <div className="feature-icon-circle" style={{ margin: '0 auto 1.5rem' }}>
+                  <i className="fas fa-comments"></i>
+                </div>
+                <h3>{t('service_consult_title')}</h3>
+                <p>{t('service_consult_desc')}</p>
               </div>
-              <h3>{t('service_consult_title')}</h3>
-              <p>{t('service_consult_desc')}</p>
             </div>
 
-            {/* Measurement */}
-            <div className="premium-card">
-              <div className="feature-icon-circle">
-                <i className="fas fa-ruler-combined"></i>
+            {/* Step 2: Measurement */}
+            <div className="timeline-item">
+              <div className="timeline-number">2</div>
+              <div className="timeline-content">
+                <div className="feature-icon-circle" style={{ margin: '0 auto 1.5rem' }}>
+                  <i className="fas fa-ruler-combined"></i>
+                </div>
+                <h3>{t('service_measure_title')}</h3>
+                <p>{t('service_measure_desc')}</p>
               </div>
-              <h3>{t('service_measure_title')}</h3>
-              <p>{t('service_measure_desc')}</p>
             </div>
 
-            {/* Removal - Highlighted */}
-            <div className="premium-card" style={{ border: '2px solid var(--accent-color)' }}>
-              <div className="feature-icon-circle" style={{ background: 'var(--accent-color)', color: 'white' }}>
-                <i className="fas fa-trash-alt"></i>
+            {/* Step 3: Removal */}
+            <div className="timeline-item">
+              <div className="timeline-number">3</div>
+              <div className="timeline-content" style={{ border: '2px solid var(--accent-color)' }}>
+                <div className="feature-icon-circle" style={{ margin: '0 auto 1.5rem', background: 'var(--accent-color)', color: 'white' }}>
+                  <i className="fas fa-trash-alt"></i>
+                </div>
+                <h3 style={{ color: 'var(--accent-color)' }}>{t('service_removal_title')}</h3>
+                <p>{t('service_removal_desc')}</p>
               </div>
-              <h3 style={{ color: 'var(--accent-color)' }}>{t('service_removal_title')}</h3>
-              <p>{t('service_removal_desc')}</p>
             </div>
 
-            {/* Installation */}
-            <div className="premium-card">
-              <div className="feature-icon-circle">
-                <i className="fas fa-tools"></i>
+            {/* Step 4: Installation */}
+            <div className="timeline-item">
+              <div className="timeline-number">4</div>
+              <div className="timeline-content">
+                <div className="feature-icon-circle" style={{ margin: '0 auto 1.5rem' }}>
+                  <i className="fas fa-tools"></i>
+                </div>
+                <h3>{t('service_install_title')}</h3>
+                <p>{t('service_install_desc')}</p>
               </div>
-              <h3>{t('service_install_title')}</h3>
-              <p>{t('service_install_desc')}</p>
             </div>
+          </div>
+
+          {/* CTA Section */}
+          <div className="text-center mt-5">
+            <a href="/contact" className="btn">
+              {t('nav_contact')}
+            </a>
           </div>
         </div>
       </PageSection>
