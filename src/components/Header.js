@@ -1,5 +1,4 @@
-'use client';
-
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
@@ -19,7 +18,13 @@ export default function Header() {
   return (
     <header>
       <Link href="/" className="logo">
-        Gad<span>Doors</span>
+        <Image
+          src="/images/logo.png"
+          alt="GadDoors Logo"
+          width={140}
+          height={40}
+          priority
+        />
       </Link>
 
       <div className="mobile-toggle" onClick={toggleMenu}>

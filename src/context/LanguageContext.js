@@ -9,7 +9,7 @@ const translations = {
     // Navigation
     nav_home: 'Accueil',
     nav_doors: 'Portes',
-    nav_accessories: 'Accessoires',
+    nav_accessories: 'Accessoires et portes speciales',
     nav_warranty: 'Garantie',
     nav_contact: 'Contact',
     nav_about: 'À Propos',
@@ -166,7 +166,7 @@ const translations = {
     // Navigation
     nav_home: 'בית',
     nav_doors: 'דלתות',
-    nav_accessories: 'אביזרים',
+    nav_accessories: 'אביזרים ודלתות מיוחדות ',
     nav_warranty: 'אחריות',
     nav_contact: 'צור קשר',
     nav_about: 'אודות',
