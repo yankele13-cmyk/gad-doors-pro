@@ -1,9 +1,30 @@
 import { NextResponse } from 'next/server';
 import { google } from 'googleapis';
+import path from 'path';
+import fs from 'fs';
+
+// Helper function to get credentials
+const getCredentials = () => {
+  // Production: Use environment variable
+  if (process.env.NODE_ENV === 'production' && process.env.GOOGLE_SERVICE_ACCOUNT_KEY) {
+    return JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_KEY);
+  }
+
+  // Development: Use local file
+  if (process.env.NODE_ENV !== 'production') {
+    const filePath = path.join(process.cwd(), 'google-credentials.json');
+    if (fs.existsSync(filePath)) {
+      const fileContents = fs.readFileSync(filePath, 'utf8');
+      return JSON.parse(fileContents);
+    }
+  }
+
+  return null;
+};
 
 export async function POST(request) {
   try {
-    const { name, email, message, honeypot } = await request.json();
+    const { name, email, telephone, message, honeypot } = await request.json();
 
     // Anti-spam: Honeypot field
     if (honeypot) {
@@ -11,7 +32,7 @@ export async function POST(request) {
     }
 
     // Validation
-    if (!name || !email || !message) {
+    if (!name || !email || !telephone || !message) {
       return NextResponse.json(
         { error: 'Tous les champs sont requis' },
         { status: 400 }
@@ -20,13 +41,10 @@ export async function POST(request) {
 
     // Google Sheets Integration
     try {
-      // Utiliser les credentials depuis les variables d'environnement (Vercel compatible)
-      const credentials = process.env.GOOGLE_SERVICE_ACCOUNT_KEY
-        ? JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_KEY)
-        : null;
+      const credentials = getCredentials();
 
       if (!credentials) {
-        throw new Error('GOOGLE_SERVICE_ACCOUNT_KEY manquant dans les variables d\'environnement');
+        throw new Error('Les identifiants Google n\'ont pas pu être chargés.');
       }
 
       const auth = new google.auth.GoogleAuth({
@@ -53,7 +71,7 @@ export async function POST(request) {
         range: 'A1', // Commence à écrire à partir de la première feuille
         valueInputOption: 'USER_ENTERED',
         requestBody: {
-          values: [[date, name, email, message]], // Les colonnes: Date, Nom, Email, Message
+          values: [[date, name, email, telephone, message]], // Les colonnes: Date, Nom, Email, Téléphone, Message
         },
       });
 

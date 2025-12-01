@@ -12,6 +12,7 @@ export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    telephone: '',
     message: '',
     honeypot: '', // Anti-spam field
   });
@@ -46,7 +47,7 @@ export default function ContactPage() {
         setStatusMessage(data.message);
         showToast(data.message || 'Message envoyé avec succès !', 'success');
         // Reset form
-        setFormData({ name: '', email: '', message: '', honeypot: '' });
+        setFormData({ name: '', email: '', telephone: '', message: '', honeypot: '' });
       } else {
         setSubmitStatus('error');
         setStatusMessage(data.error || 'Une erreur est survenue');
@@ -248,12 +249,22 @@ export default function ContactPage() {
                     borderRadius: '5px',
                   }}
                 />
+              </div>
 
-                  
+              <div style={{ marginBottom: '20px' }}>
+                <label
+                  style={{
+                    display: 'block',
+                    marginBottom: '5px',
+                    fontWeight: 600,
+                  }}
+                >
+                  {t('form_phone')} *
+                </label>
                 <input
-                  type="telephone"
-                  name= "telephone"
-                  value={formData.telephone }
+                  type="tel"
+                  name="telephone"
+                  value={formData.telephone}
                   onChange={handleChange}
                   required
                   disabled={isSubmitting}

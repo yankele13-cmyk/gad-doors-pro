@@ -186,15 +186,18 @@ header {
 }
 
 .logo {
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: var(--text-color);
+  display: flex;
+  align-items: center;
   text-decoration: none;
   transition: opacity 0.3s;
 }
 
-.logo span {
-  color: var(--accent-color);
+.logo:hover {
+  opacity: 0.9;
+}
+
+.logo img {
+  object-fit: contain; /* Assure que le logo ne soit pas déformé */
 }
 
 nav ul {

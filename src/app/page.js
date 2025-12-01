@@ -40,7 +40,7 @@ export default function Home() {
                 alt="Portes"
                 width={600}
                 height={400}
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
               />
               <div className="category-overlay">
                 <h3>{t('cat_doors')}</h3>
@@ -55,7 +55,7 @@ export default function Home() {
                 alt="Accessoires"
                 width={600}
                 height={400}
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
               />
               <div className="category-overlay">
                 <h3>{t('cat_acc')}</h3>
