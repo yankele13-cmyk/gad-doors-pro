@@ -248,6 +248,22 @@ export default function ContactPage() {
                     borderRadius: '5px',
                   }}
                 />
+
+                  
+                <input
+                  type="telephone"
+                  name= "telephone"
+                  value={formData.telephone }
+                  onChange={handleChange}
+                  required
+                  disabled={isSubmitting}
+                  style={{
+                    width: '100%',
+                    padding: '10px',
+                    border: '1px solid #ddd',
+                    borderRadius: '5px',
+                  }}
+                />
               </div>
 
               <div style={{ marginBottom: '20px' }}>
