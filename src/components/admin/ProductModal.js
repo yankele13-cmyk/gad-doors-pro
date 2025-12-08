@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { addProduct, updateProduct } from '@/lib/productStore';
+import { addProduct, updateProduct, uploadImage } from '@/lib/productStore';
 import { useLanguage } from '@/context/LanguageContext';
 
 export default function ProductModal({ product, onClose, onSave }) {
@@ -18,6 +18,7 @@ export default function ProductModal({ product, onClose, onSave }) {
   });
 
   const [imagePreview, setImagePreview] = useState('');
+  const [imageFile, setImageFile] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
 
@@ -47,20 +48,13 @@ export default function ProductModal({ product, onClose, onSave }) {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // Vérifier la taille (max 4.5MB pour localStorage - attention quota!)
-    if (file.size > 4.5 * 1024 * 1024) {
-      setError('Image trop grande (max 4.5MB)');
-      return;
-    }
+    // Stocker le fichier pour l'upload
+    setImageFile(file);
 
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const base64 = event.target?.result;
-      setFormData((prev) => ({ ...prev, image: base64 }));
-      setImagePreview(base64);
-      setError('');
-    };
-    reader.readAsDataURL(file);
+    // Créer un aperçu local de l'image
+    const previewUrl = URL.createObjectURL(file);
+    setImagePreview(previewUrl);
+    setError('');
   };
 
   const handleSubmit = async (e) => {
@@ -75,17 +69,27 @@ export default function ProductModal({ product, onClose, onSave }) {
       return;
     }
 
-    if (!formData.image) {
+    // L'image est requise uniquement si c'est un nouveau produit
+    if (!isEditMode && !imageFile) {
       setError('Une image est requise');
       setIsSubmitting(false);
       return;
     }
 
     try {
+      let imageName = formData.image;
+
+      // Si un nouveau fichier a été sélectionné, l'uploader
+      if (imageFile) {
+        imageName = await uploadImage(imageFile);
+      }
+      
+      const productData = { ...formData, image: imageName };
+
       if (isEditMode) {
-        await updateProduct(product.id, formData);
+        await updateProduct(product.id, productData);
       } else {
-        await addProduct(formData);
+        await addProduct(productData);
       }
 
       onSave?.();

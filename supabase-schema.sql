@@ -18,8 +18,9 @@ CREATE TABLE IF NOT EXISTS products (
 CREATE INDEX IF NOT EXISTS idx_products_category ON products(category);
 CREATE INDEX IF NOT EXISTS idx_products_visible ON products(is_hidden);
 
--- RLS (Row Level Security) - Lecture publique, écriture admin
-ALTER TABLE products ENABLE ROW LEVEL SECURITY;
+-- RLS (Row Level Security) - TEMPORAIREMENT DÉSACTIVÉ POUR LE DÉVELOPPEMENT
+-- ALTER TABLE products ENABLE ROW LEVEL SECURITY;
+ALTER TABLE products DISABLE ROW LEVEL SECURITY;
 
 -- Politique: Tout le monde peut lire les produits visibles
 CREATE POLICY "Public can read visible products" ON products

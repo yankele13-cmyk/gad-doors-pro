@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 import { useLanguage } from '@/context/LanguageContext';
+import { supabase } from '@/lib/supabase';
 
 export default function ProductCard({ product }) {
   const { language } = useLanguage();
@@ -16,12 +17,16 @@ export default function ProductCard({ product }) {
       ? product.description_he
       : product.description;
 
-  // Fallback image if product.image is missing
-  const imageSrc = product.image
-    ? product.image.startsWith('data:') || product.image.startsWith('http')
-      ? product.image
-      : `/images/${product.image}`
-    : '/images/placeholder.jpg'; // You might want to ensure this placeholder exists or use a generic one
+  // Build the public URL from Supabase Storage
+  const getImageUrl = (imagePath) => {
+    if (!imagePath) return '/images/placeholder.jpg'; // Fallback
+    if (imagePath.startsWith('http')) return imagePath; // Already a full URL
+    
+    const { data } = supabase.storage.from('product-images').getPublicUrl(imagePath);
+    return data.publicUrl;
+  };
+  
+  const imageSrc = getImageUrl(product.image);
 
   return (
     <div className="product-card">

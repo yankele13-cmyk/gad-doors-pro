@@ -1,17 +1,11 @@
 'use client';
 
 import { AdminProvider } from '@/context/AdminContext';
-import { Outfit } from 'next/font/google';
-import '@/app/globals.css';
+// Nous n'avons plus besoin de outfit ni de globals.css ici,
+// car ils sont déjà chargés par le layout principal.
 
-const outfit = Outfit({ subsets: ['latin'] });
-
-export default function AdminRootLayout({ children }) {
-  return (
-    <html lang="fr">
-      <body className={outfit.className}>
-        <AdminProvider>{children}</AdminProvider>
-      </body>
-    </html>
-  );
+export default function AdminLayout({ children }) {
+  // Ce layout n'a plus besoin de retourner <html> ou <body>.
+  // Il ne fait que fournir le contexte d'administration.
+  return <AdminProvider>{children}</AdminProvider>;
 }

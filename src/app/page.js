@@ -3,9 +3,38 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
+import { useEffect, useState } from 'react';
+import { getProducts } from '@/lib/productStore';
+import { supabase } from '@/lib/supabase'; // Import supabase client
 
 export default function Home() {
   const { t } = useLanguage();
+  const [doorImage, setDoorImage] = useState('/images/door-classic-lines.jpg'); // Fallback
+  const [accessoryImage, setAccessoryImage] = useState('/images/door-luxury-panel.jpg'); // Fallback
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPreviewImages = async () => {
+      setLoading(true);
+      const allProducts = await getProducts();
+      
+      const firstDoor = allProducts.find(p => p.category === 'doors' && !p.is_hidden);
+      const firstAccessory = allProducts.find(p => p.category === 'accessories' && !p.is_hidden);
+
+      if (firstDoor && firstDoor.image) {
+        const { data } = supabase.storage.from('product-images').getPublicUrl(firstDoor.image);
+        setDoorImage(data.publicUrl);
+      }
+
+      if (firstAccessory && firstAccessory.image) {
+        const { data } = supabase.storage.from('product-images').getPublicUrl(firstAccessory.image);
+        setAccessoryImage(data.publicUrl);
+      }
+      setLoading(false);
+    };
+
+    fetchPreviewImages();
+  }, []);
 
   return (
     <main>
@@ -35,13 +64,16 @@ export default function Home() {
         <div className="container">
           <div className="categories-preview" style={{ marginTop: 0, padding: 0 }}>
             <Link href="/doors" className="category-card">
-              <Image
-                src="/images/IMG-20251112-WA0048.jpg"
-                alt="Portes"
-                width={600}
-                height={400}
-                style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
-              />
+              {loading ? <div style={{width: 600, height: 400}} className="skeleton-image" /> : (
+                <Image
+                  src={doorImage}
+                  alt="Portes"
+                  width={600}
+                  height={400}
+                  style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
+                  unoptimized // Use this if you have issues with Supabase URLs
+                />
+              )}
               <div className="category-overlay">
                 <h3>{t('cat_doors')}</h3>
                 <span className="btn btn-outline" style={{ borderColor: 'white', color: 'white' }}>
@@ -50,13 +82,16 @@ export default function Home() {
               </div>
             </Link>
             <Link href="/accessories" className="category-card">
-              <Image
-                src="/images/IMG-20251112-WA0050.jpg"
-                alt="Accessoires"
-                width={600}
-                height={400}
-                style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
-              />
+              {loading ? <div style={{width: 600, height: 400}} className="skeleton-image" /> : (
+                <Image
+                  src={accessoryImage}
+                  alt="Accessoires"
+                  width={600}
+                  height={400}
+                  style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
+                  unoptimized // Use this if you have issues with Supabase URLs
+                />
+              )}
               <div className="category-overlay">
                 <h3>{t('cat_acc')}</h3>
                 <span className="btn btn-outline" style={{ borderColor: 'white', color: 'white' }}>

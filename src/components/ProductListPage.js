@@ -4,8 +4,7 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ProductCard from '@/components/ProductCard';
 import LoadingSkeleton from '@/components/LoadingSkeleton';
-import { getProducts, initializeStore } from '@/lib/productStore';
-import { products as defaultProducts } from '@/data/products';
+import { getProducts } from '@/lib/productStore';
 import { useLanguage } from '@/context/LanguageContext';
 import PageSection from '@/components/PageSection';
 
@@ -21,9 +20,6 @@ export default function ProductListPage({ category, titleKey }) {
   useEffect(() => {
     async function initialize() {
       setLoading(true);
-
-      // Initialize store with default data
-      await initializeStore(defaultProducts);
 
       // Load products
       await loadProducts();

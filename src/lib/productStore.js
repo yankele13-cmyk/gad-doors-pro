@@ -260,3 +260,31 @@ export async function initializeStore(defaultProducts) {
     isInitializing = false;
   }
 }
+
+// Uploader une image dans Supabase Storage
+export async function uploadImage(file) {
+  if (!supabase) {
+    throw new Error('Supabase client not initialized');
+  }
+  if (!file) {
+    throw new Error('Aucun fichier à uploader');
+  }
+
+  try {
+    const fileName = `${Date.now()}-${file.name.replace(/\s/g, '-')}`;
+    const { data, error } = await supabase.storage
+      .from('product-images') // Assurez-vous que ce bucket existe
+      .upload(fileName, file, {
+        cacheControl: '3600',
+        upsert: false,
+      });
+
+    if (error) throw error;
+
+    // Retourner le nom du fichier pour le stocker en DB
+    return fileName;
+  } catch (error) {
+    console.error('Error uploading image:', error);
+    throw error;
+  }
+}
