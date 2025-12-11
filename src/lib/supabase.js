@@ -1,4 +1,6 @@
-console.log('✅ Supabase Client v3.0 (Bulletproof) Initializing...');
+import { createClient } from '@supabase/supabase-js';
+
+console.log('✅ Supabase Client v3.1 (Fixed Import) Initializing...');
 
 // FALLBACK CREDENTIALS
 // Ensures the app works even if Vercel process.env injection fails
@@ -8,8 +10,9 @@ const FALLBACK_KEY = 'sb_publishable_jdiWtjeNc5HM9tgs6_VaRQ_Dt6fdFCo';
 const envUrl = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim();
 const envKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim();
 
-const supabaseUrl = (envUrl && envUrl.length > 0) ? envUrl : FALLBACK_URL;
-const supabaseKey = (envKey && envKey.length > 0) ? envKey : FALLBACK_KEY;
+// Logic: Use Env Var if valid, otherwise use Fallback.
+const supabaseUrl = (envUrl && envUrl.length > 10) ? envUrl : FALLBACK_URL;
+const supabaseKey = (envKey && envKey.length > 10) ? envKey : FALLBACK_KEY;
 
 console.log('Supabase Connection Info:', {
   usingFallback: supabaseUrl === FALLBACK_URL,
