@@ -17,19 +17,19 @@ export default function ProductCard({ product }) {
       ? product.description_he
       : product.description;
 
-  // Build the public URL from Supabase Storage
+  // Build the public URL for local images
   const getImageUrl = (imagePath) => {
     if (!imagePath) return '/images/placeholder.jpg'; // Fallback
     if (imagePath.startsWith('http')) return imagePath; // Already a full URL
-    
-    const { data } = supabase.storage.from('product-images').getPublicUrl(imagePath);
-    return data.publicUrl;
+    // Image paths already include the folder (studioDoors/, studioAccessories/)
+    if (imagePath.startsWith('studio')) return `/images/${imagePath}`;
+    return `/images/${imagePath}`; // Correctly build the path for local images
   };
   
   const imageSrc = getImageUrl(product.image);
 
   return (
-    <div className="product-card">
+    <div className="product-card" style={{ pointerEvents: 'none' }}>
       <div className="product-image">
         {product.image ? (
           <Image
@@ -37,6 +37,7 @@ export default function ProductCard({ product }) {
             alt={name || 'Product'}
             width={400}
             height={300}
+            loading="eager"
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           />
         ) : (

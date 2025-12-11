@@ -15,6 +15,13 @@ const translations = {
     nav_about: 'À Propos',
     nav_services: 'Services',
     nav_ranges: 'Nos Gammes',
+    nav_installations: 'Nos Réalisations',
+
+    // Installations Page
+    installations_title: 'Nos Réalisations',
+    installations_subtitle: 'Découvrez la qualité GadDoors en situation réelle',
+    installations_alt: 'Installation de porte intérieure par GadDoors',
+
 
     // About Page
     about_title: "Gad Dlatot – Importateur Direct & Expert",
@@ -173,6 +180,13 @@ const translations = {
     nav_about: 'אודות',
     nav_services: 'שירותים',
     nav_ranges: 'הקולקציות שלנו',
+    nav_installations: 'ההתקנות שלנו',
+
+    // Installations Page
+    installations_title: 'ההתקנות שלנו',
+    installations_subtitle: 'גלו את האיכות של גד דלתות בפרויקטים אמיתיים',
+    installations_alt: 'התקנת דלת פנים על ידי גד דלתות',
+
 
     // About Page
     about_title: "גד דלתות – יבואן ישיר ומומחה",

@@ -56,6 +56,11 @@ export default function Header() {
             </Link>
           </li>
           <li>
+            <Link href="/installations" className={isActive('/installations') ? 'active' : ''}>
+              {t('nav_installations')}
+            </Link>
+          </li>
+          <li>
             <Link href="/doors" className={isActive('/doors') ? 'active' : ''}>
               {t('nav_doors')}
             </Link>
