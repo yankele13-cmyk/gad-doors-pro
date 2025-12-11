@@ -23,7 +23,10 @@ export default function ProductCard({ product }) {
     if (imagePath.startsWith('http')) return imagePath; // Already a full URL
     // Image paths already include the folder (studioDoors/, studioAccessories/)
     if (imagePath.startsWith('studio')) return `/images/${imagePath}`;
-    return `/images/${imagePath}`; // Correctly build the path for local images
+    
+    // If not a local studio path, assume it's hosted on Supabase Storage
+    const { data } = supabase.storage.from('product-images').getPublicUrl(imagePath);
+    return data.publicUrl;
   };
   
   const imageSrc = getImageUrl(product.image);

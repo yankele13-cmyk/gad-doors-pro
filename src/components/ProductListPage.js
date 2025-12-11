@@ -7,6 +7,7 @@ import LoadingSkeleton from '@/components/LoadingSkeleton';
 import { getProducts, initializeStore } from '@/lib/productStore';
 import { products as defaultProducts } from '@/data/products';
 import { useLanguage } from '@/context/LanguageContext';
+import { supabase } from '@/lib/supabase';
 import PageSection from '@/components/PageSection';
 
 /**
@@ -179,8 +180,16 @@ export default function ProductListPage({ category, titleKey }) {
 
               {/* Product Image */}
               <div style={{ marginTop: '30px' }}>
-                <img
-                  src={`/images/${selectedProduct.image}`}
+                 <img
+                  src={
+                    selectedProduct.image.startsWith('http')
+                      ? selectedProduct.image
+                      : selectedProduct.image.startsWith('studio')
+                      ? `/images/${selectedProduct.image}`
+                      : supabase.storage
+                          .from('product-images')
+                          .getPublicUrl(selectedProduct.image).data.publicUrl
+                  }
                   alt={getProductName(selectedProduct)}
                   style={{
                     maxWidth: '100%',
