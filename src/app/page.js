@@ -9,8 +9,8 @@ import { supabase } from '@/lib/supabase'; // Import supabase client
 
 export default function Home() {
   const { t } = useLanguage();
-  const [doorImage, setDoorImage] = useState('/images/door-classic-lines.jpg'); // Fallback
-  const [accessoryImage, setAccessoryImage] = useState('/images/door-luxury-panel.jpg'); // Fallback
+  const [doorImage, setDoorImage] = useState('/images/studioDoors/door-luxury-style-1.jpg'); // Fallback
+  const [accessoryImage, setAccessoryImage] = useState('/images/presentationsite/accessory-handle-chrome-contemporary-965878.jpg'); // Fallback
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

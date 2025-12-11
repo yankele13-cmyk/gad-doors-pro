@@ -6,13 +6,22 @@
 
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim();
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim();
+
+console.log('Supabase Init Debug:', { 
+  urlExists: !!supabaseUrl, 
+  keyExists: !!supabaseKey, 
+  urlLength: supabaseUrl ? supabaseUrl.length : 0,
+  urlValue: supabaseUrl // Safe to log public URL
+});
 
 const isValidUrl = (url) => {
+  if (!url) return false;
   try {
     return Boolean(new URL(url));
   } catch (e) {
+    console.error('Invalid URL format:', url, e);
     return false;
   }
 };
@@ -26,12 +35,17 @@ export const supabase =
           console.error(
             'Supabase client not initialized. Missing or invalid NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_ANON_KEY.'
           );
-          return {
-            select: async () => ({ data: [], error: { message: 'Supabase not initialized' } }),
-            insert: async () => ({ data: [], error: { message: 'Supabase not initialized' } }),
-            update: async () => ({ data: [], error: { message: 'Supabase not initialized' } }),
-            delete: async () => ({ data: [], error: { message: 'Supabase not initialized' } }),
+          const mockChain = {
+            select: () => mockChain,
+            order: () => mockChain,
+            eq: () => mockChain,
+            single: () => ({ data: null, error: { message: 'Supabase not initialized' } }),
+            then: (resolve) => resolve({ data: [], error: { message: 'Supabase not initialized' } }),
+            insert: () => mockChain,
+            update: () => mockChain,
+            delete: () => mockChain,
           };
+          return mockChain;
         },
         storage: {
           from: () => ({

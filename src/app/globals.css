@@ -236,7 +236,7 @@ nav a.active {
   height: 80vh;
   min-height: 650px;
   background: linear-gradient(135deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1)),
-    url('/images/hero-gaddoors.jpg');
+    url('/images/presentationsite/hero-gaddoors.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
