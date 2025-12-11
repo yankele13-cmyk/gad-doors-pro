@@ -6,7 +6,7 @@ import { supabase } from './supabase';
 // Charger les produits depuis Supabase
 export async function getProducts() {
   if (!supabase) {
-    console.error('Supabase client not initialized');
+    console.error('Supabase client not initialized (getProducts)');
     return [];
   }
 
