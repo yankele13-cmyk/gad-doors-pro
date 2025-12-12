@@ -344,6 +344,7 @@ const translations = {
 
 export function LanguageProvider({ children }) {
   const [language, setLanguage] = useState('fr');
+  const [isLoaded, setIsLoaded] = useState(false);
   const dir = language === 'he' ? 'rtl' : 'ltr';
 
   useEffect(() => {
@@ -351,13 +352,16 @@ export function LanguageProvider({ children }) {
     if (savedLang) {
       setLanguage(savedLang);
     }
+    setIsLoaded(true);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('gadDoorsLang', language);
-    document.documentElement.lang = language;
-    document.documentElement.dir = dir;
-  }, [language, dir]);
+    if (isLoaded) {
+      localStorage.setItem('gadDoorsLang', language);
+      document.documentElement.lang = language;
+      document.documentElement.dir = dir;
+    }
+  }, [language, dir, isLoaded]);
 
   const toggleLanguage = () => {
     setLanguage((prev) => (prev === 'fr' ? 'he' : 'fr'));
@@ -366,6 +370,10 @@ export function LanguageProvider({ children }) {
   const t = (key) => {
     return translations[language][key] || key;
   };
+
+  if (!isLoaded) {
+    return null; // or a loading spinner
+  }
 
   return (
     <LanguageContext.Provider value={{ language, dir, toggleLanguage, t }}>
