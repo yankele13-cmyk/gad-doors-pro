@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { google } from 'googleapis';
 import path from 'path';
 import fs from 'fs';
+import { supabase } from '@/lib/supabase';
 
 // Helper function to get credentials
 const getCredentials = () => {
@@ -39,61 +40,73 @@ export async function POST(request) {
       );
     }
 
-    // Google Sheets Integration
+    // 1. Sauvegarde dans Supabase (Nouveau Système Admin)
+    try {
+      const { error: supabaseError } = await supabase
+        .from('messages')
+        .insert([
+          {
+            name,
+            email,
+            phone: telephone,
+            message,
+            is_read: false
+          }
+        ]);
+      
+      if (supabaseError) {
+        console.error('Erreur Supabase Insert:', supabaseError);
+        // On ne bloque pas si Supabase échoue, on continue vers Google Sheets pour backup
+      } else {
+        console.log('✅ Message sauvegardé dans Supabase');
+      }
+    } catch (err) {
+      console.error('Erreur inattendue Supabase:', err);
+    }
+
+    // 2. Google Sheets Integration (Legacy / Backup)
     try {
       const credentials = getCredentials();
 
       if (!credentials) {
-        throw new Error('Les identifiants Google n\'ont pas pu être chargés.');
+        console.warn('Google Credentials not found, skipping Sheets');
+      } else {
+        const auth = new google.auth.GoogleAuth({
+          credentials,
+          scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+        });
+
+        const sheets = google.sheets({ version: 'v4', auth });
+        const spreadsheetId = process.env.GOOGLE_SHEET_ID;
+
+        if (spreadsheetId) {
+          const date = new Date().toLocaleString('fr-FR', {
+            timeZone: 'Asia/Jerusalem',
+          });
+
+          await sheets.spreadsheets.values.append({
+            spreadsheetId,
+            range: 'A1',
+            valueInputOption: 'USER_ENTERED',
+            requestBody: {
+              values: [[date, name, email, telephone, message]],
+            },
+          });
+        }
       }
-
-      const auth = new google.auth.GoogleAuth({
-        credentials,
-        scopes: ['https://www.googleapis.com/auth/spreadsheets'],
-      });
-
-      const sheets = google.sheets({ version: 'v4', auth });
-
-      const spreadsheetId = process.env.GOOGLE_SHEET_ID;
-      console.log('📄 ID du Sheet:', spreadsheetId);
-
-      if (!spreadsheetId) {
-        throw new Error('GOOGLE_SHEET_ID manquant dans .env.local');
-      }
-
-      // Date formatée
-      const date = new Date().toLocaleString('fr-FR', {
-        timeZone: 'Asia/Jerusalem',
-      });
-
-      await sheets.spreadsheets.values.append({
-        spreadsheetId,
-        range: 'A1', // Commence à écrire à partir de la première feuille
-        valueInputOption: 'USER_ENTERED',
-        requestBody: {
-          values: [[date, name, email, telephone, message]], // Les colonnes: Date, Nom, Email, Téléphone, Message
-        },
-      });
-
-      return NextResponse.json(
-        {
-          success: true,
-          message: 'Message envoyé avec succès !',
-        },
-        { status: 200 }
-      );
     } catch (sheetError) {
       console.error('Erreur Google Sheets:', sheetError);
-      // DEBUG: Retourner l'erreur exacte pour comprendre le problème Vercel
-      return NextResponse.json(
-        {
-          success: false,
-          error: 'Erreur Google Sheets: ' + sheetError.message,
-          details: JSON.stringify(sheetError)
-        },
-        { status: 500 }
-      );
+      // On continue même si Sheets échoue, tant que la réponse utilisateur est OK
     }
+
+    return NextResponse.json(
+      {
+        success: true,
+        message: 'Message envoyé avec succès !',
+      },
+      { status: 200 }
+    );
+
   } catch (error) {
     console.error('Erreur API contact:', error);
     return NextResponse.json(
