@@ -189,15 +189,18 @@ header {
   display: flex;
   align-items: center;
   text-decoration: none;
-  transition: opacity 0.3s;
+  text-decoration: none;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
 }
 
 .logo:hover {
-  opacity: 0.9;
+  transform: scale(1.05);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
 .logo img {
-  object-fit: contain; /* Assure que le logo ne soit pas déformé */
+  object-fit: contain;
+  /* Assure que le logo ne soit pas déformé */
 }
 
 nav ul {
@@ -207,22 +210,34 @@ nav ul {
 }
 
 nav a {
+  position: relative;
   font-weight: 500;
   font-size: 0.95rem;
   color: var(--text-muted);
-  /* Gris par défaut */
-  transition: all 0.3s ease;
-  display: inline-block;
-  /* Nécessaire pour le transform */
+  transition: color 0.3s ease;
+  padding: 5px 0;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--accent-color);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 nav a:hover,
 nav a.active {
   color: var(--text-main);
-  /* Noir quand actif ou survolé */
-  transform: scale(1.1);
-  /* Grandit un peu */
   font-weight: 600;
+}
+
+nav a:hover::after,
+nav a.active::after {
+  width: 100%;
 }
 
 .mobile-toggle {
@@ -849,4 +864,48 @@ nav ul.active .language-switcher {
 [dir='rtl'] .btn-small {
   margin-right: 0;
   margin-left: 5px;
+}
+
+/* Contact Page Grid */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr !important;
+    gap: 30px !important;
+  }
+}
+
+/* Modal Layout */
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .modal-body {
+    flex-direction: row;
+    align-items: center;
+    /* Center vertically */
+    gap: 40px;
+    text-align: left;
+  }
+
+  .modal-body .modal-image-container {
+    flex: 1;
+    /* Take up half space */
+  }
+
+  .modal-body .modal-text-container {
+    flex: 1;
+    /* Take up half space */
+    text-align: left !important;
+  }
 }

@@ -26,8 +26,47 @@ export default function ContactPage() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const validateForm = () => {
+    // Regex for basic email validation
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    
+    // Regex for phone validation (Allows +Prefix, dashes, spaces, 9-15 digits)
+    // Examples: 0501234567, +972-50-123-4567, 03-1234567
+    const phoneRegex = /^[\+]?[(]?[0-9]{2,4}[)]?[-\s\.]?[0-9]{2,4}[-\s\.]?[0-9]{4,9}$/;
+
+    if (!formData.name.trim() || formData.name.length < 2) {
+      return { isValid: false, message: language === 'he' ? 'נא להזין שם מלא תקין' : 'Veuillez entrer un nom valide (min 2 caractères)' };
+    }
+
+    if (!emailRegex.test(formData.email)) {
+      return { isValid: false, message: language === 'he' ? 'נא להזין כתובת אימייל תקינה' : 'Veuillez entrer une adresse email valide' };
+    }
+
+    // Strip non-digits for length check
+    const digitsOnly = formData.telephone.replace(/\D/g, '');
+    if (digitsOnly.length < 9 || digitsOnly.length > 15 || !phoneRegex.test(formData.telephone)) {
+      return { isValid: false, message: language === 'he' ? 'נא להזין מספר טלפון תקין (9-15 ספרות)' : 'Veuillez entrer un numéro de téléphone valide (9-15 chiffres)' };
+    }
+
+    if (!formData.message.trim() || formData.message.length < 10) {
+      return { isValid: false, message: language === 'he' ? 'ההודעה חייבת להכיל לפחות 10 תווים' : 'Le message doit contenir au moins 10 caractères' };
+    }
+
+    return { isValid: true };
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Validate form data before submission
+    const validation = validateForm();
+    if (!validation.isValid) {
+      setSubmitStatus('error');
+      setStatusMessage(validation.message);
+      showToast(validation.message, 'error');
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitStatus(null);
 
@@ -71,15 +110,7 @@ export default function ContactPage() {
             {t('contact_subtitle')}
           </p>
 
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gap: '50px',
-              maxWidth: '1000px',
-              margin: '0 auto',
-            }}
-          >
+          <div className="contact-grid">
             {/* Contact Info */}
             <div>
               <div style={{ marginBottom: '30px' }}>

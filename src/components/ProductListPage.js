@@ -170,16 +170,9 @@ export default function ProductListPage({ category, titleKey }) {
             </button>
 
             {/* Product Content */}
-            <div style={{ textAlign: 'center' }}>
-              <h2 style={{ marginBottom: '10px', fontSize: '28px', marginTop: 0 }}>
-                {getProductName(selectedProduct)}
-              </h2>
-              <p style={{ fontSize: '16px', color: '#666', marginBottom: '30px' }}>
-                {getProductDescription(selectedProduct)}
-              </p>
-
-              {/* Product Image */}
-              <div style={{ marginTop: '30px' }}>
+            <div className="modal-body">
+              {/* Image Side */}
+              <div className="modal-image-container">
                  <img
                   src={
                     selectedProduct.image.startsWith('http')
@@ -192,16 +185,27 @@ export default function ProductListPage({ category, titleKey }) {
                   }
                   alt={getProductName(selectedProduct)}
                   style={{
-                    maxWidth: '100%',
+                    width: '100%',
                     maxHeight: '500px',
                     objectFit: 'contain',
                     borderRadius: '8px',
+                    display: 'block'
                   }}
                   onError={(e) => {
                     console.error('Image failed to load:', e.target.src);
                     e.target.style.display = 'none';
                   }}
                 />
+              </div>
+
+              {/* Text Side */}
+              <div className="modal-text-container">
+                <h2 style={{ marginBottom: '15px', fontSize: '28px', marginTop: 0 }}>
+                  {getProductName(selectedProduct)}
+                </h2>
+                <p style={{ fontSize: '18px', lineHeight: '1.6', color: '#444' }}>
+                  {getProductDescription(selectedProduct)}
+                </p>
               </div>
             </div>
           </div>

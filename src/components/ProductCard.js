@@ -31,9 +31,17 @@ export default function ProductCard({ product }) {
   
   const imageSrc = getImageUrl(product.image);
 
+  /* 
+    Adjust height: 
+    - Doors are tall/vertical -> 350px
+    - Accessories are smaller -> 250px 
+  */
+  const isAccessory = product.category === 'accessories';
+  const imageHeight = isAccessory ? 250 : 350;
+
   return (
-    <div className="product-card" style={{ pointerEvents: 'none' }}>
-      <div className="product-image">
+    <div className="product-card">
+      <div className="product-image" style={{ height: `${imageHeight}px`, background: '#f9f9f9' }}>
         {product.image ? (
           <Image
             src={imageSrc}
@@ -41,7 +49,12 @@ export default function ProductCard({ product }) {
             width={400}
             height={300}
             loading="eager"
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            style={{ 
+              width: '100%', 
+              height: '100%', 
+              objectFit: 'contain', 
+              padding: '15px'
+            }}
           />
         ) : (
           <div
@@ -60,7 +73,6 @@ export default function ProductCard({ product }) {
       </div>
       <div className="product-info">
         <h3>{name}</h3>
-        <p>{description}</p>
       </div>
     </div>
   );

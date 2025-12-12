@@ -1,5 +1,11 @@
-// Données de produits basées sur les dossiers studioDoors et studioAccessories
-export const products = [
+import { createClient } from '@supabase/supabase-js';
+
+const SUPABASE_URL = 'https://whstcylkadklvjzfwdmz.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_jdiWtjeNc5HM9tgs6_VaRQ_Dt6fdFCo';
+
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const products = [
   // Portes
   { id: 1, name: 'Porte Béton Fenêtre', name_he: 'דלת בטון עם צוהר', category: 'doors', image: 'studioDoors/door-concrete-window.jpg', description: 'Design industriel audacieux avec finition effet béton gris et insert vitré vertical pour un apport de lumière subtil.', description_he: 'עיצוב תעשייתי נועז בגימור בטון אפור עם צוהר זכוכית אנכי לכניסת אור מעודנת.' },
   { id: 2, name: 'Porte Epoxy Linea', name_he: 'דלת אפוקסי לינאה', category: 'doors', image: 'studioDoors/door-epoxy-style-5.jpg', description: 'Élégance pure. Finition Epoxy lisse ultra-résistante avec gravures horizontales modernes.', description_he: 'אלגנטיות טהורה. גימור אפוקסי חלק ועמיד במיוחד עם חריטות אופקיות מודרניות.' },
@@ -58,3 +64,27 @@ export const products = [
   { id: 51, name: 'Joint Isophonique', name_he: 'אטם בידוד רעשים', category: 'accessories', image: 'studioAccessories/accessory-hardware-style-8.jpg', description: 'Améliore l\'isolation acoustique de votre bloc-porte.', description_he: 'משפר את הבידוד האקוסטי של הדלת.' },
   { id: 52, name: 'Kit Rénovation', name_he: 'ערכת שיפוץ', category: 'accessories', image: 'studioAccessories/accessory-hardware-style-9.jpg', description: 'Solution complète pour remettre à neuf une porte existante.', description_he: 'פתרון מלא לחידוש דלת קיימת.' }
 ];
+
+async function sync() {
+  console.log('Starting sync...');
+  for (const p of products) {
+    console.log(`Updating ${p.name}...`);
+    const { error } = await supabase
+      .from('products')
+      .update({ 
+        name: p.name,
+        name_he: p.name_he,
+        description: p.description,
+        description_he: p.description_he 
+      })
+      .eq('image', p.image);
+    
+    if (error) {
+      console.error(`Error syncing ${p.name}:`, error.message);
+    }
+  }
+  console.log('Sync complete!');
+  process.exit(0);
+}
+
+sync();

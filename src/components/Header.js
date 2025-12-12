@@ -15,6 +15,10 @@ export default function Header() {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   const isActive = (path) => pathname === path;
 
   return (
@@ -23,8 +27,8 @@ export default function Header() {
         <Image
           src="/images/logo.png"
           alt="GadDoors Logo"
-          width={140}
-          height={40}
+          width={180}
+          height={52}
           priority
         />
       </Link>
@@ -36,32 +40,32 @@ export default function Header() {
       <nav>
         <ul className={isMenuOpen ? 'active' : ''}>
           <li>
-            <Link href="/" className={isActive('/') ? 'active' : ''}>
+            <Link href="/" className={isActive('/') ? 'active' : ''} onClick={closeMenu}>
               {t('nav_home')}
             </Link>
           </li>
           <li>
-            <Link href="/about" className={isActive('/about') ? 'active' : ''}>
+            <Link href="/about" className={isActive('/about') ? 'active' : ''} onClick={closeMenu}>
               {t('nav_about')}
             </Link>
           </li>
           <li>
-            <Link href="/products-range" className={isActive('/products-range') ? 'active' : ''}>
+            <Link href="/products-range" className={isActive('/products-range') ? 'active' : ''} onClick={closeMenu}>
               {t('nav_ranges')}
             </Link>
           </li>
           <li>
-            <Link href="/services" className={isActive('/services') ? 'active' : ''}>
+            <Link href="/services" className={isActive('/services') ? 'active' : ''} onClick={closeMenu}>
               {t('nav_services')}
             </Link>
           </li>
           <li>
-            <Link href="/installations" className={isActive('/installations') ? 'active' : ''}>
+            <Link href="/installations" className={isActive('/installations') ? 'active' : ''} onClick={closeMenu}>
               {t('nav_installations')}
             </Link>
           </li>
           <li>
-            <Link href="/doors" className={isActive('/doors') ? 'active' : ''}>
+            <Link href="/doors" className={isActive('/doors') ? 'active' : ''} onClick={closeMenu}>
               {t('nav_doors')}
             </Link>
           </li>
@@ -69,6 +73,7 @@ export default function Header() {
             <Link
               href="/accessories"
               className={isActive('/accessories') ? 'active' : ''}
+              onClick={closeMenu}
             >
               {t('nav_accessories')}
             </Link>
@@ -77,6 +82,7 @@ export default function Header() {
             <Link
               href="/contact"
               className={isActive('/contact') ? 'active' : ''}
+              onClick={closeMenu}
             >
               {t('nav_contact')}
             </Link>

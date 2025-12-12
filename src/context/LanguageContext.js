@@ -9,7 +9,7 @@ const translations = {
     // Navigation
     nav_home: 'Accueil',
     nav_doors: 'Portes',
-    nav_accessories: 'Accessoires et portes speciales',
+    nav_accessories: 'Accessoires',
     nav_warranty: 'Garantie',
     nav_contact: 'Contact',
     nav_about: 'À Propos',
@@ -43,8 +43,8 @@ const translations = {
     service_consult_desc: "Expert à domicile pour choisir le modèle adapté.",
     service_measure_title: "Métré Laser",
     service_measure_desc: "Prise de mesure professionnelle pour une précision parfaite.",
-    service_removal_title: "Démontage Inclus",
-    service_removal_desc: "Retrait de vos anciennes portes compris dans le prix !",
+    service_removal_title: "Démontage",
+    service_removal_desc: "Retrait de vos anciennes portes (non inclus dans le prix)",
     service_install_title: "Installation Pro",
     service_install_desc: "Montage complet de la porte et des chambranles.",
     
@@ -155,8 +155,11 @@ const translations = {
     warranty_3_title: 'Installation',
     warranty_3_desc:
       "L'installation effectuée par nos équipes certifiées est garantie 1 an. Nous assurons un ajustement parfait et un fonctionnement fluide de vos portes.",
-    doors_page_title: "Nos Portes d'Intérieur",
-    accessories_page_title: 'Accessoires & Poignées',
+    doors_page_title: 'Portes Intérieures',
+    doors_page_subtitle: 'Découvrez notre collection exclusive',
+    
+    accessories_page_title: 'Accessoires',
+    accessories_page_subtitle: 'Les détails qui font la différence',
     admin_title: 'Administration',
     admin_login: 'Se Connecter',
     admin_dashboard: 'Tableau de Bord',
@@ -208,8 +211,8 @@ const translations = {
     service_consult_desc: "מומחה עד הבית לבחירת הדגם המתאים.",
     service_measure_title: "מדידת לייזר",
     service_measure_desc: "מדידה מקצועית לדיוק מושלם.",
-    service_removal_title: "פירוק כלול",
-    service_removal_desc: "פינוי הדלתות הישנות כלול במחיר!",
+    service_removal_title: "פירוק",
+    service_removal_desc: "פינוי הדלתות הישנות (לא כלול במחיר)",
     service_install_title: "התקנה מקצועית",
     service_install_desc: "הרכבה מלאה של הדלת והמשקופים.",
 
@@ -319,8 +322,11 @@ const translations = {
     warranty_3_title: 'התקנה',
     warranty_3_desc:
       'ההתקנה המבוצעת על ידי הצוותים המוסמכים שלנו מגיעה עם שנת אחריות אחת. אנו מבטיחים התאמה מושלמת ופעולה חלקה של הדלתות שלך.',
-    doors_page_title: 'דלתות הפנים שלנו',
-    accessories_page_title: 'אביזרים וידיות',
+    doors_page_title: 'דלתות פנים',
+    doors_page_subtitle: 'גלה את הקולקציה הבלעדית שלנו',
+
+    accessories_page_title: 'אביזרים',
+    accessories_page_subtitle: 'הפרטים שעושים את ההבדל',
     admin_title: 'ניהול',
     admin_login: 'התחבר',
     admin_dashboard: 'לוח בקרה',

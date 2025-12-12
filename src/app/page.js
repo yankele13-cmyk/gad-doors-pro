@@ -8,33 +8,33 @@ import { getProducts } from '@/lib/productStore';
 import { supabase } from '@/lib/supabase'; // Import supabase client
 
 export default function Home() {
-  const { t } = useLanguage();
-  const [doorImage, setDoorImage] = useState('/images/studioDoors/door-luxury-style-1.jpg'); // Fallback
-  const [accessoryImage, setAccessoryImage] = useState('/images/presentationsite/accessory-handle-chrome-contemporary-965878.jpg'); // Fallback
-  const [loading, setLoading] = useState(true);
+  const { t, language } = useLanguage();
+  const [doorImage, setDoorImage] = useState('/images/presentationsite/door-style-gad10.jpg'); 
+  const [accessoryImage, setAccessoryImage] = useState('/images/studioAccessories/accessory-handle-style-10.jpg');
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const fetchPreviewImages = async () => {
-      setLoading(true);
-      const allProducts = await getProducts();
-      
-      const firstDoor = allProducts.find(p => p.category === 'doors' && !p.is_hidden);
-      const firstAccessory = allProducts.find(p => p.category === 'accessories' && !p.is_hidden);
-
-      if (firstDoor && firstDoor.image) {
-        const { data } = supabase.storage.from('product-images').getPublicUrl(firstDoor.image);
-        setDoorImage(data.publicUrl);
-      }
-
-      if (firstAccessory && firstAccessory.image) {
-        const { data } = supabase.storage.from('product-images').getPublicUrl(firstAccessory.image);
-        setAccessoryImage(data.publicUrl);
-      }
-      setLoading(false);
-    };
-
-    fetchPreviewImages();
-  }, []);
+  // useEffect(() => {
+  //   const fetchPreviewImages = async () => {
+  //     setLoading(true);
+  //     const allProducts = await getProducts();
+  //     
+  //     const firstDoor = allProducts.find(p => p.category === 'doors' && !p.is_hidden);
+  //     const firstAccessory = allProducts.find(p => p.category === 'accessories' && !p.is_hidden);
+  //
+  //     if (firstDoor && firstDoor.image) {
+  //       const { data } = supabase.storage.from('product-images').getPublicUrl(firstDoor.image);
+  //       setDoorImage(data.publicUrl);
+  //     }
+  //
+  //     if (firstAccessory && firstAccessory.image) {
+  //       const { data } = supabase.storage.from('product-images').getPublicUrl(firstAccessory.image);
+  //       setAccessoryImage(data.publicUrl);
+  //     }
+  //     setLoading(false);
+  //   };
+  //
+  //   fetchPreviewImages();
+  // }, []);
 
   return (
     <main>
