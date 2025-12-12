@@ -24,7 +24,7 @@ const translations = {
 
 
     // About Page
-    about_title: "Gad Dlatot – Importateur Direct & Expert",
+    about_title: "GadDoors – Importateur Direct & Expert",
     about_subtitle: "18 ans d'excellence dans la porte d'intérieur",
     about_exp_title: "18 Ans d'Expérience",
     about_exp_desc: "Une expertise reconnue dans l'importation et la distribution de portes en Israël.",
@@ -177,7 +177,7 @@ const translations = {
     // Navigation
     nav_home: 'בית',
     nav_doors: 'דלתות',
-    nav_accessories: 'אביזרים ודלתות מיוחדות ',
+    nav_accessories: 'אביזרים',
     nav_warranty: 'אחריות',
     nav_contact: 'צור קשר',
     nav_about: 'אודות',
@@ -192,7 +192,7 @@ const translations = {
 
 
     // About Page
-    about_title: "גד דלתות – יבואן ישיר ומומחה",
+    about_title: "GadDoors – יבואן ישיר ומומחה",
     about_subtitle: "18 שנות מצוינות בדלתות פנים",
     about_exp_title: "18 שנות ניסיון",
     about_exp_desc: "מומחיות מוכחת ביבוא ושיווק דלתות בישראל.",
