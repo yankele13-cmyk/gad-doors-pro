@@ -1,9 +1,3 @@
-'use client';
-
-import AdminSidebar from './AdminSidebar';
-import AuthGuard from './AuthGuard';
-import { useLanguage } from '@/context/LanguageContext';
-
 import AdminSidebar from './AdminSidebar';
 import AuthGuard from './AuthGuard';
 import { useLanguage } from '@/context/LanguageContext';

@@ -185,6 +185,96 @@ export default function AdminDashboardPage() {
           delay={0.4}
         />
       </div>
+
+      {/* Recent Activity Section */}
+      <div style={{
+          display: 'grid',
+          gridTemplateColumns: '2fr 1fr',
+          gap: '24px'
+      }} className="dashboard-grid">
+         <style jsx>{`
+            @media (max-width: 900px) {
+                .dashboard-grid {
+                     grid-template-columns: 1fr !important;
+                }
+            }
+         `}</style>
+         
+         {/* Shortcuts / Quick Actions */}
+         <div style={{
+             background: 'white',
+             borderRadius: '16px',
+             padding: '25px',
+             boxShadow: '0 4px 6px rgba(0,0,0,0.05)',
+             border: '1px solid rgba(0,0,0,0.02)'
+         }}>
+             <h3 style={{ margin: '0 0 20px 0', color: '#2d3436' }}>Actions Rapides</h3>
+             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
+                 <Link href="/admin/products" style={{ 
+                     background: '#74b9ff15', 
+                     padding: '20px', 
+                     borderRadius: '12px', 
+                     textDecoration: 'none', 
+                     color: '#0984e3',
+                     display: 'flex',
+                     alignItems: 'center',
+                     gap: '15px',
+                     transition: 'transform 0.2s',
+                     fontWeight: 600
+                 }}
+                 onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-3px)'}
+                 onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+                 >
+                     <div style={{ fontSize: '1.5rem' }}><i className="fas fa-plus-circle"></i></div>
+                     <div>Gérer les Produits</div>
+                 </Link>
+                 <Link href="/admin/messages" style={{ 
+                     background: '#55efc415', 
+                     padding: '20px', 
+                     borderRadius: '12px', 
+                     textDecoration: 'none', 
+                     color: '#00b894',
+                     display: 'flex',
+                     alignItems: 'center',
+                     gap: '15px',
+                     transition: 'transform 0.2s',
+                     fontWeight: 600
+                 }}
+                 onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-3px)'}
+                 onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+                 >
+                     <div style={{ fontSize: '1.5rem' }}><i className="fas fa-comment-alt"></i></div>
+                     <div>Voir les Messages</div>
+                 </Link>
+             </div>
+         </div>
+
+         {/* System Status */}
+         <div style={{
+             background: 'white',
+             borderRadius: '16px',
+             padding: '25px',
+             boxShadow: '0 4px 6px rgba(0,0,0,0.05)',
+             border: '1px solid rgba(0,0,0,0.02)'
+         }}>
+             <h3 style={{ margin: '0 0 20px 0', color: '#2d3436' }}>État du Système</h3>
+             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                 <li style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 0', borderBottom: '1px solid #f1f2f6' }}>
+                     <span style={{ color: '#636e72' }}>Version Admin</span>
+                     <span style={{ fontWeight: 600, color: '#2d3436' }}>v2.0 Pro</span>
+                 </li>
+                 <li style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 0', borderBottom: '1px solid #f1f2f6' }}>
+                     <span style={{ color: '#636e72' }}>Statut Serveur</span>
+                     <span style={{ fontWeight: 600, color: '#00b894' }}><i className="fas fa-check-circle"></i> En ligne</span>
+                 </li>
+                 <li style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 0' }}>
+                     <span style={{ color: '#636e72' }}>Dernière Synchro Google</span>
+                     <span style={{ fontWeight: 600, color: '#636e72' }}>-</span>
+                 </li>
+             </ul>
+         </div>
+
+      </div>
     </AdminLayout>
   );
 }
