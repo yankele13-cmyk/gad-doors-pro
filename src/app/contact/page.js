@@ -145,6 +145,7 @@ export default function ContactPage() {
                   <span dir="ltr">{siteConfig.contact.phoneDisplay}</span>
                 </p>
               </div>
+              {siteConfig.contact.email && (
               <div style={{ marginBottom: '30px' }}>
                 <h3>
                   <i
@@ -158,6 +159,7 @@ export default function ContactPage() {
                 </h3>
                 <p>{siteConfig.contact.email}</p>
               </div>
+              )}
               {/* Google Maps - Cliquable */}
               <a
                 href="https://www.google.com/maps/dir/?api=1&destination=115+Aharon+Eshkoli+Street,+Jerusalem,+Israel"

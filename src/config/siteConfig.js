@@ -6,7 +6,7 @@ export const siteConfig = {
     phone: '+972 55-278-3693',
     phoneDisplay: '+972 55-278-3693',
     whatsapp: '972552783693', // Sans le + pour les liens WhatsApp
-    email: 'contact@gaddoors.com',
+    email: '',
     address: '115 Aharon Eshkoli - Jérusalem',
     addressHe: 'אהרון אשכולי 115 - ירושלים',
   },

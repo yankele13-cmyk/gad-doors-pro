@@ -23,14 +23,25 @@ export function AdminProvider({ children }) {
     }
   }, []);
 
-  const login = (email, password) => {
-    // Credentials hardcodés pour MVP (migrer vers Supabase Auth plus tard)
-    if (email === 'admin@gaddoors.com' && password === 'admin123') {
-      sessionStorage.setItem('gadAdminAuth', 'true');
-      setIsAuthenticated(true);
-      return { success: true };
+  const login = async (email, password) => {
+    try {
+        const res = await fetch('/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+        });
+        const data = await res.json();
+
+        if (data.success) {
+            sessionStorage.setItem('gadAdminAuth', 'true');
+            setIsAuthenticated(true);
+            return { success: true };
+        } else {
+            return { success: false, error: data.error };
+        }
+    } catch (error) {
+        return { success: false, error: 'Erreur de connexion' };
     }
-    return { success: false, error: 'Email ou mot de passe incorrect' };
   };
 
   const logout = () => {

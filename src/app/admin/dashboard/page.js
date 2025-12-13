@@ -98,6 +98,11 @@ export default function AdminDashboardPage() {
         @keyframes fadeInUp {
           to { opacity: 1; transform: translateY(0); }
         }
+        @media (max-width: 900px) {
+            .dashboard-grid {
+                    grid-template-columns: 1fr !important;
+            }
+        }
       `}</style>
       
       {/* Welcome Banner */}
@@ -192,13 +197,6 @@ export default function AdminDashboardPage() {
           gridTemplateColumns: '2fr 1fr',
           gap: '24px'
       }} className="dashboard-grid">
-         <style jsx>{`
-            @media (max-width: 900px) {
-                .dashboard-grid {
-                     grid-template-columns: 1fr !important;
-                }
-            }
-         `}</style>
          
          {/* Shortcuts / Quick Actions */}
          <div style={{
