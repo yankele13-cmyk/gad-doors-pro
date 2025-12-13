@@ -1,24 +1,20 @@
 'use client';
 
 import { useLanguage } from '@/context/LanguageContext';
-import { Outfit } from 'next/font/google';
-
-// Initialisation de la police déplacée ici car ce composant gère le body
-const outfit = Outfit({ subsets: ['latin'] });
+import { useEffect } from 'react';
 
 export default function ClientLayout({ children }) {
   const { language, dir } = useLanguage();
 
-  // Ce composant client rend maintenant la structure de base de la page
-  // en utilisant les valeurs du contexte dès le premier rendu.
+  // Sync language with html attributes
+  useEffect(() => {
+    document.documentElement.lang = language;
+    document.documentElement.dir = dir;
+  }, [language, dir]);
+
   return (
-    <html
-      lang={language}
-      dir={dir}
-      suppressHydrationWarning
-      data-scroll-behavior="smooth"
-    >
-      <body className={outfit.className}>{children}</body>
-    </html>
+    <div id="app-root">
+      {children}
+    </div>
   );
 }

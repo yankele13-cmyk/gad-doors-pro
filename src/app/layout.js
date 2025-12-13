@@ -7,6 +7,9 @@ import { ToastContainer } from '@/components/Toast';
 import { LanguageProvider } from '@/context/LanguageContext';
 import ClientLayout from '@/components/ClientLayout';
 import StructuredData from '@/components/StructuredData';
+import { Outfit } from 'next/font/google';
+
+const outfit = Outfit({ subsets: ['latin'] });
 
 export const metadata = {
   title: "GadDoors | דלתות פנים פרימיום ירושלים - עיצוב ואיכות",
@@ -61,19 +64,21 @@ export const viewport = {
   initialScale: 1,
 };
 
-// Le RootLayout est maintenant beaucoup plus simple.
-// Il ne fait que fournir les contextes et délègue l'affichage à ClientLayout.
 export default function RootLayout({ children }) {
   return (
-    <LanguageProvider>
-      <ClientLayout>
-        <StructuredData />
-        <Header />
-        {children}
-        <Footer />
-        <WhatsAppWidget />
-        <ToastContainer />
-      </ClientLayout>
-    </LanguageProvider>
+    <html lang="fr" dir="ltr" suppressHydrationWarning data-scroll-behavior="smooth">
+      <body className={outfit.className}>
+        <LanguageProvider>
+          <ClientLayout>
+            <StructuredData />
+            <Header />
+            {children}
+            <Footer />
+            <WhatsAppWidget />
+            <ToastContainer />
+          </ClientLayout>
+        </LanguageProvider>
+      </body>
+    </html>
   );
 }

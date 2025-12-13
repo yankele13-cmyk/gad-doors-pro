@@ -7,6 +7,7 @@ const AdminContext = createContext();
 export function AdminProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   // Vérifier si l'utilisateur est déjà connecté au chargement
   useEffect(() => {
@@ -15,6 +16,11 @@ export function AdminProvider({ children }) {
       setIsAuthenticated(true);
     }
     setIsLoading(false);
+    
+    // Auto-close sidebar on mobile on initial load
+    if (window.innerWidth < 768) {
+        setIsSidebarOpen(false);
+    }
   }, []);
 
   const login = (email, password) => {
@@ -32,9 +38,11 @@ export function AdminProvider({ children }) {
     setIsAuthenticated(false);
   };
 
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+
   return (
     <AdminContext.Provider
-      value={{ isAuthenticated, isLoading, login, logout }}
+      value={{ isAuthenticated, isLoading, login, logout, isSidebarOpen, toggleSidebar, setIsSidebarOpen }}
     >
       {children}
     </AdminContext.Provider>
