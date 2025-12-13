@@ -1,7 +1,23 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://whstcylkadklvjzfwdmz.supabase.co';
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indoc3RjeWxrYWRrbHZqemZ3ZG16Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM2ODg2NjksImV4cCI6MjA3OTI2NDY2OX0.pNi4cRthEiJiccrQEKC3FzH_4T5ZPFRjR6Wiqq8WKrI';
+// Defensive configuration loading
+const getConfiguration = () => {
+    const envUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ? process.env.NEXT_PUBLIC_SUPABASE_URL.trim() : '';
+    const envKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY.trim() : '';
+
+    const hardcodedUrl = 'https://whstcylkadklvjzfwdmz.supabase.co';
+    const hardcodedKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indoc3RjeWxrYWRrbHZqemZ3ZG16Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM2ODg2NjksImV4cCI6MjA3OTI2NDY2OX0.pNi4cRthEiJiccrQEKC3FzH_4T5ZPFRjR6Wiqq8WKrI';
+
+    // prioritized URL: Env (if valid) > Hardcoded
+    let url = (envUrl && envUrl.startsWith('http')) ? envUrl : hardcodedUrl;
+    
+    // prioritized Key: Env (if valid length) > Hardcoded
+    let key = (envKey && envKey.length > 20) ? envKey : hardcodedKey;
+
+    return { url, key, usingFallback: url === hardcodedUrl };
+};
+
+const { url: supabaseUrl, key: supabaseKey, usingFallback } = getConfiguration();
 
 let supabaseInstance;
 
@@ -42,13 +58,17 @@ const createMockBuilder = (errorMessage) => {
 };
 
 try {
+    if (usingFallback) {
+         console.warn('[Supabase] Warning: Using hardcoded fallback credentials. Environment variables might be missing or invalid.');
+    }
+
     if (!supabaseUrl || !supabaseKey) {
         throw new Error('Supabase URL or Key is missing internally (variables are empty).');
     }
 
     // Verify basic format to avoid library crashes
     if (!supabaseUrl.startsWith('http')) {
-        throw new Error(`Invalid URL format: ${supabaseUrl}`);
+        throw new Error(`Invalid URL format: "${supabaseUrl}"`);
     }
 
     supabaseInstance = createClient(supabaseUrl, supabaseKey, {
