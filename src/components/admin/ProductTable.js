@@ -5,7 +5,6 @@ import {
   getProducts,
   deleteProduct,
   toggleProductVisibility,
-  initializeStore,
 } from '@/lib/productStore';
 import { products as defaultProducts } from '@/data/products';
 import { useLanguage } from '@/context/LanguageContext';
@@ -22,7 +21,6 @@ export default function ProductTable({ onEdit }) {
   // Charger les produits
   useEffect(() => {
     async function initialize() {
-      await initializeStore(defaultProducts);
       await loadProducts();
     }
     initialize();
