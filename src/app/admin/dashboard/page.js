@@ -6,33 +6,13 @@ import Link from 'next/link';
 import { getProducts } from '@/lib/productStore';
 import { getMessages } from '@/lib/messageStore';
 
-export default function AdminDashboardPage() {
-  const [stats, setStats] = useState({
-    products: 0,
-    doors: 0,
-    accessories: 0,
-    messages: 0 
-  });
-
-  useEffect(() => {
-    async function loadStats() {
-      const products = await getProducts();
-      const messages = await getMessages();
-      const unreadMessages = messages.filter(m => !m.is_read).length;
-      
-      setStats({
-        products: products.length,
-        doors: products.filter(p => p.category === 'doors').length,
-        accessories: products.filter(p => p.category === 'accessories').length,
-        messages: unreadMessages 
-      });
-    }
-    loadStats();
-  }, []);
-
-  const StatCard = ({ title, value, icon, gradient, link, delay }) => (
-    <Link href={link} style={{ textDecoration: 'none' }}>
-      <div style={{
+// --- StatCard Component ---
+// This component is defined outside of the main dashboard component
+// to prevent re-creation on every render, which is a core React best practice.
+const StatCard = ({ title, value, icon, gradient, link, delay }) => (
+  <Link href={link} style={{ textDecoration: 'none' }}>
+    <div
+      style={{
         background: 'white',
         borderRadius: '16px',
         padding: '30px',
@@ -47,7 +27,7 @@ export default function AdminDashboardPage() {
         overflow: 'hidden',
         animation: `fadeInUp 0.6s ease-out forwards ${delay}s`,
         opacity: 0,
-        transform: 'translateY(20px)'
+        transform: 'translateY(20px)',
       }}
       className="stat-card"
       onMouseOver={(e) => {
@@ -58,12 +38,33 @@ export default function AdminDashboardPage() {
         e.currentTarget.style.transform = 'translateY(0)';
         e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.04)';
       }}
-      >
-        <div style={{ position: 'relative', zIndex: 2 }}>
-          <h3 style={{ margin: '0 0 8px 0', color: '#636e72', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px' }}>{title}</h3>
-          <div style={{ fontSize: '2.5rem', fontWeight: 800, color: '#2d3436', lineHeight: 1 }}>{value}</div>
+    >
+      <div style={{ position: 'relative', zIndex: 2 }}>
+        <h3
+          style={{
+            margin: '0 0 8px 0',
+            color: '#636e72',
+            fontSize: '0.85rem',
+            fontWeight: 600,
+            textTransform: 'uppercase',
+            letterSpacing: '1px',
+          }}
+        >
+          {title}
+        </h3>
+        <div
+          style={{
+            fontSize: '2.5rem',
+            fontWeight: 800,
+            color: '#2d3436',
+            lineHeight: 1,
+          }}
+        >
+          {value}
         </div>
-        <div style={{
+      </div>
+      <div
+        style={{
           width: '64px',
           height: '64px',
           borderRadius: '20px',
@@ -73,24 +74,52 @@ export default function AdminDashboardPage() {
           alignItems: 'center',
           justifyContent: 'center',
           fontSize: '1.4rem',
-          boxShadow: `0 8px 16px -4px ${gradient[0]}80`
-        }}>
-          <i className={`fas ${icon}`}></i>
-        </div>
-        {/* Decorative circle */}
-        <div style={{
-            position: 'absolute',
-            top: '-20px',
-            right: '-20px',
-            width: '100px',
-            height: '100px',
-            background: `radial-gradient(circle, ${gradient[0]}10 0%, transparent 70%)`,
-            borderRadius: '50%',
-            opacity: 0.5
-        }} />
+          boxShadow: `0 8px 16px -4px ${gradient[0]}80`,
+        }}
+      >
+        <i className={`fas ${icon}`}></i>
       </div>
-    </Link>
-  );
+      {/* Decorative circle */}
+      <div
+        style={{
+          position: 'absolute',
+          top: '-20px',
+          right: '-20px',
+          width: '100px',
+          height: '100px',
+          background: `radial-gradient(circle, ${gradient[0]}10 0%, transparent 70%)`,
+          borderRadius: '50%',
+          opacity: 0.5,
+        }}
+      />
+    </div>
+  </Link>
+);
+
+export default function AdminDashboardPage() {
+  const [stats, setStats] = useState({
+    products: 0,
+    doors: 0,
+    accessories: 0,
+    messages: 0,
+  });
+
+  useEffect(() => {
+    async function loadStats() {
+      const products = await getProducts();
+      const messages = await getMessages();
+      const unreadMessages = messages.filter((m) => !m.is_read).length;
+
+      setStats({
+        products: products.length,
+        doors: products.filter((p) => p.category === 'doors').length,
+        accessories: products.filter((p) => p.category === 'accessories')
+          .length,
+        messages: unreadMessages,
+      });
+    }
+    loadStats();
+  }, []);
 
   return (
     <AdminLayout title="Tableau de Bord">

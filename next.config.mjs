@@ -8,6 +8,13 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
+        hostname: 'kwlyhnmbbgnlczmxqwbq.supabase.co',
+        port: '',
+        pathname: '/storage/v1/object/public/product-images/**',
+      },
+      // Also allow old domain potentially if needed, or just replace
+      {
+        protocol: 'https',
         hostname: 'whstcylkadklvjzfwdmz.supabase.co',
         port: '',
         pathname: '/storage/v1/object/public/product-images/**',

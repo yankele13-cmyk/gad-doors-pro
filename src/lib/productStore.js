@@ -8,7 +8,10 @@ export async function getProducts() {
     .select('*')
     .order('id', { ascending: true });
   if (error) {
-    console.error('Error fetching products:', error);
+    console.error('🚨 Error fetching products FULL:', JSON.stringify(error, null, 2));
+    console.error('🚨 Error message:', error.message);
+    console.error('🚨 Error details:', error.details);
+    console.error('🚨 Error hint:', error.hint);
     return [];
   }
   return data || [];

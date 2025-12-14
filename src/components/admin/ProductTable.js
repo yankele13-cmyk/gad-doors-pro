@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import {
   getProducts,
   deleteProduct,
@@ -18,6 +18,12 @@ export default function ProductTable({ onEdit }) {
   const [categoryFilter, setCategoryFilter] = useState('all');
   const { t } = useLanguage();
 
+  const loadProducts = useCallback(async () => {
+    const allProducts = await getProducts();
+    setProducts(allProducts);
+    setFilteredProducts(allProducts);
+  }, []);
+
   // Charger les produits
   useEffect(() => {
     async function initialize() {
@@ -27,13 +33,7 @@ export default function ProductTable({ onEdit }) {
     const handleUpdate = () => loadProducts();
     window.addEventListener('productsUpdated', handleUpdate);
     return () => window.removeEventListener('productsUpdated', handleUpdate);
-  }, []);
-
-  const loadProducts = async () => {
-    const allProducts = await getProducts();
-    setProducts(allProducts);
-    setFilteredProducts(allProducts);
-  };
+  }, [loadProducts]);
 
   // Filtrer les produits
   useEffect(() => {

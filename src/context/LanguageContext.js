@@ -348,11 +348,16 @@ export function LanguageProvider({ children }) {
   const dir = language === 'he' ? 'rtl' : 'ltr';
 
   useEffect(() => {
-    const savedLang = localStorage.getItem('gadDoorsLang');
-    if (savedLang) {
-      setLanguage(savedLang);
+    try {
+      const savedLang = localStorage.getItem('gadDoorsLang');
+      if (savedLang) {
+        setLanguage(savedLang);
+      }
+    } catch (error) {
+      console.warn('Could not read localStorage for language setting.');
+    } finally {
+      setIsLoaded(true);
     }
-    setIsLoaded(true);
   }, []);
 
   useEffect(() => {

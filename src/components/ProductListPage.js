@@ -1,11 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import ProductCard from '@/components/ProductCard';
 import LoadingSkeleton from '@/components/LoadingSkeleton';
-import { getProducts, initializeStore } from '@/lib/productStore';
-import { products as defaultProducts } from '@/data/products';
+import { getProducts } from '@/lib/productStore';
 import { useLanguage } from '@/context/LanguageContext';
 import { getSupabase } from '@/lib/supabase';
 import PageSection from '@/components/PageSection';
@@ -20,29 +19,24 @@ export default function ProductListPage({ category, titleKey }) {
   const [loading, setLoading] = useState(true);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  useEffect(() => {
-    async function initialize() {
-      setLoading(true);
-      // Load products
-      await loadProducts();
-      setLoading(false);
-    }
-
-    initialize();
-
-    // Listen for updates from admin
-    const handleUpdate = () => loadProducts();
-    window.addEventListener('productsUpdated', handleUpdate);
-    return () => window.removeEventListener('productsUpdated', handleUpdate);
-  }, [category]); // Re-load if category changes
-
-  const loadProducts = async () => {
+  const loadProducts = useCallback(async () => {
+    setLoading(true);
     const allProducts = await getProducts();
     const filteredProducts = allProducts.filter(
       (p) => p.category === category && !p.is_hidden
     );
     setProducts(filteredProducts);
-  };
+    setLoading(false);
+  }, [category]);
+
+  useEffect(() => {
+    loadProducts();
+
+    // Listen for updates from admin
+    const handleUpdate = () => loadProducts();
+    window.addEventListener('productsUpdated', handleUpdate);
+    return () => window.removeEventListener('productsUpdated', handleUpdate);
+  }, [loadProducts]);
 
   const openModal = (product) => {
     console.log('Opening modal for product:', product);

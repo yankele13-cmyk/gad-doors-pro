@@ -32,6 +32,7 @@ export default function ProductCard({ product }) {
     
     // 4. If not a local studio path, assume it's hosted on Supabase Storage
     try {
+        const supabase = getSupabase(); // Initialize client
         const { data } = supabase.storage.from('product-images').getPublicUrl(imagePath);
         return data.publicUrl;
     } catch (e) {
