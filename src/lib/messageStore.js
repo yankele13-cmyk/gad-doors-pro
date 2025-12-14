@@ -1,6 +1,7 @@
-import { supabase } from './supabase';
+import { getSupabase } from './supabase';
 
 export async function getMessages() {
+  const supabase = getSupabase();
   if (!supabase) return [];
 
   try {
