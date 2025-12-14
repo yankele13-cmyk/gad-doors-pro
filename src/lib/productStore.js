@@ -1,7 +1,10 @@
 // Product Store - CRUD operations avec Supabase
 // Gestion centralisée des produits via base de données
 
-import { supabase } from './supabase';
+import { getSupabase } from './supabase';
+
+// Helper to get the Supabase client
+const supabase = getSupabase();
 
 // Charger les produits depuis Supabase
 export async function getProducts() {

@@ -15,12 +15,6 @@ import PageSection from '@/components/PageSection';
  * Consolidates doors and accessories pages
  */
 export default function ProductListPage({ category, titleKey }) {
-  // Temporary code to debug Vercel environment variables
-  console.log(
-    'Variable loaded on Vercel:',
-    process.env.NEXT_PUBLIC_SUPABASE_URL
-  );
-
   const { t, language } = useLanguage();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);

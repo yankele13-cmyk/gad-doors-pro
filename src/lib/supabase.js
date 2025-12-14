@@ -1,14 +1,27 @@
 import { createClient } from '@supabase/supabase-js';
 
-// Get Supabase credentials from environment variables
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+let supabaseInstance = null;
 
-// Check if the environment variables are set
-if (!supabaseUrl || !supabaseKey) {
-  throw new Error('Supabase URL or Key is not defined in environment variables.');
+/**
+ * Gets a Supabase client instance.
+ * Implements a singleton pattern to ensure only one instance is created.
+ * @returns {import('@supabase/supabase-js').SupabaseClient}
+ */
+export function getSupabase() {
+  if (supabaseInstance) {
+    return supabaseInstance;
+  }
+
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (!supabaseUrl || !supabaseKey) {
+    // This check is important for the server-side build process
+    // where env vars might not be available immediately.
+    throw new Error('Supabase URL or Key is not available.');
+  }
+
+  supabaseInstance = createClient(supabaseUrl, supabaseKey);
+  return supabaseInstance;
 }
-
-// Initialize the Supabase client
-export const supabase = createClient(supabaseUrl, supabaseKey);
 
