@@ -23,10 +23,6 @@ export default function ProductListPage({ category, titleKey }) {
   useEffect(() => {
     async function initialize() {
       setLoading(true);
-
-      // S'assure que la DB est peuplée si elle est vide
-      await initializeStore(defaultProducts);
-
       // Load products
       await loadProducts();
       setLoading(false);
