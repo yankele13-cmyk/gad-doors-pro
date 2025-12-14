@@ -7,7 +7,7 @@ import LoadingSkeleton from '@/components/LoadingSkeleton';
 import { getProducts, initializeStore } from '@/lib/productStore';
 import { products as defaultProducts } from '@/data/products';
 import { useLanguage } from '@/context/LanguageContext';
-import { supabase } from '@/lib/supabase';
+import { getSupabase } from '@/lib/supabase';
 import PageSection from '@/components/PageSection';
 
 /**

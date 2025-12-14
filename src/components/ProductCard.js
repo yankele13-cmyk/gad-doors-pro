@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 import { useLanguage } from '@/context/LanguageContext';
-import { supabase } from '@/lib/supabase';
+import { getSupabase } from '@/lib/supabase';
 
 export default function ProductCard({ product }) {
   const { language } = useLanguage();

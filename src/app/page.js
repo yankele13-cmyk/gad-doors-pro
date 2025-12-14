@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
 import { useEffect, useState } from 'react';
 import { getProducts } from '@/lib/productStore';
-import { supabase } from '@/lib/supabase'; // Import supabase client
+import { getSupabase } from '@/lib/supabase'; // Import getSupabase function
 
 export default function Home() {
   const { t, language } = useLanguage();
