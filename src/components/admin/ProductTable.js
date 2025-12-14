@@ -237,7 +237,16 @@ export default function ProductTable({ onEdit }) {
                     }}
                   >
                     <Image
-                      src={`/images/${product.image}`}
+                      src={(() => {
+                        const imgPath = product.image;
+                        if (!imgPath) return '/images/placeholder.jpg';
+                        if (imgPath.startsWith('http')) return imgPath;
+                        if (imgPath.startsWith('/images/')) return imgPath;
+                        if (imgPath.startsWith('studio')) return `/images/${imgPath}`;
+                        // Fallback to Supabase Storage
+                        const { data } = supabase.storage.from('product-images').getPublicUrl(imgPath);
+                        return data.publicUrl;
+                      })()}
                       alt={product.name}
                       width={60}
                       height={60}

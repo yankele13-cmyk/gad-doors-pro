@@ -20,16 +20,35 @@ export default function ProductCard({ product }) {
   // Build the public URL for local images
   const getImageUrl = (imagePath) => {
     if (!imagePath) return '/images/placeholder.jpg'; // Fallback
-    if (imagePath.startsWith('http')) return imagePath; // Already a full URL
-    // Image paths already include the folder (studioDoors/, studioAccessories/)
+    
+    // 1. Absolute URL (e.g. external http or already processed)
+    if (imagePath.startsWith('http')) return imagePath; 
+    
+    // 2. Already starts with /images (local path fix)
+    if (imagePath.startsWith('/images/')) return imagePath;
+
+    // 3. Local studio paths (legacy data)
     if (imagePath.startsWith('studio')) return `/images/${imagePath}`;
     
-    // If not a local studio path, assume it's hosted on Supabase Storage
-    const { data } = supabase.storage.from('product-images').getPublicUrl(imagePath);
-    return data.publicUrl;
+    // 4. If not a local studio path, assume it's hosted on Supabase Storage
+    try {
+        const { data } = supabase.storage.from('product-images').getPublicUrl(imagePath);
+        return data.publicUrl;
+    } catch (e) {
+        console.error('Error generating public URL:', e);
+        return imagePath;
+    }
   };
   
+  /* 
+    DEBUG LOGGING (Safe inline)
+    If we are in production and the resolved URL looks weird (e.g. still a path but not starting with /), log it.
+  */
   const imageSrc = getImageUrl(product.image);
+  
+  if (process.env.NODE_ENV === 'production' && !imageSrc.startsWith('/') && !imageSrc.startsWith('http')) {
+      console.log(`[ProductCard Debug] ${product.name} -> ${imageSrc}`);
+  }
 
   /* 
     Adjust height: 

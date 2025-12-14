@@ -173,16 +173,19 @@ export default function ProductListPage({ category, titleKey }) {
             <div className="modal-body">
               {/* Image Side */}
               <div className="modal-image-container">
-                 <img
-                  src={
-                    selectedProduct.image.startsWith('http')
-                      ? selectedProduct.image
-                      : selectedProduct.image.startsWith('studio')
-                      ? `/images/${selectedProduct.image}`
-                      : supabase.storage
-                          .from('product-images')
-                          .getPublicUrl(selectedProduct.image).data.publicUrl
-                  }
+                  <img
+                   src={(() => {
+                     const imgPath = selectedProduct.image;
+                     if (!imgPath) return '/images/placeholder.jpg';
+                     if (imgPath.startsWith('http')) return imgPath;
+                     if (imgPath.startsWith('/images/')) return imgPath;
+                     // Handle local studio paths
+                     if (imgPath.startsWith('studio')) return `/images/${imgPath}`;
+                     
+                     // Handle Supabase Storage
+                     const { data } = supabase.storage.from('product-images').getPublicUrl(imgPath);
+                     return data.publicUrl;
+                   })()}
                   alt={getProductName(selectedProduct)}
                   style={{
                     width: '100%',
