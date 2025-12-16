@@ -1,36 +1,40 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { useAdmin } from '@/context/AdminContext';
+import { useAuth } from '@/context/AuthContext';
 import { useLanguage } from '@/context/LanguageContext';
 
 export default function AdminLoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-
+  
   const router = useRouter();
-  const { login } = useAdmin();
+  const { login, user, loading } = useAuth();
   const { t } = useLanguage();
+
+  // Redirect if already logged in
+  useEffect(() => {
+    if (!loading && user) {
+        router.push('/admin/dashboard');
+    }
+  }, [user, loading, router]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    setIsLoading(true);
-
-    // Simulate network delay for better UX feel
-    setTimeout(async () => {
-        const result = login(email, password);
-        if (result.success) {
-            router.push('/admin/dashboard');
-        } else {
-            setError(result.error);
-            setIsLoading(false);
-        }
-    }, 800);
+    
+    // Login with Firebase
+    const result = await login(email, password);
+    
+    if (result.success) {
+        // Redirect is handled by useEffect or here
+        router.push('/admin/dashboard');
+    } else {
+        setError(result.error);
+    }
   };
 
   return (
@@ -176,25 +180,25 @@ export default function AdminLoginPage() {
 
               <button
                   type="submit"
-                  disabled={isLoading}
+                  disabled={loading}
                   style={{
                       width: '100%',
                       padding: '16px',
-                      background: isLoading ? '#636e72' : 'linear-gradient(135deg, #eebb99 0%, #d4a373 100%)',
+                      background: loading ? '#636e72' : 'linear-gradient(135deg, #eebb99 0%, #d4a373 100%)',
                       border: 'none',
                       borderRadius: '12px',
                       color: '#2d3436',
                       fontSize: '1rem',
                       fontWeight: 700,
-                      cursor: isLoading ? 'not-allowed' : 'pointer',
+                      cursor: loading ? 'not-allowed' : 'pointer',
                       transition: 'all 0.3s',
-                      transform: isLoading ? 'none' : 'translateY(0)',
-                      boxShadow: isLoading ? 'none' : '0 10px 20px rgba(238, 187, 153, 0.2)'
+                      transform: loading ? 'none' : 'translateY(0)',
+                      boxShadow: loading ? 'none' : '0 10px 20px rgba(238, 187, 153, 0.2)'
                   }}
-                  onMouseOver={(e) => !isLoading && (e.currentTarget.style.transform = 'translateY(-2px)')}
-                  onMouseOut={(e) => !isLoading && (e.currentTarget.style.transform = 'translateY(0)')}
+                  onMouseOver={(e) => !loading && (e.currentTarget.style.transform = 'translateY(-2px)')}
+                  onMouseOut={(e) => !loading && (e.currentTarget.style.transform = 'translateY(0)')}
               >
-                  {isLoading ? (
+                  {loading ? (
                       <span><i className="fas fa-spinner fa-spin" style={{ marginRight: '8px' }}></i> Connexion...</span>
                   ) : (
                       'Se connecter'
