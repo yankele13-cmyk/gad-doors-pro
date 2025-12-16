@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 import { useLanguage } from '@/context/LanguageContext';
-import { getSupabase } from '@/lib/supabase';
+// import { getSupabase } from '@/lib/supabase'; // Removed
 
 export default function ProductCard({ product }) {
   const { language } = useLanguage();
@@ -30,15 +30,8 @@ export default function ProductCard({ product }) {
     // 3. Local studio paths (legacy data)
     if (imagePath.startsWith('studio')) return `/images/${imagePath}`;
     
-    // 4. If not a local studio path, assume it's hosted on Supabase Storage
-    try {
-        const supabase = getSupabase(); // Initialize client
-        const { data } = supabase.storage.from('product-images').getPublicUrl(imagePath);
-        return data.publicUrl;
-    } catch (e) {
-        console.error('Error generating public URL:', e);
-        return imagePath;
-    }
+    // 4. Fallback to assuming the property holds the full URL (Firebase migration)
+    return imagePath;
   };
   
   /* 

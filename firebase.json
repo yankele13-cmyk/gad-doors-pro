@@ -1,0 +1,24 @@
+{
+  "hosting": {
+    "source": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      "!**/.env.local"
+    ],
+    "frameworksBackend": {
+      "region": "us-central1",
+      "memory": "1024MiB",
+      "timeoutSeconds": 60,
+      "minInstances": 0,
+      "maxInstances": 10
+    }
+  },
+  "storage": {
+    "rules": "storage.rules"
+  },
+  "firestore": {
+    "rules": "firestore.rules"
+  }
+}

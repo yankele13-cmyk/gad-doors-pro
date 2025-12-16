@@ -1,113 +1,123 @@
-import { getSupabase } from './supabase';
+import { db, storage } from './firebase';
+import { 
+  collection, 
+  getDocs, 
+  addDoc, 
+  updateDoc, 
+  deleteDoc, 
+  doc, 
+  query, 
+  orderBy 
+} from 'firebase/firestore';
+import { 
+  ref, 
+  uploadBytes, 
+  getDownloadURL 
+} from 'firebase/storage';
 
-// Charger les produits depuis Supabase
+const COLLECTION_NAME = 'products';
+
+// Charger les produits depuis Firebase Firestore
 export async function getProducts() {
-  const supabase = getSupabase();
-  const { data, error } = await supabase
-    .from('products')
-    .select('*')
-    .order('id', { ascending: true });
-  if (error) {
-    console.error('🚨 Error fetching products FULL:', JSON.stringify(error, null, 2));
-    console.error('🚨 Error message:', error.message);
-    console.error('🚨 Error details:', error.details);
-    console.error('🚨 Error hint:', error.hint);
+  try {
+    const q = query(collection(db, COLLECTION_NAME), orderBy('id', 'asc'));
+    // Note: 'id' field might not exist on all docs automatically in Firestore like SQL auto-increment.
+    // If 'id' is just a custom field, this works. If we rely on document ID, we might need to adjust sorting.
+    // For now assuming existing data structure compatibility or new data.
+    
+    const querySnapshot = await getDocs(q);
+    const products = querySnapshot.docs.map(doc => ({
+      id: doc.id, // Use Firestore Doc ID as the primary ID
+      ...doc.data()
+    }));
+    
+    return products;
+  } catch (error) {
+    console.error('🚨 Error fetching products from Firebase:', error);
     return [];
   }
-  return data || [];
 }
 
 // Ajouter un nouveau produit
 export async function addProduct(productData) {
-  const supabase = getSupabase();
-  const { data, error } = await supabase
-    .from('products')
-    .insert([
-      {
-        name: productData.name,
-        name_he: productData.name_he,
-        category: productData.category,
-        image: productData.image,
-        description: productData.description || '',
-        description_he: productData.description_he || '',
-        is_hidden: false,
-      },
-    ])
-    .select()
-    .single();
+  try {
+    const docRef = await addDoc(collection(db, COLLECTION_NAME), {
+      name: productData.name,
+      name_he: productData.name_he,
+      category: productData.category,
+      image: productData.image,
+      description: productData.description || '',
+      description_he: productData.description_he || '',
+      is_hidden: false,
+      createdAt: new Date().toISOString(), 
+      // Manually handling 'id' for sorting if needed, or rely on createdAt
+      // For compatibility with previous code sorting by 'id', we might want to store a number, 
+      // but Firestore IDs are strings. Let's stick to standard Firestore pattern.
+    });
 
-  if (error) {
-    console.error('Error adding product:', error);
+    // Fetch the new doc to return it
+    return { id: docRef.id, ...productData };
+  } catch (error) {
+    console.error('Error adding product to Firebase:', error);
     throw error;
+  } finally {
+    window.dispatchEvent(new Event('productsUpdated'));
   }
-  window.dispatchEvent(new Event('productsUpdated'));
-  return data;
 }
 
 // Mettre à jour un produit existant
 export async function updateProduct(id, productData) {
-  const supabase = getSupabase();
-  const { data, error } = await supabase
-    .from('products')
-    .update(productData)
-    .eq('id', id)
-    .select()
-    .single();
-
-  if (error) {
-    console.error('Error updating product:', error);
+  try {
+    const productRef = doc(db, COLLECTION_NAME, id);
+    await updateDoc(productRef, productData);
+    
+    window.dispatchEvent(new Event('productsUpdated'));
+    return { id, ...productData };
+  } catch (error) {
+    console.error('Error updating product in Firebase:', error);
     throw error;
   }
-  window.dispatchEvent(new Event('productsUpdated'));
-  return data;
 }
 
 // Supprimer un produit
 export async function deleteProduct(id) {
-  const supabase = getSupabase();
-  const { error } = await supabase.from('products').delete().eq('id', id);
-
-  if (error) {
-    console.error('Error deleting product:', error);
+  try {
+    await deleteDoc(doc(db, COLLECTION_NAME, id));
+    window.dispatchEvent(new Event('productsUpdated'));
+    return true;
+  } catch (error) {
+    console.error('Error deleting product from Firebase:', error);
     throw error;
   }
-  window.dispatchEvent(new Event('productsUpdated'));
-  return true;
 }
 
 // Toggle visibilité d'un produit
 export async function toggleProductVisibility(id, currentState) {
-  const supabase = getSupabase();
-  const { data, error } = await supabase
-    .from('products')
-    .update({ is_hidden: !currentState })
-    .eq('id', id)
-    .select()
-    .single();
-
-  if (error) {
+  try {
+    const productRef = doc(db, COLLECTION_NAME, id);
+    await updateDoc(productRef, { is_hidden: !currentState });
+    
+    window.dispatchEvent(new Event('productsUpdated'));
+    return { id, is_hidden: !currentState };
+  } catch (error) {
     console.error('Error toggling product visibility:', error);
     throw error;
   }
-  window.dispatchEvent(new Event('productsUpdated'));
-  return data;
 }
 
-// Uploader une image dans Supabase Storage
+// Uploader une image dans Firebase Storage
 export async function uploadImage(file) {
-  const supabase = getSupabase();
-  const fileName = `${Date.now()}-${file.name.replace(/\s/g, '-')}`;
-  const { data, error } = await supabase.storage
-    .from('product-images')
-    .upload(fileName, file, {
-      cacheControl: '3600',
-      upsert: false,
-    });
-
-  if (error) {
-    console.error('Error uploading image:', error);
+  try {
+    const fileName = `${Date.now()}-${file.name.replace(/\s/g, '-')}`;
+    const storageRef = ref(storage, `product-images/${fileName}`);
+    
+    const snapshot = await uploadBytes(storageRef, file);
+    const downloadURL = await getDownloadURL(snapshot.ref);
+    
+    return { path: downloadURL }; // Return format compatible with app usage
+  } catch (error) {
+    console.error('Error uploading image to Firebase:', error);
     throw error;
   }
-  return data;
 }
 

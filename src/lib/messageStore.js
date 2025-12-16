@@ -1,49 +1,49 @@
-import { getSupabase } from './supabase';
+import { db } from './firebase';
+import { collection, addDoc, getDocs, updateDoc, doc, orderBy, query } from 'firebase/firestore';
+
+const COLLECTION_NAME = 'messages';
 
 export async function getMessages() {
-  const supabase = getSupabase();
-  if (!supabase) return [];
-
   try {
-    const { data, error } = await supabase
-      .from('messages')
-      .select('*')
-      .order('created_at', { ascending: false });
-
-    if (error) throw error;
-    return data || [];
+    const q = query(collection(db, COLLECTION_NAME), orderBy('createdAt', 'desc'));
+    const querySnapshot = await getDocs(q);
+    return querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
   } catch (error) {
-    console.error('Error fetching messages:', error);
+    console.error('Error fetching messages from Firebase:', error);
     return [];
   }
 }
 
-export async function deleteMessage(id) {
+export async function addMessage(messageData) {
   try {
-    const { error } = await supabase
-      .from('messages')
-      .delete()
-      .eq('id', id);
-
-    if (error) throw error;
-    return true;
+    const docRef = await addDoc(collection(db, COLLECTION_NAME), {
+      ...messageData,
+      isRead: false,
+      createdAt: new Date().toISOString()
+    });
+    return { id: docRef.id, ...messageData };
   } catch (error) {
-    console.error('Error deleting message:', error);
+    console.error('Error adding message to Firebase:', error);
     throw error;
   }
 }
 
 export async function markMessageAsRead(id) {
   try {
-    const { error } = await supabase
-      .from('messages')
-      .update({ is_read: true })
-      .eq('id', id);
-
-    if (error) throw error;
+    const messageRef = doc(db, COLLECTION_NAME, id);
+    await updateDoc(messageRef, { isRead: true });
     return true;
   } catch (error) {
-    console.error('Error updating message status:', error);
+    console.error('Error marking message as read in Firebase:', error);
     throw error;
   }
+}
+
+export async function deleteMessage(id) {
+  // Not implemented in original but could be added if needed
+  console.warn('deleteMessage not implemented for Firebase yet');
+  return false;
 }

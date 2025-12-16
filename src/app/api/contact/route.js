@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { google } from 'googleapis';
 import path from 'path';
 import fs from 'fs';
-import { getSupabase } from '@/lib/supabase';
+// import { getSupabase } from '@/lib/supabase'; // Removed
 
 // Helper function to get credentials
 const getCredentials = () => {
@@ -40,28 +40,24 @@ export async function POST(request) {
       );
     }
 
-    // 1. Sauvegarde dans Supabase (Nouveau Système Admin)
+    // 1. Sauvegarde dans Firebase (Nouveau Système Admin)
     try {
-      const { error: supabaseError } = await supabase
-        .from('messages')
-        .insert([
-          {
-            name,
-            email,
-            phone: telephone,
-            message,
-            is_read: false
-          }
-        ]);
+      const { addDoc, collection } = await import('firebase/firestore');
+      const { db } = await import('@/lib/firebase');
       
-      if (supabaseError) {
-        console.error('Erreur Supabase Insert:', supabaseError);
-        // On ne bloque pas si Supabase échoue, on continue vers Google Sheets pour backup
-      } else {
-        console.log('✅ Message sauvegardé dans Supabase');
-      }
-    } catch (err) {
-      console.error('Erreur inattendue Supabase:', err);
+      await addDoc(collection(db, 'messages'), {
+        name,
+        email,
+        phone: telephone,
+        message,
+        isRead: false,
+        createdAt: new Date().toISOString(),
+        source: 'contact_form'
+      });
+      console.log('✅ Message sauvegardé dans Firebase');
+    } catch (firebaseError) {
+      console.error('Erreur Firebase Insert:', firebaseError);
+      // On ne bloque pas, on continue vers Google Sheets
     }
 
     // 2. Google Sheets Integration (Legacy / Backup)

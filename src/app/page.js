@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
 import { useEffect, useState } from 'react';
 import { getProducts } from '@/lib/productStore';
-import { getSupabase } from '@/lib/supabase'; // Import getSupabase function
+// import { getSupabase } from '@/lib/supabase'; // Removed
 
 export default function Home() {
   const { t, language } = useLanguage();
@@ -15,25 +15,6 @@ export default function Home() {
 
   // useEffect(() => {
   //   const fetchPreviewImages = async () => {
-  //     setLoading(true);
-  //     const allProducts = await getProducts();
-  //     
-  //     const firstDoor = allProducts.find(p => p.category === 'doors' && !p.is_hidden);
-  //     const firstAccessory = allProducts.find(p => p.category === 'accessories' && !p.is_hidden);
-  //
-  //     if (firstDoor && firstDoor.image) {
-  //       const { data } = supabase.storage.from('product-images').getPublicUrl(firstDoor.image);
-  //       setDoorImage(data.publicUrl);
-  //     }
-  //
-  //     if (firstAccessory && firstAccessory.image) {
-  //       const { data } = supabase.storage.from('product-images').getPublicUrl(firstAccessory.image);
-  //       setAccessoryImage(data.publicUrl);
-  //     }
-  //     setLoading(false);
-  //   };
-  //
-  //   fetchPreviewImages();
   // }, []);
 
   return (

@@ -6,7 +6,7 @@ import ProductCard from '@/components/ProductCard';
 import LoadingSkeleton from '@/components/LoadingSkeleton';
 import { getProducts } from '@/lib/productStore';
 import { useLanguage } from '@/context/LanguageContext';
-import { getSupabase } from '@/lib/supabase';
+// import { getSupabase } from '@/lib/supabase'; // Removed
 import PageSection from '@/components/PageSection';
 
 /**
@@ -172,9 +172,8 @@ export default function ProductListPage({ category, titleKey }) {
                      // Handle local studio paths
                      if (imgPath.startsWith('studio')) return `/images/${imgPath}`;
                      
-                     // Handle Supabase Storage
-                     const { data } = supabase.storage.from('product-images').getPublicUrl(imgPath);
-                     return data.publicUrl;
+                     // Handle Firebase/Direct URL
+                     return imgPath;
                    })()}
                   alt={getProductName(selectedProduct)}
                   style={{

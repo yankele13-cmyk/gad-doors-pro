@@ -241,9 +241,9 @@ export default function ProductTable({ onEdit }) {
                         if (imgPath.startsWith('http')) return imgPath;
                         if (imgPath.startsWith('/images/')) return imgPath;
                         if (imgPath.startsWith('studio')) return `/images/${imgPath}`;
-                        // Fallback to Supabase Storage
-                        const { data } = supabase.storage.from('product-images').getPublicUrl(imgPath);
-                        return data.publicUrl;
+                        // Fallback to Direct URL (Firebase)
+                        const imageUrl = imgPath;
+                        return imageUrl;
                       })()}
                       alt={product.name}
                       width={60}
