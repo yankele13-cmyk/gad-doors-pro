@@ -1,12 +1,12 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import Image from 'next/image';
 import PropTypes from 'prop-types';
 import ProductCard from '@/components/features/ProductCard';
 import LoadingSkeleton from '@/components/ui/LoadingSkeleton';
-import { getProducts } from '@/services/business/productStore';
+import { getProducts, getProductsByCategory } from '@/services/business/productStore';
 import { useLanguage } from '@/context/LanguageContext';
-// import { getSupabase } from '@/lib/supabase'; // Removed
 import PageSection from '@/components/layout/PageSection';
 
 /**
@@ -21,21 +21,33 @@ export default function ProductListPage({ category, titleKey }) {
 
   const loadProducts = useCallback(async () => {
     setLoading(true);
-    const allProducts = await getProducts();
-    const filteredProducts = allProducts.filter(
-      (p) => p.category === category && !p.is_hidden
-    );
-    setProducts(filteredProducts);
+    // Optimization: Fetch only needed category
+    const categoryProducts = await getProductsByCategory(category);
+    
+    // Client-side filtering for visibility (can be moved to query if field is indexed)
+    const visibleProducts = categoryProducts.filter((p) => !p.is_hidden);
+    
+    setProducts(visibleProducts);
     setLoading(false);
   }, [category]);
 
   useEffect(() => {
     loadProducts();
 
-    // Listen for updates from admin
+    // Event listener for real-time-like updates from admin actions
+    // This allows the UI to refresh without a full page reload when a product is changed
     const handleUpdate = () => loadProducts();
-    window.addEventListener('productsUpdated', handleUpdate);
-    return () => window.removeEventListener('productsUpdated', handleUpdate);
+    
+    // Safety check for window object (SSR protection)
+    if (typeof window !== 'undefined') {
+      window.addEventListener('productsUpdated', handleUpdate);
+    }
+    
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('productsUpdated', handleUpdate);
+      }
+    };
   }, [loadProducts]);
 
   const openModal = (product) => {
@@ -160,8 +172,8 @@ export default function ProductListPage({ category, titleKey }) {
             {/* Product Content */}
             <div className="modal-body">
               {/* Image Side */}
-              <div className="modal-image-container">
-                  <img
+              <div className="modal-image-container" style={{ position: 'relative', width: '100%', minHeight: '300px', height: 'auto' }}>
+                 <Image
                    src={(() => {
                      const imgPath = selectedProduct.image;
                      if (!imgPath) return '/images/placeholder.jpg';
@@ -173,19 +185,19 @@ export default function ProductListPage({ category, titleKey }) {
                      // Handle Firebase/Direct URL
                      return imgPath;
                    })()}
-                  alt={getProductName(selectedProduct)}
-                  style={{
-                    width: '100%',
-                    maxHeight: '500px',
-                    objectFit: 'contain',
-                    borderRadius: '8px',
-                    display: 'block'
-                  }}
-                  onError={(e) => {
-                    console.error('Image failed to load:', e.target.src);
-                    e.target.style.display = 'none';
-                  }}
-                />
+                   alt={getProductName(selectedProduct)}
+                   width={800}
+                   height={600}
+                   quality={85}
+                   priority
+                   style={{
+                     width: '100%',
+                     height: 'auto',
+                     maxHeight: '500px',
+                     objectFit: 'contain',
+                     borderRadius: '8px',
+                   }}
+                 />
               </div>
 
               {/* Text Side */}

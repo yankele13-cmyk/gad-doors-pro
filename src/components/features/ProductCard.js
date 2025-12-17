@@ -4,7 +4,6 @@ import Image from 'next/image';
 import Badge from '@/components/ui/Badge';
 import PropTypes from 'prop-types';
 import { useLanguage } from '@/context/LanguageContext';
-// import { getSupabase } from '@/lib/supabase'; // Removed
 
 export default function ProductCard({ product }) {
   const { language } = useLanguage();
@@ -55,7 +54,7 @@ export default function ProductCard({ product }) {
             alt={name || 'Product'}
             width={400}
             height={300}
-            loading="eager"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             style={{ 
               width: '100%', 
               height: '100%', 

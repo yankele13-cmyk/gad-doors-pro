@@ -7,7 +7,8 @@ import {
   deleteDoc, 
   doc, 
   query, 
-  orderBy 
+  orderBy,
+  where 
 } from 'firebase/firestore';
 import { 
   ref, 
@@ -16,6 +17,35 @@ import {
 } from 'firebase/storage';
 
 const COLLECTION_NAME = 'products';
+
+// Charger les produits par catégorie (Optimisé)
+export async function getProductsByCategory(category) {
+  try {
+    // Optimization: Filtering by category only (no orderBy to avoid complex index requirements)
+    const q = query(
+      collection(db, COLLECTION_NAME), 
+      where('category', '==', category)
+    );
+    
+    const querySnapshot = await getDocs(q);
+    const products = querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+
+    // Sort in memory to avoid needing a composite index
+    // Assuming 'id' field is numeric or string sortable
+    products.sort((a, b) => {
+       if (typeof a.id === 'string') return a.id.localeCompare(b.id);
+       return a.id - b.id;
+    });
+    
+    return products;
+  } catch (error) {
+    console.error(`🚨 Error fetching ${category} products:`, error);
+    return [];
+  }
+}
 
 // Charger les produits depuis Firebase Firestore
 export async function getProducts() {
