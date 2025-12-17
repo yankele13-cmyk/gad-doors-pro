@@ -87,6 +87,24 @@ export default function Header() {
               {t('nav_contact')}
             </Link>
           </li>
+          {/* Visualizer Link (New) */}
+          <li>
+            <Link 
+              href="/visualizer" 
+              className="nav-link"
+              style={{
+                color: pathname === '/visualizer' ? 'var(--accent-color)' : 'var(--text-primary)',
+                fontWeight: '600',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px'
+              }}
+              onClick={closeMenu}
+            >
+              <i className="fas fa-camera" style={{ fontSize: '0.9em' }}></i>
+              <span>Studio</span>
+            </Link>
+          </li>
           <li>
             <button
               className="language-switcher"

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { addProduct, updateProduct, uploadImage } from '@/services/business/productStore';
 import { useLanguage } from '@/context/LanguageContext';
+import MagicUploader from './MagicUploader';
 
 export default function ProductModal({ product, onClose, onSave }) {
   const { t } = useLanguage();
@@ -207,31 +208,31 @@ export default function ProductModal({ product, onClose, onSave }) {
             >
               Image *
             </label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-              style={{ marginBottom: '10px' }}
-            />
-            {imagePreview && (
-              <div style={{ marginTop: '10px' }}>
-                <img
-                  src={imagePreview}
-                  alt="Preview"
-                  style={{
-                    maxWidth: '200px',
-                    maxHeight: '150px',
-                    borderRadius: '8px',
-                    objectFit: 'cover',
-                  }}
-                />
-              </div>
-            )}
-            <small
-              style={{ color: '#666', display: 'block', marginTop: '5px' }}
+            <label
+              style={{ display: 'block', marginBottom: '5px', fontWeight: 600 }}
             >
-              Max 4.5MB - JPG, PNG, WebP
-            </small>
+              Image *
+            </label>
+            
+            <MagicUploader 
+              currentImage={imagePreview}
+              onImageUpload={(url) => {
+                // When magic upload or local selection happens
+                // If it's a URL (from Magic), set it directly
+                if (typeof url === 'string') {
+                  setFormData(prev => ({ ...prev, image: url }));
+                  setImagePreview(url);
+                  setImageFile(null); // Clear file as we have a URL now
+                }
+              }}
+            />
+            {/* Fallback hidden input/manual handling is inside MagicUploader now */}
+
+            <input
+               type="hidden" 
+               name="image_url_fallback" 
+               value={formData.image} 
+            />
           </div>
 
           {/* Error */}

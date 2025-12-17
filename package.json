@@ -10,12 +10,15 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^7.1.0",
+    "cloudinary": "^2.8.0",
     "firebase": "^12.6.0",
     "googleapis": "^166.0.0",
     "next": "^16.0.8",
     "prop-types": "^15.8.1",
     "react": "19.2.0",
     "react-dom": "19.2.0",
+    "react-moveable": "^0.56.0",
+    "react-rnd": "^10.5.2",
     "zod": "^4.2.1"
   },
   "devDependencies": {

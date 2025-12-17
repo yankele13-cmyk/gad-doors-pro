@@ -44,7 +44,7 @@ export default function AdminProductsPage() {
   );
 
   return (
-    <AdminLayout title="Gestion des Produits" action={HeaderAction}>
+    <AdminLayout title="Gestion des Produits">
       
       {/* Filters Area - Could be expanded later */}
       <div style={{ marginBottom: '20px' }}>
@@ -52,6 +52,28 @@ export default function AdminProductsPage() {
       </div>
 
       <div style={{ background: 'white', borderRadius: '10px', padding: '20px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
+         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+            <h2 style={{ margin: 0, color: '#2d3436' }}>Liste des Produits</h2>
+            <button
+              onClick={handleAddProduct}
+              className="btn"
+              style={{ 
+                border: 'none', 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '8px',
+                background: 'linear-gradient(135deg, #0984e3 0%, #74b9ff 100%)',
+                color: 'white',
+                padding: '10px 20px',
+                borderRadius: '8px',
+                fontWeight: 600,
+                boxShadow: '0 4px 6px rgba(9, 132, 227, 0.2)'
+              }}
+            >
+              <i className="fas fa-plus"></i>
+              {t('admin_add') || 'Ajouter'}
+            </button>
+         </div>
          <ProductTable onEdit={handleEditProduct} />
       </div>
 
