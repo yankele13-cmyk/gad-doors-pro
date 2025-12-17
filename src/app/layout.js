@@ -15,8 +15,7 @@ export const metadata = {
   title: "GadDoors | דלתות פנים פרימיום ירושלים - עיצוב ואיכות",
   description:
     "דלתות פנים יוקרתיות בירושלים. עיצוב מודרני, התקנה מקצועית, 5 שנות אחריות. מומחים לדלתות ואביזרים בישראל | Portes d'intérieur premium à Jérusalem",
-  keywords:
-    'דלתות פנים ירושלים, דלתות פרימיום ישראל, התקנת דלתות ירושלים, דלתות מעוצבות, אביזרים לדלתות, ידיות עיצוב, נגרות ירושלים, portes intérieur Jérusalem, portes premium Israël',
+
   authors: [{ name: 'GadDoors' }],
   creator: 'GadDoors',
   publisher: 'GadDoors',

@@ -1,0 +1,7 @@
+.container {
+  width: 100%;
+}
+
+/* Reusing global masonry styles but scoping them if needed, or rely on global CSS loading */
+/* Since globals are imported in layout, we assume .masonry-grid is available. */
+/* But specifically for this component if we want scoped styles: */

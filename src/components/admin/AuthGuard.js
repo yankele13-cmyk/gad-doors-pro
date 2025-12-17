@@ -2,10 +2,12 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAdmin } from '@/context/AdminContext';
+import { useAuth } from '@/context/AuthContext';
 
 export default function AuthGuard({ children }) {
-  const { isAuthenticated, isLoading } = useAdmin();
+  const { user, loading } = useAuth();
+  const isAuthenticated = !!user;
+  const isLoading = loading;
   const router = useRouter();
 
   useEffect(() => {

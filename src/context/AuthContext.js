@@ -27,15 +27,28 @@ export const AuthProvider = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
+  // ===== RBAC: Liste des emails autorisés comme admin =====
+  // Chargé depuis .env.local pour la sécurité
+  const ALLOWED_ADMIN_EMAILS = (process.env.NEXT_PUBLIC_ADMIN_EMAILS || '').split(',').map(email => email.trim());
+
   const login = async (email, password) => {
     setLoading(true);
     try {
       const { signInWithEmailAndPassword } = await import('firebase/auth');
-      await signInWithEmailAndPassword(auth, email, password);
-      // Router push handled by protection logic or component
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      
+      // RBAC CHECK: Vérifier si l'email est dans la liste des admins autorisés
+      if (!ALLOWED_ADMIN_EMAILS.includes(userCredential.user.email)) {
+        // Si non autorisé, déconnecter immédiatement et rejeter
+        await signOut(auth);
+        return { success: false, error: 'Accès non autorisé. Vous n\'êtes pas administrateur.' };
+      }
+
       return { success: true };
     } catch (error) {
-      console.error('Login error:', error);
+      if (process.env.NODE_ENV !== 'production') {
+        console.error('Login error:', error);
+      }
       let errorMessage = 'Erreur de connexion';
       if (error.code === 'auth/invalid-credential') errorMessage = 'Email ou mot de passe incorrect';
       if (error.code === 'auth/too-many-requests') errorMessage = 'Trop de tentatives, réessayez plus tard';

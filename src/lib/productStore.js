@@ -61,7 +61,7 @@ export async function addProduct(productData) {
     console.error('Error adding product to Firebase:', error);
     throw error;
   } finally {
-    window.dispatchEvent(new Event('productsUpdated'));
+    if (typeof window !== 'undefined') window.dispatchEvent(new Event('productsUpdated'));
   }
 }
 
@@ -71,7 +71,7 @@ export async function updateProduct(id, productData) {
     const productRef = doc(db, COLLECTION_NAME, id);
     await updateDoc(productRef, productData);
     
-    window.dispatchEvent(new Event('productsUpdated'));
+    if (typeof window !== 'undefined') window.dispatchEvent(new Event('productsUpdated'));
     return { id, ...productData };
   } catch (error) {
     console.error('Error updating product in Firebase:', error);
@@ -83,7 +83,7 @@ export async function updateProduct(id, productData) {
 export async function deleteProduct(id) {
   try {
     await deleteDoc(doc(db, COLLECTION_NAME, id));
-    window.dispatchEvent(new Event('productsUpdated'));
+    if (typeof window !== 'undefined') window.dispatchEvent(new Event('productsUpdated'));
     return true;
   } catch (error) {
     console.error('Error deleting product from Firebase:', error);
@@ -97,7 +97,7 @@ export async function toggleProductVisibility(id, currentState) {
     const productRef = doc(db, COLLECTION_NAME, id);
     await updateDoc(productRef, { is_hidden: !currentState });
     
-    window.dispatchEvent(new Event('productsUpdated'));
+    if (typeof window !== 'undefined') window.dispatchEvent(new Event('productsUpdated'));
     return { id, is_hidden: !currentState };
   } catch (error) {
     console.error('Error toggling product visibility:', error);

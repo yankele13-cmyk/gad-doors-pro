@@ -1,5 +1,5 @@
 import { db } from './firebase';
-import { collection, addDoc, getDocs, updateDoc, doc, orderBy, query } from 'firebase/firestore';
+import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, orderBy, query } from 'firebase/firestore';
 
 const COLLECTION_NAME = 'messages';
 
@@ -43,7 +43,11 @@ export async function markMessageAsRead(id) {
 }
 
 export async function deleteMessage(id) {
-  // Not implemented in original but could be added if needed
-  console.warn('deleteMessage not implemented for Firebase yet');
-  return false;
+  try {
+    await deleteDoc(doc(db, COLLECTION_NAME, id));
+    return true;
+  } catch (error) {
+    console.error('Error deleting message from Firebase:', error);
+    throw error;
+  }
 }
