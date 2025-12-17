@@ -4,6 +4,8 @@ import { usePathname } from 'next/navigation';
 import { useLanguage } from '@/context/LanguageContext';
 import { siteConfig } from '@/config/siteConfig';
 
+import { whatsappMessages } from '@/data/locales/whatsapp';
+
 export default function WhatsAppWidget() {
   const pathname = usePathname();
   const { language } = useLanguage();
@@ -15,29 +17,7 @@ export default function WhatsAppWidget() {
 
   // Messages personnalisés selon la page
   const getWhatsAppMessage = () => {
-    const messages = {
-      fr: {
-        '/': "Bonjour ! Je visite votre site Gad-Doors et j'aimerais en savoir plus sur vos portes.",
-        '/doors':
-          "Bonjour ! Je suis intéressé par vos portes d'intérieur. Pouvez-vous me donner plus d'informations ?",
-        '/accessories':
-          "Bonjour ! J'aimerais avoir des informations sur vos accessoires et poignées.",
-        '/contact':
-          'Bonjour ! Je souhaite vous contacter concernant vos produits.',
-        '/warranty': "Bonjour ! J'ai une question concernant vos garanties.",
-        default: "Bonjour ! J'ai une question sur vos produits Gad-Doors.",
-      },
-      he: {
-        '/': 'שלום! אני מבקר באתר Gad-Doors ורוצה לדעת יותר על הדלתות שלכם.',
-        '/doors': 'שלום! אני מעוניין בדלתות הפנים שלכם. אפשר לקבל מידע נוסף?',
-        '/accessories': 'שלום! אשמח לקבל מידע על האביזרים והידיות שלכם.',
-        '/contact': 'שלום! אני רוצה ליצור קשר לגבי המוצרים שלכם.',
-        '/warranty': 'שלום! יש לי שאלה לגבי האחריות.',
-        default: 'שלום! יש לי שאלה על המוצרים של Gad-Doors.',
-      },
-    };
-
-    const langMessages = messages[language] || messages.fr;
+    const langMessages = whatsappMessages[language] || whatsappMessages.fr;
     return langMessages[pathname] || langMessages.default;
   };
 

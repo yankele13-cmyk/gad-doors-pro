@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import AdminLayout from '@/components/admin/AdminLayout';
-import { getMessages, deleteMessage, markMessageAsRead } from '@/lib/messageStore';
+import AdminLayout from '@/components/layout/AdminLayout';
+import { getMessages, deleteMessage, markMessageAsRead } from '@/services/business/messageStore';
 
 export default function AdminMessagesPage() {
   const [messages, setMessages] = useState([]);

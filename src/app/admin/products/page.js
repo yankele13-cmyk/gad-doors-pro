@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import AdminLayout from '@/components/admin/AdminLayout';
+import AdminLayout from '@/components/layout/AdminLayout';
 import ProductTable from '@/components/admin/ProductTable';
 import ProductModal from '@/components/admin/ProductModal';
 import { useLanguage } from '@/context/LanguageContext';

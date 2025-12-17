@@ -1,12 +1,12 @@
 import './globals.css';
 import './components.css';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import WhatsAppWidget from '@/components/WhatsAppWidget';
-import { ToastContainer } from '@/components/Toast';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
+import WhatsAppWidget from '@/components/features/WhatsAppWidget';
+import { ToastContainer } from '@/components/ui/Toast';
 import { LanguageProvider } from '@/context/LanguageContext';
-import ClientLayout from '@/components/ClientLayout';
-import StructuredData from '@/components/StructuredData';
+import ClientLayout from '@/components/layout/ClientLayout';
+import StructuredData from '@/components/layout/StructuredData';
 import { Outfit } from 'next/font/google';
 
 const outfit = Outfit({ subsets: ['latin'] });

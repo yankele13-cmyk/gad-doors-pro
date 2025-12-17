@@ -41,9 +41,7 @@ export default function Footer() {
                 <i className="fas fa-phone"></i>{' '}
                 <span dir="ltr">{siteConfig.contact.phoneDisplay}</span>
               </li>
-              <li>
-                <i className="fas fa-envelope"></i> {siteConfig.contact.email}
-              </li>
+
             </ul>
           </div>
         </div>

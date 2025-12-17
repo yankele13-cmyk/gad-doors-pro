@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { AdminProvider, useAdmin } from '@/context/AdminContext';
 import { AuthProvider, useAuth } from '@/context/AuthContext';
-import AdminSidebar from '@/components/admin/AdminSidebar';
+import AdminSidebar from '@/components/layout/AdminSidebar';
 import './admin.css';
 
 // Auth Guard Component

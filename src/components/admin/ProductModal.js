@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { addProduct, updateProduct, uploadImage } from '@/lib/productStore';
+import { addProduct, updateProduct, uploadImage } from '@/services/business/productStore';
 import { useLanguage } from '@/context/LanguageContext';
 
 export default function ProductModal({ product, onClose, onSave }) {

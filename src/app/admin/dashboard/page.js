@@ -1,10 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import AdminLayout from '@/components/admin/AdminLayout';
+import AdminLayout from '@/components/layout/AdminLayout';
 import Link from 'next/link';
-import { getProducts } from '@/lib/productStore';
-import { getMessages } from '@/lib/messageStore';
+import { getProducts } from '@/services/business/productStore';
+import { getMessages } from '@/services/business/messageStore';
 
 // --- StatCard Component ---
 // This component is defined outside of the main dashboard component

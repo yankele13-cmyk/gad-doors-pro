@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { addInstallation, deleteInstallation } from '@/lib/installationStore';
-import { installationUploadSchema } from '@/lib/validations';
+import { addInstallation, deleteInstallation } from '@/services/business/installationStore';
+import { installationUploadSchema } from '@/lib/utils/validations';
 
 export default function AdminInstallationsClient({ initialImages = [] }) {
   const [images, setImages] = useState(initialImages);

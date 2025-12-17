@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import AdminLayout from '@/components/admin/AdminLayout';
+import AdminLayout from '@/components/layout/AdminLayout';
 import AdminInstallationsClient from '@/components/admin/AdminInstallationsClient';
-import { getInstallations } from '@/lib/installationStore';
+import { getInstallations } from '@/services/business/installationStore';
 
 export default function AdminInstallationsPage() {
   const [images, setImages] = useState([]);

@@ -2,12 +2,12 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import ProductCard from '@/components/ProductCard';
-import LoadingSkeleton from '@/components/LoadingSkeleton';
-import { getProducts } from '@/lib/productStore';
+import ProductCard from '@/components/features/ProductCard';
+import LoadingSkeleton from '@/components/ui/LoadingSkeleton';
+import { getProducts } from '@/services/business/productStore';
 import { useLanguage } from '@/context/LanguageContext';
 // import { getSupabase } from '@/lib/supabase'; // Removed
-import PageSection from '@/components/PageSection';
+import PageSection from '@/components/layout/PageSection';
 
 /**
  * Reusable Product List Page
@@ -39,12 +39,10 @@ export default function ProductListPage({ category, titleKey }) {
   }, [loadProducts]);
 
   const openModal = (product) => {
-    console.log('Opening modal for product:', product);
     setSelectedProduct(product);
   };
 
   const closeModal = () => {
-    console.log('Closing modal');
     setSelectedProduct(null);
   };
 

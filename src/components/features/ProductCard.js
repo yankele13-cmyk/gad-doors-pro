@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Badge from '@/components/ui/Badge';
 import PropTypes from 'prop-types';
 import { useLanguage } from '@/context/LanguageContext';
 // import { getSupabase } from '@/lib/supabase'; // Removed
@@ -34,15 +35,8 @@ export default function ProductCard({ product }) {
     return imagePath;
   };
   
-  /* 
-    DEBUG LOGGING (Safe inline)
-    If we are in production and the resolved URL looks weird (e.g. still a path but not starting with /), log it.
-  */
+  // Image Url logic
   const imageSrc = getImageUrl(product.image);
-  
-  if (process.env.NODE_ENV === 'production' && !imageSrc.startsWith('/') && !imageSrc.startsWith('http')) {
-      console.log(`[ProductCard Debug] ${product.name} -> ${imageSrc}`);
-  }
 
   /* 
     Adjust height: 

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { siteConfig } from '@/config/siteConfig';
-import { showToast } from '@/components/Toast';
+import { showToast } from '@/components/ui/Toast';
 
 export default function ContactPage() {
   const { t, language } = useLanguage();

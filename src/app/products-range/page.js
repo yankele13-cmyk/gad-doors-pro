@@ -1,7 +1,7 @@
 'use client';
 
 import { useLanguage } from '@/context/LanguageContext';
-import PageSection from '@/components/PageSection';
+import PageSection from '@/components/layout/PageSection';
 
 export default function ProductsRangePage() {
   const { t } = useLanguage();

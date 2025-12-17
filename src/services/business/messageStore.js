@@ -1,4 +1,4 @@
-import { db } from './firebase';
+import { db } from '@/lib/firebase/firebaseApp';
 import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, orderBy, query } from 'firebase/firestore';
 
 const COLLECTION_NAME = 'messages';

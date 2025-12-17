@@ -5,10 +5,10 @@ import {
   getProducts,
   deleteProduct,
   toggleProductVisibility,
-} from '@/lib/productStore';
+} from '@/services/business/productStore';
 import { products as defaultProducts } from '@/data/products';
 import { useLanguage } from '@/context/LanguageContext';
-import Badge from '@/components/Badge';
+import Badge from '@/components/ui/Badge';
 import Image from 'next/image';
 
 export default function ProductTable({ onEdit }) {

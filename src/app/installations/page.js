@@ -1,6 +1,6 @@
-import { getInstallations } from '@/lib/installationStore';
-import InstallationGrid from '@/components/installations/InstallationGrid';
-import PageSection from '@/components/PageSection';
+import { getInstallations } from '@/services/business/installationStore';
+import InstallationGrid from '@/components/features/InstallationGrid';
+import PageSection from '@/components/layout/PageSection';
 import './installations.css';
 
 export const metadata = {
