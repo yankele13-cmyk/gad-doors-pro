@@ -11,9 +11,9 @@ export default function VisualizerPage() {
     <main>
        <PageSection paddingTop>
           <div className="text-center" style={{ marginBottom: '40px' }}>
-            <h1>Studio Virtuel 📸</h1>
+            <h1>{t('visualizer_title')}</h1>
             <p style={{ fontSize: '1.2rem', color: '#666' }}>
-               Visualisez nos portes directement chez vous en quelques secondes.
+               {t('visualizer_desc')}
             </p>
           </div>
           

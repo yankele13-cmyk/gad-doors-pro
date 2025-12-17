@@ -37,6 +37,16 @@ export default function AdminSidebar() {
       icon: 'fa-envelope',
     },
     {
+      name: 'Agenda',
+      path: '/admin/calendar',
+      icon: 'fa-calendar-alt',
+    },
+    {
+      name: 'Planning Tech',
+      path: '/admin/agenda',
+      icon: 'fa-mobile-alt',
+    },
+    {
       name: 'Réalisations',
       path: '/admin/installations',
       icon: 'fa-images',

@@ -158,6 +158,10 @@ const translations = {
     doors_page_title: 'Portes Intérieures',
     doors_page_subtitle: 'Découvrez notre collection exclusive',
     
+    // Visualizer
+    visualizer_title: 'Studio Virtuel 📸',
+    visualizer_desc: 'Visualisez nos portes directement chez vous en quelques secondes.',
+
     accessories_page_title: 'Accessoires',
     accessories_page_subtitle: 'Les détails qui font la différence',
     admin_title: 'Administration',
@@ -324,6 +328,10 @@ const translations = {
       'ההתקנה המבוצעת על ידי הצוותים המוסמכים שלנו מגיעה עם שנת אחריות אחת. אנו מבטיחים התאמה מושלמת ופעולה חלקה של הדלתות שלך.',
     doors_page_title: 'דלתות פנים',
     doors_page_subtitle: 'גלה את הקולקציה הבלעדית שלנו',
+
+    // Visualizer
+    visualizer_title: 'סטודיו וירטואלי 📸',
+    visualizer_desc: 'דמיינו את הדלתות שלנו אצלכם בבית תוך שניות.',
 
     accessories_page_title: 'אביזרים',
     accessories_page_subtitle: 'הפרטים שעושים את ההבדל',

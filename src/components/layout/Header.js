@@ -93,11 +93,12 @@ export default function Header() {
               href="/visualizer" 
               className="nav-link"
               style={{
-                color: pathname === '/visualizer' ? 'var(--accent-color)' : 'var(--text-primary)',
-                fontWeight: '600',
+                color: '#FFD700', // Jaune Or
+                fontWeight: 'bold',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '8px'
+                gap: '8px',
+                textShadow: '0 0 10px rgba(255, 215, 0, 0.2)' // Petit effet glow
               }}
               onClick={closeMenu}
             >

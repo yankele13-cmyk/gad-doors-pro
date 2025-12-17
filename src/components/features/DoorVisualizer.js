@@ -107,7 +107,7 @@ export default function DoorVisualizer() {
                     className="btn btn-outline"
                     onClick={() => fileInputRef.current.click()}
                 >
-                    <i className="fas fa-camera"></i> Upload a picture
+                    <i className="fas fa-camera"></i> {language === 'he' ? 'העלה תמונה' : 'Upload a picture'}
                 </button>
                 <input 
                     type="file" 
@@ -118,7 +118,7 @@ export default function DoorVisualizer() {
                 />
                 {background && (
                     <button className="btn" style={{ background: '#ff4d4f', color: 'white', border: 'none' }} onClick={handleReset}>
-                    Reset
+                    {language === 'he' ? 'לאפס' : 'Reset'}
                     </button>
                 )}
             </div>
@@ -283,10 +283,59 @@ export default function DoorVisualizer() {
         )}
       </div>
 
-      <div style={{ padding: '20px', textAlign: 'center', color: '#666', fontSize: '14px', fontStyle: 'italic' }}>
-          {isPerspectiveMode 
-            ? "💡 Mode 3D : Tirez les 4 coins pour ajuster la perspective de la porte." 
-            : "💡 Mode Simple : Déplacez, redimensionnez ou pivotez la porte."}
+      {/* User Guide */}
+      {/* User Guide */}
+      <div style={{ padding: '20px', background: '#fff', borderRadius: '8px', marginTop: '20px', border: '1px solid #eee' }}>
+          <h3 style={{ fontSize: '1rem', marginBottom: '15px', color: '#2d3436' }}>
+            <i className="fas fa-info-circle"></i> {language === 'he' ? 'איך זה עובד?' : 'Comment ça marche ?'}
+          </h3>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px', fontSize: '0.9rem', color: '#636e72' }}>
+              <div>
+                  {language === 'he' ? (
+                    <div dir="rtl" style={{ color: '#2d3436' }}>
+                        <strong>1. התמונה שלך</strong>
+                        <p style={{ margin: '2px 0 0 0' }}>צלם תמונה של החדר (מקדימה או מהצד) ולחץ על <em>Upload a picture</em>.</p>
+                    </div>
+                  ) : (
+                    <div style={{ marginBottom: '8px' }}>
+                        <strong>1. Votre Photo</strong>
+                        <p style={{ margin: '2px 0 0 0' }}>Prenez une photo de votre pièce (face ou biais) et cliquez sur <em>Upload a picture</em>.</p>
+                    </div>
+                  )}
+              </div>
+              <div>
+                  {language === 'he' ? (
+                    <div dir="rtl" style={{ color: '#2d3436' }}>
+                        <strong>2. הדגם</strong>
+                        <p style={{ margin: '2px 0 0 0' }}>בחר דלת מהרשימה למעלה. היא תופיע על התמונה שלך.</p>
+                    </div>
+                  ) : (
+                    <div style={{ marginBottom: '8px' }}>
+                        <strong>2. Le Modèle</strong>
+                        <p style={{ margin: '2px 0 0 0' }}>Choisissez une porte dans la liste en haut. Elle apparaîtra sur votre photo.</p>
+                    </div>
+                  )}
+              </div>
+              <div>
+                  {language === 'he' ? (
+                     <div dir="rtl" style={{ color: '#2d3436' }}>
+                        <strong>3. התאמה</strong>
+                        <ul style={{ margin: '2px 0 0 0', paddingRight: '20px' }}>
+                        <li><strong>רגיל:</strong> הזז והגדל את הדלת.</li>
+                        <li><strong>תלת מימד:</strong> גרור את <span style={{color: '#ff4757', fontWeight: 'bold'}}>4 הנקודות</span> לפינות.</li>
+                        </ul>
+                    </div>
+                  ) : (
+                    <div style={{ marginBottom: '8px' }}>
+                        <strong>3. L'Ajustement</strong>
+                        <ul style={{ margin: '2px 0 0 0', paddingLeft: '20px' }}>
+                        <li><strong>Simple :</strong> Déplacez/Agrandissez.</li>
+                        <li><strong>3D :</strong> Tirez les <span style={{color: '#ff4757', fontWeight: 'bold'}}>4 points</span> vers les angles.</li>
+                        </ul>
+                    </div>
+                  )}
+              </div>
+          </div>
       </div>
       
       {/* Custom Styles for Moveable Handles */}
